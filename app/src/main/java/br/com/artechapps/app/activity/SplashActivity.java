@@ -18,6 +18,18 @@ public class SplashActivity extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
-        startActivity(new Intent(this, LoginActivity.class));
+
+        redirectToTarget(LoginActivity.class);
+
+    }
+
+    private void redirectToTarget(Class clazz){
+        Intent i = new Intent(this, clazz);
+        // Closing all the Activities
+        i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        // Add new Flag to start new Activity
+        i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        startActivity(i);
+        finish();
     }
 }
