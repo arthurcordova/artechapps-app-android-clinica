@@ -1,7 +1,9 @@
-package br.com.artechapps.app;
+package br.com.artechapps.app.activity;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+
+import br.com.artechapps.app.R;
 
 public class SplashActivity extends AppCompatActivity {
 
