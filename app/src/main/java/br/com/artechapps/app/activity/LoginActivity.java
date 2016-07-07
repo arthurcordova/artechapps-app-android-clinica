@@ -97,9 +97,9 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
             public void onTextChanged(CharSequence s, int start, int before, int count) {
 
                 boolean flag = true;
-                String eachBlock[] = mCPF.getText().toString().split("-");
+                String eachBlock[] = mCPF.getText().toString().split(".");
                 for (int i = 0; i < eachBlock.length; i++) {
-                    if (eachBlock[i].length() > 4) {
+                    if (eachBlock[i].length() > 3) {
                         flag = false;
                     }
                 }
@@ -118,10 +118,14 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
 
                     if (keyDel == 0) {
 
-                        if (((mCPF.getText().length() + 1) % 5) == 0) {
+                        if (((mCPF.getText().length() + 1) % 4) == 0) {
 
-                            if (mCPF.getText().toString().split("-").length <= 3) {
-                                mCPF.setText(mCPF.getText() + "-");
+                            if (mCPF.getText().toString().split(".").length < 3) {
+                                if(mCPF.getText().length() == 11){
+                                    mCPF.setText(mCPF.getText() + "-");
+                                } else {
+                                    mCPF.setText(mCPF.getText() + ".");
+                                }
                                 mCPF.setSelection(mCPF.getText().length());
                             }
                         }
