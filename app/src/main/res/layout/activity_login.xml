@@ -60,7 +60,6 @@
                     android:background="@android:color/transparent"
                     android:hint="@string/hint_password"
                     android:imeActionId="@+id/login"
-                    android:imeActionLabel="@string/action_sign_in_short"
                     android:imeOptions="actionUnspecified"
                     android:inputType="textPassword"
                     android:maxLines="1"
@@ -72,7 +71,7 @@
         </android.support.v7.widget.CardView>
 
         <Button
-            android:id="@+id/email_sign_in_button"
+            android:id="@+id/sign_in_button"
             style="?android:textAppearanceSmall"
             android:layout_width="match_parent"
             android:layout_height="55dp"
@@ -80,6 +79,7 @@
             android:layout_margin="16dp"
             android:textColor="#ffffff"
             android:alpha="0.2"
+            android:clickable="false"
             android:text="@string/button_sign_in"
             android:textStyle="bold" />
 
