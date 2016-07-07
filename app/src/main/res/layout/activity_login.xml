@@ -37,7 +37,7 @@
                     android:layout_height="wrap_content"
                     android:background="@android:color/transparent"
                     android:hint="@string/hint_cpf"
-                    android:inputType="phone"
+                    android:inputType="number"
                     android:maxLines="1"
                     android:padding="14dp"
                     android:singleLine="true" />
@@ -75,7 +75,10 @@
             style="?android:textAppearanceSmall"
             android:layout_width="match_parent"
             android:layout_height="55dp"
+            android:background="@drawable/button_selector"
             android:layout_margin="16dp"
+            android:textColor="#ffffff"
+            android:alpha="0.2"
             android:text="@string/button_sign_in"
             android:textStyle="bold" />
 

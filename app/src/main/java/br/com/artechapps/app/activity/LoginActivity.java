@@ -1,10 +1,10 @@
 package br.com.artechapps.app.activity;
 
-import android.animation.Animator;
-import android.animation.AnimatorListenerAdapter;
 import android.annotation.TargetApi;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.support.annotation.NonNull;
+import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.app.LoaderManager.LoaderCallbacks;
@@ -18,13 +18,15 @@ import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
 import android.provider.ContactsContract;
+import android.text.Editable;
 import android.text.TextUtils;
+import android.text.TextWatcher;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.inputmethod.EditorInfo;
 import android.widget.ArrayAdapter;
-import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -54,23 +56,21 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
      * Keep track of the login task to ensure we can cancel it if requested.
      */
     private UserLoginTask mAuthTask = null;
+    String a;
+    int keyDel;
 
     // UI references.
-    private EditText mEmailView;
-    private EditText mPasswordView;
-    private View mProgressView;
-    private View mLoginFormView;
+    private EditText mCPF;
+    private EditText mPassword;
+    private FloatingActionButton mFab;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
-        // Set up the login form.
-        mEmailView = (EditText) findViewById(R.id.email);
-        populateAutoComplete();
-
-        mPasswordView = (EditText) findViewById(R.id.password);
-        mPasswordView.setOnEditorActionListener(new TextView.OnEditorActionListener() {
+        mCPF = (EditText) findViewById(R.id.email);
+        mPassword = (EditText) findViewById(R.id.password);
+        mPassword.setOnEditorActionListener(new TextView.OnEditorActionListener() {
             @Override
             public boolean onEditorAction(TextView textView, int id, KeyEvent keyEvent) {
                 if (id == R.id.login || id == EditorInfo.IME_NULL) {
@@ -80,17 +80,77 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
                 return false;
             }
         });
-
-        Button mEmailSignInButton = (Button) findViewById(R.id.email_sign_in_button);
-        mEmailSignInButton.setOnClickListener(new OnClickListener() {
+        mFab = (FloatingActionButton) findViewById(R.id.fab);
+        mFab.setOnClickListener(new OnClickListener() {
             @Override
-            public void onClick(View view) {
-                attemptLogin();
+            public void onClick(View v) {
+                startActivity(new Intent(LoginActivity.this, NewUserActivity.class));
+            }
+        });
+        mCPF.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+                boolean flag = true;
+                String eachBlock[] = mCPF.getText().toString().split("-");
+                for (int i = 0; i < eachBlock.length; i++) {
+                    if (eachBlock[i].length() > 4) {
+                        flag = false;
+                    }
+                }
+                if (flag) {
+
+                    mCPF.setOnKeyListener(new View.OnKeyListener() {
+
+                        @Override
+                        public boolean onKey(View v, int keyCode, KeyEvent event) {
+
+                            if (keyCode == KeyEvent.KEYCODE_DEL)
+                                keyDel = 1;
+                            return false;
+                        }
+                    });
+
+                    if (keyDel == 0) {
+
+                        if (((mCPF.getText().length() + 1) % 5) == 0) {
+
+                            if (mCPF.getText().toString().split("-").length <= 3) {
+                                mCPF.setText(mCPF.getText() + "-");
+                                mCPF.setSelection(mCPF.getText().length());
+                            }
+                        }
+                        a = mCPF.getText().toString();
+                    } else {
+                        a = mCPF.getText().toString();
+                        keyDel = 0;
+                    }
+
+                } else {
+                    mCPF.setText(a);
+                }
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
             }
         });
 
-//        mLoginFormView = findViewById(R.id.login_form);
-//        mProgressView = findViewById(R.id.login_progress);
+//        Button mEmailSignInButton = (Button) findViewById(R.id.email_sign_in_button);
+//        mEmailSignInButton.setOnClickListener(new OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                attemptLogin();
+//            }
+//        });
+
     }
 
     private void populateAutoComplete() {
@@ -109,7 +169,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
             return true;
         }
         if (shouldShowRequestPermissionRationale(READ_CONTACTS)) {
-            Snackbar.make(mEmailView, R.string.permission_rationale, Snackbar.LENGTH_INDEFINITE)
+            Snackbar.make(mCPF, R.string.permission_rationale, Snackbar.LENGTH_INDEFINITE)
                     .setAction(android.R.string.ok, new View.OnClickListener() {
                         @Override
                         @TargetApi(Build.VERSION_CODES.M)
@@ -148,31 +208,31 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
         }
 
         // Reset errors.
-        mEmailView.setError(null);
-        mPasswordView.setError(null);
+        mCPF.setError(null);
+        mPassword.setError(null);
 
         // Store values at the time of the login attempt.
-        String email = mEmailView.getText().toString();
-        String password = mPasswordView.getText().toString();
+        String email = mCPF.getText().toString();
+        String password = mPassword.getText().toString();
 
         boolean cancel = false;
         View focusView = null;
 
         // Check for a valid password, if the user entered one.
         if (!TextUtils.isEmpty(password) && !isPasswordValid(password)) {
-            mPasswordView.setError(getString(R.string.error_invalid_password));
-            focusView = mPasswordView;
+            mPassword.setError(getString(R.string.error_invalid_password));
+            focusView = mPassword;
             cancel = true;
         }
 
         // Check for a valid email address.
         if (TextUtils.isEmpty(email)) {
-            mEmailView.setError(getString(R.string.error_field_required));
-            focusView = mEmailView;
+            mCPF.setError(getString(R.string.error_field_required));
+            focusView = mCPF;
             cancel = true;
         } else if (!isEmailValid(email)) {
-            mEmailView.setError(getString(R.string.error_invalid_email));
-            focusView = mEmailView;
+            mCPF.setError(getString(R.string.error_invalid_email));
+            focusView = mCPF;
             cancel = true;
         }
 
@@ -275,7 +335,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
                 new ArrayAdapter<>(LoginActivity.this,
                         android.R.layout.simple_dropdown_item_1line, emailAddressCollection);
 
-//        mEmailView.setAdapter(adapter);
+//        mCPF.setAdapter(adapter);
     }
 
 
@@ -334,8 +394,8 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
             if (success) {
                 finish();
             } else {
-                mPasswordView.setError(getString(R.string.error_incorrect_password));
-                mPasswordView.requestFocus();
+                LoginActivity.this.mPassword.setError(getString(R.string.error_incorrect_password));
+                LoginActivity.this.mPassword.requestFocus();
             }
         }
 
