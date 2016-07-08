@@ -10,7 +10,8 @@ android {
         targetSdkVersion 23
         versionCode 1
         versionName "1.0"
-        buildConfigField "String", "HOST", '"http://www2.beautyclinic.com.br"'
+        buildConfigField 'String', 'HOST', '"http://www2.beautyclinic.com.br"'
+        buildConfigField 'Long', 'FILIAL', 1 + 'l'
     }
     buildTypes {
         release {
