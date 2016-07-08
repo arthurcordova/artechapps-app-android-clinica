@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.v4.widget.NestedScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:card_view="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -24,7 +25,7 @@
             android:layout_height="221dp"
             android:layout_margin="16dp"
             card_view:cardCornerRadius="5dp"
-            card_view:cardElevation="0dp">
+            card_view:cardElevation="2dp">
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -121,8 +122,6 @@
                         android:layout_height="wrap_content"
                         android:background="@android:color/transparent"
                         android:hint="@string/hint_password"
-                        android:imeActionId="@+id/login"
-                        android:imeOptions="actionUnspecified"
                         android:inputType="textPassword"
                         android:maxLines="1"
                         android:padding="16dp"
@@ -156,8 +155,6 @@
                         android:layout_height="wrap_content"
                         android:background="@android:color/transparent"
                         android:hint="@string/hint_password_confirm"
-                        android:imeActionId="@+id/login"
-                        android:imeOptions="actionUnspecified"
                         android:inputType="textPassword"
                         android:maxLines="1"
                         android:padding="16dp"
@@ -185,17 +182,5 @@
 
     </LinearLayout>
 
-    <android.support.design.widget.FloatingActionButton
-        android:id="@+id/fab"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="end|bottom"
-        android:layout_margin="16dp"
-        android:background="?attr/selectableItemBackgroundBorderless"
-        android:clickable="true"
-        android:src="@drawable/ic_person_add_white_24px"
-        android:tag="Teste"
-        tools:fabSize="normal" />
-
-</android.support.design.widget.CoordinatorLayout>
+</android.support.v4.widget.NestedScrollView>
 
