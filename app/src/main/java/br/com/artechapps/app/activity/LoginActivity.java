@@ -16,17 +16,15 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import br.com.artechapps.app.R;
+import br.com.artechapps.app.utils.UtilsCPF;
 
 /**
  * A login screen that offers login via cpf/password.
  */
 public class LoginActivity extends AppCompatActivity {
 
-//    private UserLoginTask mAuthTask = null;
     private String a;
     private int mKeyDel;
-    private boolean mCPFValidated = false;
-    private boolean mPasswordValidated = false;
 
     private EditText mCPF;
     private EditText mPassword;
@@ -120,16 +118,17 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
 
+        mSignIn.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                attemptLogin();
+            }
+        });
 
 
     }
 
     private void attemptLogin() {
-//        if (mAuthTask != null) {
-//            return;
-//        }
-
-        // Reset errors.
         mCPF.setError(null);
         mPassword.setError(null);
 
@@ -160,29 +159,17 @@ public class LoginActivity extends AppCompatActivity {
 
         if (cancel) {
             focusView.requestFocus();
+
         } else {
 
-            //execute
         }
     }
 
-    private void enableButton(){
-        mSignIn.setAlpha(1);
-        mSignIn.setClickable(true);
-    }
-
-    private void disableButton(){
-        mSignIn.setAlpha(0.12F);
-        mSignIn.setClickable(false);
-    }
-
     private boolean isEmailValid(String cpf) {
-        //TODO: Replace this with your own logic
-        return cpf.contains("@");
+        return UtilsCPF.validateCPF(cpf);
     }
 
     private boolean isPasswordValid(String password) {
-        //TODO: Replace this with your own logic
         return password.length() > 4;
     }
 

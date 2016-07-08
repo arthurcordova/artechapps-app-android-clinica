@@ -106,7 +106,6 @@
             android:layout_width="match_parent"
             android:layout_height="55dp"
             android:layout_margin="16dp"
-            android:alpha="0.2"
             android:background="@drawable/button_selector"
             android:clickable="false"
             android:text="@string/button_sign_in"
