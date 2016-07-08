@@ -16,6 +16,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import br.com.artechapps.app.R;
+import br.com.artechapps.app.task.AsyncTaskLogin;
 import br.com.artechapps.app.utils.UtilsCPF;
 
 /**
@@ -121,7 +122,9 @@ public class LoginActivity extends AppCompatActivity {
         mSignIn.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
-                attemptLogin();
+
+//                attemptLogin();
+                new AsyncTaskLogin().execute();
             }
         });
 

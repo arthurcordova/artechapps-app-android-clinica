@@ -10,7 +10,7 @@ android {
         targetSdkVersion 23
         versionCode 1
         versionName "1.0"
-        buildConfigField "String", "HOST", "'http://www2.beautyclinic.com.br/'"
+        buildConfigField "String", "HOST", '"http://www2.beautyclinic.com.br"'
     }
     buildTypes {
         release {
@@ -27,4 +27,5 @@ dependencies {
     compile 'com.android.support:design:23.4.0'
     compile 'com.android.support:cardview-v7:23.4.0'
     compile 'com.android.support:recyclerview-v7:23.4.0'
+    compile 'com.google.code.gson:gson:2.7'
 }
