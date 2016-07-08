@@ -2,10 +2,13 @@
 
     <string name="app_name">App</string>
     <string name="title_activity_login">Login</string>
+    <string name="title_activity_new_user">Novo usuário</string>
 
 
+    <string name="hint_name">Digite seu nome</string>
     <string name="hint_cpf">Digite seu C.P.F.</string>
     <string name="hint_password">Digite sua senha</string>
+    <string name="hint_password_confirm">Confirme sua senha</string>
 
     <string name="button_sign_in">Entrar</string>
 
