@@ -122,9 +122,8 @@ public class LoginActivity extends AppCompatActivity {
         mSignIn.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
-
 //                attemptLogin();
-                new AsyncTaskLogin().execute();
+                new AsyncTaskLogin(getString(R.string.hint_execute_login),LoginActivity.this, true).execute();
             }
         });
 

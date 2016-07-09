@@ -46,9 +46,7 @@ public final class SessionManager {
         redirectToTarget(redirect);
     }
 
-    /**
-     * @param target if not logged redirect to parameter target
-     */
+
     public void checkLogin(Class target) {
         if (isLoggedIn()) {
 
@@ -82,7 +80,7 @@ public final class SessionManager {
             if (user != null) {
                 user.setCpfcnpj(preferences.getString(KEY_CPF, null));
                 user.setName(preferences.getString(KEY_NAME, null));
-                user.setCodFilial(preferences.getLong(KEY_FILIAL, 2L));
+                user.setCodFilial(preferences.getLong(KEY_FILIAL, 1L));
                 user.setActive(preferences.getBoolean(KEY_ACTIVE, false));
             }
         }
