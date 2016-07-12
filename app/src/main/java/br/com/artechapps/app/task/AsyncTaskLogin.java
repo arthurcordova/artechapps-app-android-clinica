@@ -2,6 +2,7 @@ package br.com.artechapps.app.task;
 
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.Intent;
 
 import com.google.gson.Gson;
 
@@ -9,6 +10,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 import java.io.IOException;
 
+import br.com.artechapps.app.MainMenuActivity;
 import br.com.artechapps.app.model.User;
 import br.com.artechapps.app.utils.EndPoints;
 
@@ -57,5 +59,6 @@ public class AsyncTaskLogin extends AsyncTaskHttp {
                 e.printStackTrace();
             }
         }
+        mContext.startActivity(new Intent(mContext, MainMenuActivity.class));
     }
 }
