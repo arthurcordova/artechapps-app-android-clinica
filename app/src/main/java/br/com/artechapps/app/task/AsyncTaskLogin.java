@@ -8,6 +8,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 import java.io.IOException;
 
+import br.com.artechapps.app.BuildConfig;
 import br.com.artechapps.app.activity.MainMenuActivity;
 import br.com.artechapps.app.model.User;
 import br.com.artechapps.app.utils.EndPoints;
@@ -20,10 +21,10 @@ public class AsyncTaskLogin extends AsyncTaskHttp {
 
     private JSONObject mJson;
 
-    public AsyncTaskLogin(String msg, Context context, boolean showDialod) {
+    public AsyncTaskLogin(String msg, Context context, boolean showDialog) {
         mMsg = msg;
         mContext = context;
-        mShowDialog = showDialod;
+        mShowDialog = showDialog;
 
     }
 
@@ -31,9 +32,9 @@ public class AsyncTaskLogin extends AsyncTaskHttp {
     protected String doInBackground(String... params) {
         try {
             User user = new User();
-            user.setCodFilial(1L);
+            user.setCodFilial(BuildConfig.FILIAL);
             user.setSenha("1");
-            user.setCpfcnpj("11111111111");
+            user.setCpfcnpj("06048472978");
 
             Gson gson = new Gson();
             String userJson = gson.toJson(user);
@@ -58,14 +59,13 @@ public class AsyncTaskLogin extends AsyncTaskHttp {
                 user.setLastName(mJson.getString("ultimoNome"));
                 user.setCpfcnpj(mJson.getString("cpfcnpj"));
                 user.setActive(mJson.getString("situacao").equals("A"));
-                user.setCodFilial(1L);
+                user.setCodFilial(BuildConfig.FILIAL);
                 user.setCode(mJson.getLong("codcliente"));
 
                 if (user.isActive()){
                     SessionManager sm = new SessionManager(mContext);
                     sm.createSessionLogin(user);
                     sm.redirectToTarget(MainMenuActivity.class);
-
                 } else {
                     //user inactive
                 }

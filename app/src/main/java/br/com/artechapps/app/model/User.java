@@ -8,11 +8,13 @@ import java.io.Serializable;
 public class User implements Serializable{
 
     private String cpfcnpj;
-    private String name;
+    private String nome;
     private String lastName;
     private String senha;
+    private String tipopessoa;
     private Long codFilial;
     private Long code;
+    private Long opcad;
     private boolean active;
 
     public String getCpfcnpj() {
@@ -24,11 +26,11 @@ public class User implements Serializable{
     }
 
     public String getName() {
-        return name;
+        return nome;
     }
 
     public void setName(String name) {
-        this.name = name;
+        this.nome = name;
     }
 
     public String getLastName() {
@@ -47,6 +49,22 @@ public class User implements Serializable{
         this.senha = senha;
     }
 
+    public String getNome() {
+        return nome;
+    }
+
+    public void setNome(String nome) {
+        this.nome = nome;
+    }
+
+    public String getTipopessoa() {
+        return tipopessoa;
+    }
+
+    public void setTipopessoa(String tipopessoa) {
+        this.tipopessoa = tipopessoa;
+    }
+
     public long getCodFilial() {
         return codFilial;
     }
@@ -61,6 +79,14 @@ public class User implements Serializable{
 
     public void setCode(Long code) {
         this.code = code;
+    }
+
+    public Long getOpcad() {
+        return opcad;
+    }
+
+    public void setOpcad(Long opcad) {
+        this.opcad = opcad;
     }
 
     public boolean isActive() {

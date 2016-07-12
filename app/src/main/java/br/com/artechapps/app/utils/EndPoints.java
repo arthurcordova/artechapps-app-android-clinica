@@ -7,4 +7,6 @@ public class EndPoints extends Webservice{
 
     public static final String LOGIN = SERVER.concat("/login");
 
+    public static final String NEW_USER = SERVER.concat("/cadcliente");
+
 }
