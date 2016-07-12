@@ -34,6 +34,7 @@ public class AsyncTaskHttp extends AsyncTask<String, String, String> {
     protected Context mContext;
     protected boolean mShowDialog;
     protected ProgressDialog mDialog;
+    protected int mResponseCode;
 
     @Override
     protected void onPreExecute() {
@@ -83,7 +84,11 @@ public class AsyncTaskHttp extends AsyncTask<String, String, String> {
         while ((inputLine = bf.readLine()) != null) {
             result.append(inputLine);
         }
+        mResponseCode = urlConnection.getResponseCode();
         urlConnection.disconnect();
+
+        urlConnection.getResponseCode();
+
         return result.toString();
     }
 
