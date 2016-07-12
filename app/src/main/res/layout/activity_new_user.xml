@@ -23,7 +23,6 @@
             android:id="@+id/cv"
             android:layout_width="match_parent"
             android:layout_height="221dp"
-            android:layout_margin="16dp"
             card_view:cardCornerRadius="5dp"
             card_view:cardElevation="2dp">
 
@@ -172,8 +171,7 @@
             style="?android:textAppearanceSmall"
             android:layout_width="match_parent"
             android:layout_height="55dp"
-            android:layout_margin="16dp"
-            android:alpha="0.2"
+            android:layout_marginTop="32dp"
             android:background="@drawable/button_selector"
             android:clickable="false"
             android:text="Criar"
