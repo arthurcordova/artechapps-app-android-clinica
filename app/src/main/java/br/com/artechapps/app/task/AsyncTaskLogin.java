@@ -1,8 +1,6 @@
 package br.com.artechapps.app.task;
 
-import android.app.ProgressDialog;
 import android.content.Context;
-import android.content.Intent;
 
 import com.google.gson.Gson;
 
@@ -10,9 +8,10 @@ import org.json.JSONException;
 import org.json.JSONObject;
 import java.io.IOException;
 
-import br.com.artechapps.app.MainMenuActivity;
+import br.com.artechapps.app.activity.MainMenuActivity;
 import br.com.artechapps.app.model.User;
 import br.com.artechapps.app.utils.EndPoints;
+import br.com.artechapps.app.utils.SessionManager;
 
 /**
  * Created by arthurcordova on 7/8/16.
@@ -54,11 +53,27 @@ public class AsyncTaskLogin extends AsyncTaskHttp {
         super.onPostExecute(s);
         if (mJson != null){
             try {
-                mJson.getString("codCliente");
+                User user = new User();
+                user.setName(mJson.getString("nome"));
+                user.setLastName(mJson.getString("ultimoNome"));
+                user.setCpfcnpj(mJson.getString("cpfcnpj"));
+                user.setActive(mJson.getString("situacao").equals("A"));
+                user.setCodFilial(1L);
+                user.setCode(mJson.getLong("codcliente"));
+
+                if (user.isActive()){
+                    SessionManager sm = new SessionManager(mContext);
+                    sm.createSessionLogin(user);
+                    sm.redirectToTarget(MainMenuActivity.class);
+
+                } else {
+                    //user inactive
+                }
+
             } catch (JSONException e) {
                 e.printStackTrace();
             }
         }
-        mContext.startActivity(new Intent(mContext, MainMenuActivity.class));
+
     }
 }

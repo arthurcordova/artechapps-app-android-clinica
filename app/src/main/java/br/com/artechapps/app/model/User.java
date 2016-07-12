@@ -9,8 +9,10 @@ public class User implements Serializable{
 
     private String cpfcnpj;
     private String name;
+    private String lastName;
     private String senha;
     private Long codFilial;
+    private Long code;
     private boolean active;
 
     public String getCpfcnpj() {
@@ -29,6 +31,14 @@ public class User implements Serializable{
         this.name = name;
     }
 
+    public String getLastName() {
+        return lastName;
+    }
+
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
+    }
+
     public String getSenha() {
         return senha;
     }
@@ -43,6 +53,14 @@ public class User implements Serializable{
 
     public void setCodFilial(Long codFilial) {
         this.codFilial = codFilial;
+    }
+
+    public Long getCode() {
+        return code;
+    }
+
+    public void setCode(Long code) {
+        this.code = code;
     }
 
     public boolean isActive() {

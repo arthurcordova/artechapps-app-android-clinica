@@ -1,10 +1,10 @@
 package br.com.artechapps.app.activity;
 
-import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
 import br.com.artechapps.app.R;
+import br.com.artechapps.app.utils.SessionManager;
 
 public class SplashActivity extends AppCompatActivity {
 
@@ -19,17 +19,8 @@ public class SplashActivity extends AppCompatActivity {
     protected void onResume() {
         super.onResume();
 
-        redirectToTarget(LoginActivity.class);
-
+        SessionManager sm = new SessionManager(SplashActivity.this);
+        sm.checkLogin(MainMenuActivity.class, LoginActivity.class);
     }
 
-    private void redirectToTarget(Class clazz){
-        Intent i = new Intent(this, clazz);
-        // Closing all the Activities
-        i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-        // Add new Flag to start new Activity
-        i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-        startActivity(i);
-        finish();
-    }
 }

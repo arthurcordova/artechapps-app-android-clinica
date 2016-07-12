@@ -47,24 +47,22 @@ public final class SessionManager {
     }
 
 
-    public void checkLogin(Class target) {
+    public void checkLogin(Class targetTrue, Class targetFalse) {
         if (isLoggedIn()) {
-
-            User user = getSessionUser();
-
+            redirectToTarget(targetTrue);
+        } else {
+            redirectToTarget(targetFalse);
         }
-        redirectToTarget(target);
+
 
     }
 
-    private void redirectToTarget(Class clazz) {
+    public void redirectToTarget(Class clazz) {
         Intent i = new Intent(context, clazz);
         // Closing all the Activities
         i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         // Add new Flag to start new Activity
         i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-        // Origin parent
-//        i.putExtra("origin", AppSplashActivity.class.getName());
         context.startActivity(i);
         ((AppCompatActivity) context).finish();
     }
