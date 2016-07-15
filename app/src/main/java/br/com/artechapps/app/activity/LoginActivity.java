@@ -1,6 +1,7 @@
 package br.com.artechapps.app.activity;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -15,7 +16,9 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import br.com.artechapps.app.BuildConfig;
 import br.com.artechapps.app.R;
+import br.com.artechapps.app.model.User;
 import br.com.artechapps.app.task.AsyncTaskLogin;
 import br.com.artechapps.app.utils.UtilsCPF;
 
@@ -26,11 +29,13 @@ public class LoginActivity extends AppCompatActivity {
 
     private String a;
     private int mKeyDel;
+    private final String USER_LOGIN = "user_login";
 
     private EditText mCPF;
     private EditText mPassword;
     private Button mSignIn;
     private FloatingActionButton mFab;
+    private SharedPreferences mSharedPreferences;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,6 +45,9 @@ public class LoginActivity extends AppCompatActivity {
         mPassword = (EditText) findViewById(R.id.password);
         mFab = (FloatingActionButton) findViewById(R.id.fab);
         mSignIn = (Button) findViewById(R.id.sign_in_button);
+
+        mSharedPreferences = getSharedPreferences(BuildConfig.APPLICATION_ID, MODE_PRIVATE);
+        String user = mSharedPreferences.getString(USER_LOGIN, null);
 
         mPassword.setOnEditorActionListener(new TextView.OnEditorActionListener() {
             @Override
@@ -56,6 +64,22 @@ public class LoginActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(LoginActivity.this, NewUserActivity.class));
+            }
+        });
+
+        if (user!=null && !user.equals("")){
+            mCPF.setText(user);
+            mPassword.requestFocus();
+        }
+
+        mCPF.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                if (!hasFocus){
+                    SharedPreferences.Editor editor = mSharedPreferences.edit();
+                    editor.putString(USER_LOGIN, mCPF.getText().toString());
+                    editor.commit();
+                }
             }
         });
 
@@ -122,15 +146,15 @@ public class LoginActivity extends AppCompatActivity {
         mSignIn.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
-//                attemptLogin();
-                new AsyncTaskLogin(getString(R.string.hint_execute_login),LoginActivity.this, true).execute();
+                if (attemptLogin())
+                    new AsyncTaskLogin(getString(R.string.hint_execute_login),LoginActivity.this, true).execute(mCPF.getText().toString(), mPassword.getText().toString());
             }
         });
 
 
     }
 
-    private void attemptLogin() {
+    private boolean attemptLogin() {
         mCPF.setError(null);
         mPassword.setError(null);
 
@@ -138,33 +162,28 @@ public class LoginActivity extends AppCompatActivity {
         String cpf = mCPF.getText().toString();
         String password = mPassword.getText().toString();
 
-        boolean cancel = false;
+        boolean forward = false;
         View focusView = null;
 
-        // Check for a valid password, if the user entered one.
-        if (!TextUtils.isEmpty(password) && !isPasswordValid(password)) {
+        if (TextUtils.isEmpty(password)) {
             mPassword.setError(getString(R.string.error_invalid_password));
             focusView = mPassword;
-            cancel = true;
-        }
-
-        // Check for a valid cpf address.
-        if (TextUtils.isEmpty(cpf)) {
+        } else if (!isPasswordValid(password)){
+            mPassword.setError(getString(R.string.error_invalid_password));
+            focusView = mPassword;
+        } else if (TextUtils.isEmpty(cpf)) {
             mCPF.setError(getString(R.string.error_field_required));
             focusView = mCPF;
-            cancel = true;
         } else if (!isEmailValid(cpf)) {
             mCPF.setError(getString(R.string.error_invalid_cpf));
             focusView = mCPF;
-            cancel = true;
-        }
-
-        if (cancel) {
-            focusView.requestFocus();
-
         } else {
-
+            forward = true;
         }
+        if (!forward) {
+            focusView.requestFocus();
+        }
+        return forward;
     }
 
     private boolean isEmailValid(String cpf) {
@@ -172,7 +191,7 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     private boolean isPasswordValid(String password) {
-        return password.length() > 4;
+        return password.length() > 0;
     }
 
 }

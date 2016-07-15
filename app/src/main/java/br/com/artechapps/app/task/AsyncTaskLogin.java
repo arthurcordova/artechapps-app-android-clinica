@@ -31,10 +31,13 @@ public class AsyncTaskLogin extends AsyncTaskHttp {
     @Override
     protected String doInBackground(String... params) {
         try {
+            String cpf = params[0].replace(".","").replace("-","");
+            String pwd = params[1];
+
             User user = new User();
             user.setCodFilial(BuildConfig.FILIAL);
-            user.setSenha("1");
-            user.setCpfcnpj("06048472978");
+            user.setSenha(pwd);
+            user.setCpfcnpj(cpf);
 
             Gson gson = new Gson();
             String userJson = gson.toJson(user);
