@@ -64,36 +64,35 @@ public class MainMenuActivity extends AppCompatActivity
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()){
-            case R.id.action_logout:
-                SessionManager sm = new SessionManager(MainMenuActivity.this);
-                sm.destroySessionLogin(SplashActivity.class);
-                break;
-
-        }
+//        switch (item.getItemId()){
+//            case R.id.action_logout:
+//
+//                break;
+//
+//        }
         return super.onOptionsItemSelected(item);
     }
 
     @SuppressWarnings("StatementWithEmptyBody")
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
-        // Handle navigation view item clicks here.
-        int id = item.getItemId();
-
-        if (id == R.id.nav_camera) {
-            // Handle the camera action
-        } else if (id == R.id.nav_gallery) {
-
-        } else if (id == R.id.nav_slideshow) {
-
-        } else if (id == R.id.nav_manage) {
-
-        } else if (id == R.id.nav_share) {
-
-        } else if (id == R.id.nav_send) {
+        switch (item.getItemId()){
+            case R.id.nav_message :
+                break;
+            case R.id.nav_event :
+                break;
+            case R.id.nav_products :
+                break;
+            case R.id.nav_money :
+                break;
+            case R.id.nav_about :
+                break;
+            case R.id.nav_logout :
+                SessionManager sm = new SessionManager(MainMenuActivity.this);
+                sm.destroySessionLogin(SplashActivity.class);
+                break;
 
         }
-
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;

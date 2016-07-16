@@ -23,7 +23,13 @@
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
 
-    <string name="action_logout">Sair</string>
+    <string name="nav_message">Menssagens</string>
+    <string name="nav_event">Agendamentos</string>
+    <string name="nav_product">Produtos</string>
+    <string name="nav_money">Orçamentos</string>
+    <string name="nav_about">Sobre</string>
+    <string name="nav_logout">Sair</string>
+    <string name="nav_buy">Carrinho de compras</string>
 
 
 </resources>
