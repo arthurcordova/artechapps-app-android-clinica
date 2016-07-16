@@ -3,6 +3,7 @@ package br.com.artechapps.app.activity;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
+import android.support.v4.app.Fragment;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -14,6 +15,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 
 import br.com.artechapps.app.R;
+import br.com.artechapps.app.fragment.MessageFragment;
 import br.com.artechapps.app.utils.SessionManager;
 
 public class MainMenuActivity extends AppCompatActivity
@@ -78,6 +80,7 @@ public class MainMenuActivity extends AppCompatActivity
     public boolean onNavigationItemSelected(MenuItem item) {
         switch (item.getItemId()){
             case R.id.nav_message :
+                replaceFragment(new MessageFragment());
                 break;
             case R.id.nav_event :
                 break;
@@ -96,5 +99,9 @@ public class MainMenuActivity extends AppCompatActivity
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
+    }
+
+    protected void replaceFragment(Fragment fragment){
+        getSupportFragmentManager().beginTransaction().replace(R.id.container,fragment).commit();
     }
 }
