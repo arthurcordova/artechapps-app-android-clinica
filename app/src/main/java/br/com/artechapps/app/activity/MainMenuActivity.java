@@ -15,7 +15,10 @@ import android.view.Menu;
 import android.view.MenuItem;
 
 import br.com.artechapps.app.R;
+import br.com.artechapps.app.fragment.EventFragment;
 import br.com.artechapps.app.fragment.MessageFragment;
+import br.com.artechapps.app.fragment.MoneyFragment;
+import br.com.artechapps.app.fragment.ProductFragment;
 import br.com.artechapps.app.utils.SessionManager;
 
 public class MainMenuActivity extends AppCompatActivity
@@ -83,10 +86,13 @@ public class MainMenuActivity extends AppCompatActivity
                 replaceFragment(new MessageFragment());
                 break;
             case R.id.nav_event :
+                replaceFragment(new EventFragment());
                 break;
             case R.id.nav_products :
+                replaceFragment(new ProductFragment());
                 break;
             case R.id.nav_money :
+                replaceFragment(new MoneyFragment());
                 break;
             case R.id.nav_about :
                 break;
