@@ -6,6 +6,7 @@ import android.os.AsyncTask;
 
 import com.google.gson.Gson;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.json.JSONTokener;
@@ -56,20 +57,28 @@ public class AsyncTaskHttp extends AsyncTask<String, String, String> {
         }
     }
 
-    public JSONObject connectToServer(String urlStr, String param) throws JSONException, IOException {
-        return new JSONObject(new JSONTokener(urlConnection(urlStr, param)));
+    public JSONObject connectServerO(String urlStr, String param, boolean isGET) throws JSONException, IOException {
+        return new JSONObject(new JSONTokener(urlConnection(urlStr, param, isGET)));
     }
 
-    public String urlConnection(String urlStr, String parameters) throws JSONException, IOException {
+    public JSONArray connectServerA(String urlStr, String param, boolean isGET) throws JSONException, IOException {
+        return new JSONArray(new JSONTokener(urlConnection(urlStr, param, isGET)));
+    }
+
+    public String urlConnection(String urlStr, String parameters, boolean isGET) throws JSONException, IOException {
         StringBuilder result = new StringBuilder();
 
         URL url = new URL(urlStr);
         HttpURLConnection urlConnection = (HttpURLConnection) url.openConnection();
         urlConnection.setReadTimeout(CONN_TIME_OUT);
         urlConnection.setConnectTimeout(CONN_TIME_OUT);
-        urlConnection.setRequestMethod(METHOD_POST);
         urlConnection.setDoInput(CONN_INPUT);
         urlConnection.setRequestProperty("Content-Type", "application/json");
+        if (isGET){
+            urlConnection.setRequestMethod(METHOD_GET);
+        } else {
+            urlConnection.setRequestMethod(METHOD_POST);
+        }
 
         if (parameters != null){
             OutputStream output = new BufferedOutputStream(urlConnection.getOutputStream());

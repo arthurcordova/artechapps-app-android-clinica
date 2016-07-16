@@ -23,6 +23,7 @@ public final class SessionManager {
     private final String KEY_CPF = "login";
     private final String KEY_FILIAL = "code";
     private final String KEY_NAME = "name";
+    private final String KEY_CODE = "user_code";
     private final String KEY_ACTIVE = "active";
 
     public SessionManager(Context context) {
@@ -36,6 +37,7 @@ public final class SessionManager {
         editor.putLong(KEY_FILIAL, user.getCodFilial());
         editor.putString(KEY_CPF, user.getCpfcnpj());
         editor.putString(KEY_NAME, user.getName());
+        editor.putLong(KEY_CODE, user.getCode());
         editor.commit();
     }
 
@@ -72,16 +74,15 @@ public final class SessionManager {
     }
 
     public User getSessionUser() {
-        User user = null;
         if (isLoggedIn()) {
-
-            if (user != null) {
-                user.setCpfcnpj(preferences.getString(KEY_CPF, null));
-                user.setName(preferences.getString(KEY_NAME, null));
-                user.setCodFilial(preferences.getLong(KEY_FILIAL, 1L));
-                user.setActive(preferences.getBoolean(KEY_ACTIVE, false));
-            }
+            User user = new User();
+            user.setCpfcnpj(preferences.getString(KEY_CPF, null));
+            user.setName(preferences.getString(KEY_NAME, null));
+            user.setCodFilial(preferences.getLong(KEY_FILIAL, 1L));
+            user.setActive(preferences.getBoolean(KEY_ACTIVE, false));
+            user.setCode(preferences.getLong(KEY_CODE, 0L));
+            return user;
         }
-        return user;
+        return null;
     }
 }

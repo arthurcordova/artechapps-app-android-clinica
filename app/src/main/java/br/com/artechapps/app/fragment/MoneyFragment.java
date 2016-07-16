@@ -9,6 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import br.com.artechapps.app.R;
+import br.com.artechapps.app.task.AsyncTaskMoney;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -55,6 +56,9 @@ public class MoneyFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        new AsyncTaskMoney("Carregando oraçamentos...",getContext(),true).execute("1204");
+
         if (getArguments() != null) {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);

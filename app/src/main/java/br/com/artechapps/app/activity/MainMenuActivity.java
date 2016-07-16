@@ -13,16 +13,22 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.TextView;
 
 import br.com.artechapps.app.R;
 import br.com.artechapps.app.fragment.EventFragment;
 import br.com.artechapps.app.fragment.MessageFragment;
 import br.com.artechapps.app.fragment.MoneyFragment;
 import br.com.artechapps.app.fragment.ProductFragment;
+import br.com.artechapps.app.model.User;
 import br.com.artechapps.app.utils.SessionManager;
 
 public class MainMenuActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
+
+    private TextView mTvHeaderUserName;
+    private TextView mTvHeaderUserEmail;
+    private SessionManager mSM;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,6 +54,16 @@ public class MainMenuActivity extends AppCompatActivity
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+
+        mSM = new SessionManager(this);
+        User user = mSM.getSessionUser();
+
+//        mTvHeaderUserName = (TextView) findViewById(R.id.header_user_name);
+//        mTvHeaderUserEmail = (TextView) findViewById(R.id.header_user_email);
+//        mTvHeaderUserName.setText(user.getName());
+//        mTvHeaderUserEmail.setText(user.getCpfcnpj());
+
+
     }
 
     @Override

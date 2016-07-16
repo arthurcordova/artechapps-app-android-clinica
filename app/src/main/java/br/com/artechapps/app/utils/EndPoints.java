@@ -9,4 +9,10 @@ public class EndPoints extends Webservice{
 
     public static final String NEW_USER = SERVER.concat("/cadcliente");
 
+    public static final String MESSAGES = SERVER.concat("/msgsporcliente/");
+
+    public static final String PRODUCTS = SERVER.concat("/procedimentos/");
+
+    public static final String MONEY_PER_CLIENT = SERVER.concat("/orcporcliente/");
+
 }

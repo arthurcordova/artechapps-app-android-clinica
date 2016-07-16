@@ -42,7 +42,7 @@ public class AsyncTaskLogin extends AsyncTaskHttp {
             Gson gson = new Gson();
             String userJson = gson.toJson(user);
 
-            mJson = connectToServer(EndPoints.LOGIN, userJson);
+            mJson = connectServerO(EndPoints.LOGIN, userJson,false);
         } catch (JSONException e) {
             e.printStackTrace();
         } catch (IOException e) {
@@ -77,6 +77,5 @@ public class AsyncTaskLogin extends AsyncTaskHttp {
                 e.printStackTrace();
             }
         }
-
     }
 }

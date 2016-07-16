@@ -40,7 +40,7 @@ public class AsyncTaskNewUser extends AsyncTaskHttp {
             Gson gson = new Gson();
             String userJson = gson.toJson(user);
 
-            mJson = connectToServer(EndPoints.NEW_USER, userJson);
+            mJson = connectServerO(EndPoints.NEW_USER, userJson,false);
         } catch (JSONException e) {
             e.printStackTrace();
         } catch (IOException e) {
@@ -49,10 +49,4 @@ public class AsyncTaskNewUser extends AsyncTaskHttp {
 
         return null;
     }
-
-
-
-
-
-
 }
