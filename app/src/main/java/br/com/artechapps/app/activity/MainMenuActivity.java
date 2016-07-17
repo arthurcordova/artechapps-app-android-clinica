@@ -1,9 +1,14 @@
 package br.com.artechapps.app.activity;
 
+import android.content.Context;
+import android.graphics.Rect;
+import android.graphics.drawable.LayerDrawable;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
+import android.view.Gravity;
+import android.view.MenuInflater;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -14,6 +19,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import br.com.artechapps.app.R;
 import br.com.artechapps.app.fragment.EventFragment;
@@ -76,12 +82,98 @@ public class MainMenuActivity extends AppCompatActivity
         }
     }
 
+    private int hot_number = 0  ;
+    private TextView ui_hot = null;
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
+
         getMenuInflater().inflate(R.menu.main_menu, menu);
-        return true;
+
+
+        final MenuItem menu_hot = menu.findItem(R.id.action_buy);
+        menu_hot.setActionView(R.layout.action_bar_notifitcation_icon);
+
+        final View menu_hotlist = menu_hot.getActionView();
+
+        ui_hot = (TextView) menu_hotlist.findViewById(R.id.hotlist_hot);
+        updateHotCount(hot_number);
+//        new MyMenuItemStuffListener(menu_hotlist, "Show hot message") {
+//            @Override
+//            public void onClick(View v) {
+////                onHotlistSelected();
+//            }
+//        };
+        return super.onCreateOptionsMenu(menu);
+
+
+        // Inflate the menu; this adds items to the action bar if it is present.
+//        getMenuInflater().inflate(R.menu.main_menu, menu);
+//
+//        int notifCount = 1;
+//        View count = menu.findItem(R.id.action_buy);
+//        count.setBackground(getResources().getDrawable(R.drawable.badge_circle));
+
+//        MenuItem item = menu.findItem(R.id.action_buy);
+//        LayerDrawable icon = (LayerDrawable) item.getIcon();
+//
+//        // Update LayerDrawable's BadgeDrawable
+//        Utils2.setBadgeCount(this, icon, 2);
+//        return true;
     }
+
+    static abstract class MyMenuItemStuffListener implements View.OnClickListener, View.OnLongClickListener {
+        private String hint;
+        private View view;
+
+        MyMenuItemStuffListener(View view, String hint) {
+            this.view = view;
+            this.hint = hint;
+            view.setOnClickListener(this);
+            view.setOnLongClickListener(this);
+        }
+
+        @Override abstract public void onClick(View v);
+
+        @Override public boolean onLongClick(View v) {
+            final int[] screenPos = new int[2];
+            final Rect displayFrame = new Rect();
+            view.getLocationOnScreen(screenPos);
+            view.getWindowVisibleDisplayFrame(displayFrame);
+            final Context context = view.getContext();
+            final int width = view.getWidth();
+            final int height = view.getHeight();
+            final int midy = screenPos[1] + height / 2;
+            final int screenWidth = context.getResources().getDisplayMetrics().widthPixels;
+            Toast cheatSheet = Toast.makeText(context, hint, Toast.LENGTH_SHORT);
+            if (midy < displayFrame.height()) {
+                cheatSheet.setGravity(Gravity.TOP | Gravity.RIGHT,
+                        screenWidth - screenPos[0] - width / 2, height);
+            } else {
+                cheatSheet.setGravity(Gravity.BOTTOM | Gravity.CENTER_HORIZONTAL, 0, height);
+            }
+            cheatSheet.show();
+            return true;
+        }
+    }
+
+
+    public void updateHotCount(final int new_hot_number) {
+        hot_number = new_hot_number;
+        if (ui_hot == null) return;
+        runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                if (new_hot_number == 0)
+                    ui_hot.setVisibility(View.INVISIBLE);
+                else {
+                    ui_hot.setVisibility(View.VISIBLE);
+                    ui_hot.setText(Integer.toString(new_hot_number));
+                }
+            }
+        });
+    }
+
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
