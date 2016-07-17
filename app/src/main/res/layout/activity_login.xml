@@ -106,7 +106,7 @@
             android:layout_marginRight="@dimen/activity_horizontal_margin"
             android:background="@drawable/button_selector"
             android:clickable="false"
-            android:text="@string/button_sign_in"
+            android:text="@string/action_sign_in"
             android:textColor="#ffffff"
             android:textStyle="bold" />
 

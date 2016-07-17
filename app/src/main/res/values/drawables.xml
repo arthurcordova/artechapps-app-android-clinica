@@ -5,7 +5,8 @@
     <item name="ic_menu_products" type="drawable">@drawable/ic_menu_products</item>
     <item name="ic_menu_logout" type="drawable">@drawable/ic_menu_logout</item>
     <item name="ic_menu_about" type="drawable">@drawable/ic_menu_about</item>
-    <item name="ic_menu_shopping_cart" type="drawable">@drawable/ic_menu_shopping_cart</item>
+    <item name="ic_menu_shopping_cart_whi" type="drawable">@drawable/ic_menu_shopping_cart_white</item>
+    <item name="ic_menu_shopping_cart_pin" type="drawable">@drawable/ic_menu_shopping_cart_pink</item>
 
     <item name="ic_list_image" type="drawable">@drawable/ic_image_black_24dp</item>
 </resources>

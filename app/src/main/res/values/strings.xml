@@ -12,9 +12,11 @@
     <string name="hint_password_confirm">Confirme sua senha</string>
     <string name="hint_execute_login">Efetuando login...</string>
 
-    <string name="button_sign_in">Entrar</string>
+    <string name="action_sign_in">Entrar</string>
+    <string name="action_sign_in_short">Entrar</string>
+    <string name="action_add_cart">ADICIONAR</string>
 
-    <string name="action_sign_in_short">Sign in</string>
+
     <string name="error_invalid_cpf">C.P.F. inválido</string>
     <string name="error_invalid_password">Senha inválida</string>
     <string name="error_incorrect_password">C.P.F. ou senha incorreta</string>
