@@ -6,4 +6,6 @@
     <item name="ic_menu_logout" type="drawable">@drawable/ic_menu_logout</item>
     <item name="ic_menu_about" type="drawable">@drawable/ic_menu_about</item>
     <item name="ic_menu_shopping_cart" type="drawable">@drawable/ic_menu_shopping_cart</item>
+
+    <item name="ic_list_image" type="drawable">@drawable/ic_image_black_24dp</item>
 </resources>
