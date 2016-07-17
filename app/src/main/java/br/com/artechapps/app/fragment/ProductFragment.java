@@ -14,6 +14,7 @@ import android.view.ViewGroup;
 import java.util.ArrayList;
 
 import br.com.artechapps.app.R;
+import br.com.artechapps.app.activity.MainMenuActivity;
 import br.com.artechapps.app.adapter.RVAdapterProduct;
 import br.com.artechapps.app.database.Persistence;
 import br.com.artechapps.app.database.PersistenceProduct;
@@ -39,6 +40,7 @@ public class ProductFragment extends Fragment {
     private OnFragmentInteractionListener mListener;
     private PersistenceProduct mPersistence;
     private ArrayList<Product> mList;
+    private MainMenuActivity mActivity;
 
     private RecyclerView mRvProduct;
 
@@ -81,12 +83,14 @@ public class ProductFragment extends Fragment {
 
         mRvProduct = (RecyclerView) view.findViewById(R.id.rvProducts);
 
-        new AsyncTaskProduct("Carregando produtos...",getContext(),true, mRvProduct).execute("1");
+        mActivity = (MainMenuActivity)getActivity();
+
+        new AsyncTaskProduct("Carregando produtos...",getContext(),true, mRvProduct, mActivity).execute("1");
 
         mPersistence = new PersistenceProduct(getContext());
         mList = mPersistence.getProduct();
 
-        RVAdapterProduct mAdapterPatient = new RVAdapterProduct(mList);
+        RVAdapterProduct mAdapterPatient = new RVAdapterProduct(mList, mActivity);
 
         mRvProduct.setLayoutManager(new LinearLayoutManager(getContext()));
         mRvProduct.setItemAnimator(new DefaultItemAnimator());

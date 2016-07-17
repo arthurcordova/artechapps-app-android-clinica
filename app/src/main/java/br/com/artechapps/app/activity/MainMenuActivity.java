@@ -82,8 +82,16 @@ public class MainMenuActivity extends AppCompatActivity
         }
     }
 
-    private int hot_number = 0  ;
+    private int counter = 0;
     private TextView ui_hot = null;
+
+    public int getCounter() {
+        return counter;
+    }
+
+    public void setCounter(int counter) {
+        this.counter += counter;
+    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -97,7 +105,9 @@ public class MainMenuActivity extends AppCompatActivity
         final View menu_hotlist = menu_hot.getActionView();
 
         ui_hot = (TextView) menu_hotlist.findViewById(R.id.hotlist_hot);
-        updateHotCount(hot_number);
+
+        updateShopCart();
+
 //        new MyMenuItemStuffListener(menu_hotlist, "Show hot message") {
 //            @Override
 //            public void onClick(View v) {
@@ -122,53 +132,57 @@ public class MainMenuActivity extends AppCompatActivity
 //        return true;
     }
 
-    static abstract class MyMenuItemStuffListener implements View.OnClickListener, View.OnLongClickListener {
-        private String hint;
-        private View view;
+//    static abstract class MyMenuItemStuffListener implements View.OnClickListener, View.OnLongClickListener {
+//        private String hint;
+//        private View view;
+//
+//        MyMenuItemStuffListener(View view, String hint) {
+//            this.view = view;
+//            this.hint = hint;
+//            view.setOnClickListener(this);
+//            view.setOnLongClickListener(this);
+//        }
+//
+//        @Override abstract public void onClick(View v);
+//
+//        @Override public boolean onLongClick(View v) {
+//            final int[] screenPos = new int[2];
+//            final Rect displayFrame = new Rect();
+//            view.getLocationOnScreen(screenPos);
+//            view.getWindowVisibleDisplayFrame(displayFrame);
+//            final Context context = view.getContext();
+//            final int width = view.getWidth();
+//            final int height = view.getHeight();
+//            final int midy = screenPos[1] + height / 2;
+//            final int screenWidth = context.getResources().getDisplayMetrics().widthPixels;
+//            Toast cheatSheet = Toast.makeText(context, hint, Toast.LENGTH_SHORT);
+//            if (midy < displayFrame.height()) {
+//                cheatSheet.setGravity(Gravity.TOP | Gravity.RIGHT,
+//                        screenWidth - screenPos[0] - width / 2, height);
+//            } else {
+//                cheatSheet.setGravity(Gravity.BOTTOM | Gravity.CENTER_HORIZONTAL, 0, height);
+//            }
+//            cheatSheet.show();
+//            return true;
+//        }
+//    }
 
-        MyMenuItemStuffListener(View view, String hint) {
-            this.view = view;
-            this.hint = hint;
-            view.setOnClickListener(this);
-            view.setOnLongClickListener(this);
-        }
 
-        @Override abstract public void onClick(View v);
-
-        @Override public boolean onLongClick(View v) {
-            final int[] screenPos = new int[2];
-            final Rect displayFrame = new Rect();
-            view.getLocationOnScreen(screenPos);
-            view.getWindowVisibleDisplayFrame(displayFrame);
-            final Context context = view.getContext();
-            final int width = view.getWidth();
-            final int height = view.getHeight();
-            final int midy = screenPos[1] + height / 2;
-            final int screenWidth = context.getResources().getDisplayMetrics().widthPixels;
-            Toast cheatSheet = Toast.makeText(context, hint, Toast.LENGTH_SHORT);
-            if (midy < displayFrame.height()) {
-                cheatSheet.setGravity(Gravity.TOP | Gravity.RIGHT,
-                        screenWidth - screenPos[0] - width / 2, height);
-            } else {
-                cheatSheet.setGravity(Gravity.BOTTOM | Gravity.CENTER_HORIZONTAL, 0, height);
-            }
-            cheatSheet.show();
-            return true;
-        }
-    }
-
-
-    public void updateHotCount(final int new_hot_number) {
-        hot_number = new_hot_number;
+    public void updateShopCart() {
         if (ui_hot == null) return;
         runOnUiThread(new Runnable() {
             @Override
             public void run() {
-                if (new_hot_number == 0)
+                if (counter == 0)
                     ui_hot.setVisibility(View.INVISIBLE);
                 else {
                     ui_hot.setVisibility(View.VISIBLE);
-                    ui_hot.setText(Integer.toString(new_hot_number));
+                    if (counter > 9){
+                        ui_hot.setText("+9");
+                    } else {
+                        ui_hot.setText(Integer.toString(counter));
+                    }
+
                 }
             }
         });
@@ -189,22 +203,22 @@ public class MainMenuActivity extends AppCompatActivity
     @SuppressWarnings("StatementWithEmptyBody")
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
-        switch (item.getItemId()){
-            case R.id.nav_message :
+        switch (item.getItemId()) {
+            case R.id.nav_message:
                 replaceFragment(new MessageFragment());
                 break;
-            case R.id.nav_event :
+            case R.id.nav_event:
                 replaceFragment(new EventFragment());
                 break;
-            case R.id.nav_products :
+            case R.id.nav_products:
                 replaceFragment(new ProductFragment());
                 break;
-            case R.id.nav_money :
+            case R.id.nav_money:
                 replaceFragment(new MoneyFragment());
                 break;
-            case R.id.nav_about :
+            case R.id.nav_about:
                 break;
-            case R.id.nav_logout :
+            case R.id.nav_logout:
                 SessionManager sm = new SessionManager(MainMenuActivity.this);
                 sm.destroySessionLogin(SplashActivity.class);
                 break;
@@ -215,7 +229,7 @@ public class MainMenuActivity extends AppCompatActivity
         return true;
     }
 
-    protected void replaceFragment(Fragment fragment){
-        getSupportFragmentManager().beginTransaction().replace(R.id.container,fragment).commit();
+    protected void replaceFragment(Fragment fragment) {
+        getSupportFragmentManager().beginTransaction().replace(R.id.container, fragment).commit();
     }
 }

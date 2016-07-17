@@ -9,6 +9,7 @@ import android.widget.TextView;
 import java.util.ArrayList;
 
 import br.com.artechapps.app.R;
+import br.com.artechapps.app.activity.MainMenuActivity;
 import br.com.artechapps.app.model.Product;
 
 /**
@@ -17,16 +18,18 @@ import br.com.artechapps.app.model.Product;
 public class RVAdapterProduct extends RecyclerView.Adapter<RVAdapterProduct.ViewHolder> {
 
     private ArrayList<Product> mItemsData;
+    private MainMenuActivity mActivity;
 
-    public RVAdapterProduct(ArrayList<Product> itemsData) {
+    public RVAdapterProduct(ArrayList<Product> itemsData, MainMenuActivity activity) {
         mItemsData = itemsData;
+        mActivity = activity;
     }
 
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View itemLayoutView = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.list_item_product, null);
-        ViewHolder viewHolder = new ViewHolder(itemLayoutView);
+        ViewHolder viewHolder = new ViewHolder(itemLayoutView, mActivity);
         return viewHolder;
     }
 
@@ -52,12 +55,25 @@ public class RVAdapterProduct extends RecyclerView.Adapter<RVAdapterProduct.View
         TextView tvCode;
         TextView tvDescription;
         TextView tvValue;
+        TextView tvAdd;
 
-        public ViewHolder(View itemLayoutView) {
+        MainMenuActivity mActivity;
+
+        public ViewHolder(View itemLayoutView, final MainMenuActivity activity) {
             super(itemLayoutView);
+            mActivity = activity;
             tvCode = (TextView) itemLayoutView.findViewById(R.id.code);
             tvDescription = (TextView) itemLayoutView.findViewById(R.id.description);
             tvValue = (TextView) itemLayoutView.findViewById(R.id.value);
+            tvAdd = (TextView)itemLayoutView.findViewById(R.id.add);
+
+            tvAdd.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    mActivity.setCounter(1);
+                    mActivity.updateShopCart();
+                }
+            });
         }
     }
 }

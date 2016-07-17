@@ -11,6 +11,7 @@ import org.json.JSONException;
 import java.io.IOException;
 import java.util.ArrayList;
 
+import br.com.artechapps.app.activity.MainMenuActivity;
 import br.com.artechapps.app.adapter.RVAdapterProduct;
 import br.com.artechapps.app.database.PersistenceProduct;
 import br.com.artechapps.app.model.Product;
@@ -25,12 +26,14 @@ public class AsyncTaskProduct extends AsyncTaskHttp {
     private PersistenceProduct mPersistence;
     private RecyclerView mRecyclerView;
     private ArrayList<Product> mList;
+    private MainMenuActivity mActivity;
 
-    public AsyncTaskProduct(String msg, Context context, boolean showDialog, RecyclerView recyclerView) {
+    public AsyncTaskProduct(String msg, Context context, boolean showDialog, RecyclerView recyclerView, MainMenuActivity activity) {
         mMsg = msg;
         mContext = context;
         mShowDialog = showDialog;
         mRecyclerView = recyclerView;
+        mActivity = activity;
     }
 
     @Override
@@ -56,7 +59,7 @@ public class AsyncTaskProduct extends AsyncTaskHttp {
 
             mList = mPersistence.getProduct();
 
-            RVAdapterProduct mAdapterPatient = new RVAdapterProduct(mList);
+            RVAdapterProduct mAdapterPatient = new RVAdapterProduct(mList, mActivity);
 
             mRecyclerView.setLayoutManager(new LinearLayoutManager(mContext));
             mRecyclerView.setItemAnimator(new DefaultItemAnimator());
