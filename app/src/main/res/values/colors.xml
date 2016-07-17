@@ -2,9 +2,9 @@
 <resources>
     <color name="colorPrimary">#E91E63</color>
     <color name="colorPrimaryDark">#C2185B</color>
-    <color name="colorPrimaryLight">#F8BBD0</color>
+    <color name="colorPrimaryLight">#f9d8db</color>
     <color name="colorAccent">#E91E63</color>
-    <color name="colorDivider">#B6B6B6</color>
+    <color name="colorDivider">#ededed</color>
     <color name="textBlack">#000000</color>
 
 </resources>

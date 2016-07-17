@@ -35,8 +35,9 @@ public class RVAdapterProduct extends RecyclerView.Adapter<RVAdapterProduct.View
     public void onBindViewHolder(ViewHolder viewHolder, int position) {
         Product model = mItemsData.get(position);
         viewHolder.tvCode.setText(String.valueOf(model.getId()));
+
         viewHolder.tvDescription.setText(model.getDescription());
-        viewHolder.tvValue.setText(String.valueOf(model.getValue()));
+        viewHolder.tvValue.setText(model.formatValue(model.getValue()));
 
     }
 
