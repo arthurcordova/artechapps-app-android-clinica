@@ -7,6 +7,10 @@ import java.io.Serializable;
  */
 public class Product implements Serializable {
 
+    public static final String JSON_CODE = "codProduto";
+    public static final String JSON_DESC = "descricao";
+    public static final String JSON_VALUE = "valorProduto";
+
     private long id;
     private String Description;
     private Double value;

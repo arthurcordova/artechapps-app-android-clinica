@@ -6,18 +6,19 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import java.util.List;
+import java.util.ArrayList;
 
 import br.com.artechapps.app.R;
+import br.com.artechapps.app.model.Product;
 
 /**
  * Created by acstapassoli on 07/12/2015.
  */
 public class RVAdapterProduct extends RecyclerView.Adapter<RVAdapterProduct.ViewHolder> {
 
-    private List mItemsData;
+    private ArrayList<Product> mItemsData;
 
-    public RVAdapterProduct(List itemsData) {
+    public RVAdapterProduct(ArrayList<Product> itemsData) {
         mItemsData = itemsData;
     }
 
@@ -32,8 +33,8 @@ public class RVAdapterProduct extends RecyclerView.Adapter<RVAdapterProduct.View
     // Replace the contents of a view (invoked by the layout manager)
     @Override
     public void onBindViewHolder(ViewHolder viewHolder, int position) {
-        String hours = (String) mItemsData.get(position);
-        viewHolder.tvHour.setText(hours);
+        Product model = mItemsData.get(position);
+        viewHolder.tvCode.setText(model.getDescription());
 
     }
 
@@ -45,11 +46,11 @@ public class RVAdapterProduct extends RecyclerView.Adapter<RVAdapterProduct.View
     // inner class to hold a reference to each item of RecyclerView
     public static class ViewHolder extends RecyclerView.ViewHolder {
 
-        public TextView tvHour;
+        TextView tvCode;
 
         public ViewHolder(View itemLayoutView) {
             super(itemLayoutView);
-            tvHour = (TextView) itemLayoutView.findViewById(R.id.code);
+            tvCode = (TextView) itemLayoutView.findViewById(R.id.code);
         }
     }
 }

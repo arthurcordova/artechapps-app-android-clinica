@@ -4,11 +4,20 @@ import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.DefaultItemAnimator;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import java.util.ArrayList;
+
 import br.com.artechapps.app.R;
+import br.com.artechapps.app.adapter.RVAdapterProduct;
+import br.com.artechapps.app.database.Persistence;
+import br.com.artechapps.app.database.PersistenceProduct;
+import br.com.artechapps.app.model.Product;
 import br.com.artechapps.app.task.AsyncTaskProduct;
 
 /**
@@ -20,16 +29,18 @@ import br.com.artechapps.app.task.AsyncTaskProduct;
  * create an instance of this fragment.
  */
 public class ProductFragment extends Fragment {
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
+
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
 
-    // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
 
     private OnFragmentInteractionListener mListener;
+    private PersistenceProduct mPersistence;
+    private ArrayList<Product> mList;
+
+    private RecyclerView mRvProduct;
 
     public ProductFragment() {
         // Required empty public constructor
@@ -57,8 +68,6 @@ public class ProductFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        new AsyncTaskProduct("Carregando produtos...",getContext(),true).execute("1");
-
         if (getArguments() != null) {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
@@ -68,8 +77,24 @@ public class ProductFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_product, container, false);
+        View view = inflater.inflate(R.layout.fragment_product, container, false);
+
+        mRvProduct = (RecyclerView) view.findViewById(R.id.rvProducts);
+
+        new AsyncTaskProduct("Carregando produtos...",getContext(),true, mRvProduct).execute("1");
+
+        mPersistence = new PersistenceProduct(getContext());
+        mList = mPersistence.getProduct();
+
+        RVAdapterProduct mAdapterPatient = new RVAdapterProduct(mList);
+
+        mRvProduct.setLayoutManager(new LinearLayoutManager(getContext()));
+        mRvProduct.setItemAnimator(new DefaultItemAnimator());
+        mRvProduct.setAdapter(mAdapterPatient);
+
+        mPersistence.close();
+
+        return view;
     }
 
     // TODO: Rename method, update argument and hook method into UI event
@@ -85,8 +110,12 @@ public class ProductFragment extends Fragment {
         if (context instanceof OnFragmentInteractionListener) {
             mListener = (OnFragmentInteractionListener) context;
         } else {
-//            throw new RuntimeException(context.toString()
-//                    + " must implement OnFragmentInteractionListener");
+
+
+
+
+
+
         }
     }
 

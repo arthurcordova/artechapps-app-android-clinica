@@ -1,12 +1,19 @@
 package br.com.artechapps.app.task;
 
 import android.content.Context;
+import android.support.v7.widget.DefaultItemAnimator;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
+import br.com.artechapps.app.adapter.RVAdapterProduct;
+import br.com.artechapps.app.database.PersistenceProduct;
+import br.com.artechapps.app.model.Product;
 import br.com.artechapps.app.utils.EndPoints;
 
 /**
@@ -15,12 +22,15 @@ import br.com.artechapps.app.utils.EndPoints;
 public class AsyncTaskProduct extends AsyncTaskHttp {
 
     private JSONArray mJson;
+    private PersistenceProduct mPersistence;
+    private RecyclerView mRecyclerView;
+    private ArrayList<Product> mList;
 
-    public AsyncTaskProduct(String msg, Context context, boolean showDialog) {
+    public AsyncTaskProduct(String msg, Context context, boolean showDialog, RecyclerView recyclerView) {
         mMsg = msg;
         mContext = context;
         mShowDialog = showDialog;
-
+        mRecyclerView = recyclerView;
     }
 
     @Override
@@ -41,29 +51,19 @@ public class AsyncTaskProduct extends AsyncTaskHttp {
     protected void onPostExecute(String s) {
         super.onPostExecute(s);
         if (mJson != null && mJson.length() > 0){
-//            try {
-//                User user = new User();
-//                user.setName(mJson.getString("nome"));
-//                user.setLastName(mJson.getString("ultimoNome"));
-//                user.setCpfcnpj(mJson.getString("cpfcnpj"));
-//                user.setActive(mJson.getString("situacao").equals("A"));
-//                user.setCodFilial(BuildConfig.FILIAL);
-//                user.setCode(mJson.getLong("codcliente"));
-//
-//                if (user.isActive()){
-//                    SessionManager sm = new SessionManager(mContext);
-//                    sm.createSessionLogin(user);
-//                    sm.redirectToTarget(MainMenuActivity.class);
-//                } else {
-//                    //user inactive
-//                }
-//
-//            } catch (JSONException e) {
-//                e.printStackTrace();
-//            }
+            mPersistence = new PersistenceProduct(mContext);
+            mPersistence.save(mJson);
+
+            mList = mPersistence.getProduct();
+
+            RVAdapterProduct mAdapterPatient = new RVAdapterProduct(mList);
+
+            mRecyclerView.setLayoutManager(new LinearLayoutManager(mContext));
+            mRecyclerView.setItemAnimator(new DefaultItemAnimator());
+            mRecyclerView.setAdapter(mAdapterPatient);
+
+            mPersistence.close();
+
         }
-
     }
-
-
 }
