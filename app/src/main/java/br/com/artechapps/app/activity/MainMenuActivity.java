@@ -1,14 +1,9 @@
 package br.com.artechapps.app.activity;
 
-import android.content.Context;
-import android.graphics.Rect;
-import android.graphics.drawable.LayerDrawable;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
-import android.view.Gravity;
-import android.view.MenuInflater;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -19,7 +14,6 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import br.com.artechapps.app.R;
 import br.com.artechapps.app.fragment.EventFragment;
@@ -61,14 +55,15 @@ public class MainMenuActivity extends AppCompatActivity
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
+        View header =
+                navigationView.getHeaderView(0);
+        mTvHeaderUserName = (TextView) header.findViewById(R.id.header_user_name);
+        mTvHeaderUserEmail = (TextView) header.findViewById(R.id.header_user_email);
+
         mSM = new SessionManager(this);
         User user = mSM.getSessionUser();
 
-//        mTvHeaderUserName = (TextView) findViewById(R.id.header_user_name);
-//        mTvHeaderUserEmail = (TextView) findViewById(R.id.header_user_email);
-//        mTvHeaderUserName.setText(user.getName());
-//        mTvHeaderUserEmail.setText(user.getCpfcnpj());
-
+        mTvHeaderUserName.setText(user.getName());
 
     }
 

@@ -17,7 +17,10 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            android:clickable="true"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            >
 
             <LinearLayout
                 android:layout_width="wrap_content"
@@ -88,6 +91,8 @@
                         android:src="@drawable/ic_menu_shopping_cart_pin"
                         android:layout_marginTop="2dp"
                         android:layout_alignTop="@+id/add"
+                        android:clickable="true"
+                        android:background="?attr/selectableItemBackgroundBorderless"
                         android:layout_toLeftOf="@+id/add"
                         android:layout_toStartOf="@+id/add" />
 
@@ -100,6 +105,8 @@
                         android:paddingLeft="6dp"
                         android:paddingRight="16dp"
                         android:text="@string/action_add_cart"
+                        android:clickable="true"
+                        android:background="?attr/selectableItemBackground"
                         android:textColor="@color/colorAccent"
                         android:textStyle="bold"
                         android:layout_alignBottom="@+id/value"
