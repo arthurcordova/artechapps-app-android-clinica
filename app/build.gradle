@@ -11,7 +11,7 @@ android {
         versionCode 1
         versionName "1.0"
         buildConfigField 'String', 'HOST', '"http://www2.beautyclinic.com.br"'
-        buildConfigField 'Long', 'FILIAL', 1 + 'l'
+        buildConfigField 'Long', 'FILIAL', 2 + 'l'
     }
     buildTypes {
         release {
@@ -30,6 +30,5 @@ dependencies {
     compile 'com.android.support:recyclerview-v7:23.4.0'
     compile 'com.google.code.gson:gson:2.7'
     compile 'com.android.support:support-v4:23.4.0'
-    compile 'me.leolin:ShortcutBadger:1.1.6@aar'
 
 }

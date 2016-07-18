@@ -13,6 +13,7 @@ import android.view.ViewGroup;
 
 import java.util.ArrayList;
 
+import br.com.artechapps.app.BuildConfig;
 import br.com.artechapps.app.R;
 import br.com.artechapps.app.activity.MainMenuActivity;
 import br.com.artechapps.app.adapter.RVAdapterProduct;
@@ -85,7 +86,7 @@ public class ProductFragment extends Fragment {
 
         mActivity = (MainMenuActivity)getActivity();
 
-        new AsyncTaskProduct("Carregando produtos...",getContext(),true, mRvProduct, mActivity).execute("1");
+        new AsyncTaskProduct("Carregando produtos...",getContext(),true, mRvProduct, mActivity).execute(String.valueOf(BuildConfig.FILIAL));
 
         mPersistence = new PersistenceProduct(getContext());
         mList = mPersistence.getProduct();
@@ -114,11 +115,6 @@ public class ProductFragment extends Fragment {
         if (context instanceof OnFragmentInteractionListener) {
             mListener = (OnFragmentInteractionListener) context;
         } else {
-
-
-
-
-
 
         }
     }

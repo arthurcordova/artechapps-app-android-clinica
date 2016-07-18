@@ -1,6 +1,7 @@
 package br.com.artechapps.app.task;
 
 import android.content.Context;
+import android.widget.Toast;
 
 import com.google.gson.Gson;
 
@@ -76,6 +77,8 @@ public class AsyncTaskLogin extends AsyncTaskHttp {
             } catch (JSONException e) {
                 e.printStackTrace();
             }
+        } else {
+            Toast.makeText(mContext,"Usuário ou senha inválida.", Toast.LENGTH_LONG).show();
         }
     }
 }
