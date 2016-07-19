@@ -110,7 +110,7 @@
                         android:src="@drawable/ic_vpn_key_black_24dp" />
 
                     <EditText
-                        android:id="@+id/password"
+                        android:id="@+id/new_password"
                         style="?android:textAppearanceMedium"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"

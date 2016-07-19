@@ -18,7 +18,6 @@ import android.widget.TextView;
 
 import br.com.artechapps.app.BuildConfig;
 import br.com.artechapps.app.R;
-import br.com.artechapps.app.model.User;
 import br.com.artechapps.app.task.AsyncTaskLogin;
 import br.com.artechapps.app.utils.UtilsCPF;
 
@@ -174,7 +173,7 @@ public class LoginActivity extends AppCompatActivity {
         } else if (TextUtils.isEmpty(cpf)) {
             mCPF.setError(getString(R.string.error_field_required));
             focusView = mCPF;
-        } else if (!isEmailValid(cpf)) {
+        } else if (!isCPFValid(cpf)) {
             mCPF.setError(getString(R.string.error_invalid_cpf));
             focusView = mCPF;
         } else {
@@ -186,7 +185,7 @@ public class LoginActivity extends AppCompatActivity {
         return forward;
     }
 
-    private boolean isEmailValid(String cpf) {
+    private boolean isCPFValid(String cpf) {
         return UtilsCPF.validateCPF(cpf);
     }
 

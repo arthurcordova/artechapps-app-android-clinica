@@ -19,6 +19,7 @@
 
     <string name="error_invalid_cpf">C.P.F. inválido</string>
     <string name="error_invalid_password">Senha inválida</string>
+    <string name="error_invalid_name">Nome inválido</string>
     <string name="error_incorrect_password">C.P.F. ou senha incorreta</string>
     <string name="error_field_required">Campo obrigatório</string>
 

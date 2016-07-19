@@ -112,56 +112,7 @@ public class MainMenuActivity extends AppCompatActivity
         return super.onCreateOptionsMenu(menu);
 
 
-        // Inflate the menu; this adds items to the action bar if it is present.
-//        getMenuInflater().inflate(R.menu.main_menu, menu);
-//
-//        int notifCount = 1;
-//        View count = menu.findItem(R.id.action_buy);
-//        count.setBackground(getResources().getDrawable(R.drawable.badge_circle));
-
-//        MenuItem item = menu.findItem(R.id.action_buy);
-//        LayerDrawable icon = (LayerDrawable) item.getIcon();
-//
-//        // Update LayerDrawable's BadgeDrawable
-//        Utils2.setBadgeCount(this, icon, 2);
-//        return true;
     }
-
-//    static abstract class MyMenuItemStuffListener implements View.OnClickListener, View.OnLongClickListener {
-//        private String hint;
-//        private View view;
-//
-//        MyMenuItemStuffListener(View view, String hint) {
-//            this.view = view;
-//            this.hint = hint;
-//            view.setOnClickListener(this);
-//            view.setOnLongClickListener(this);
-//        }
-//
-//        @Override abstract public void onClick(View v);
-//
-//        @Override public boolean onLongClick(View v) {
-//            final int[] screenPos = new int[2];
-//            final Rect displayFrame = new Rect();
-//            view.getLocationOnScreen(screenPos);
-//            view.getWindowVisibleDisplayFrame(displayFrame);
-//            final Context context = view.getContext();
-//            final int width = view.getWidth();
-//            final int height = view.getHeight();
-//            final int midy = screenPos[1] + height / 2;
-//            final int screenWidth = context.getResources().getDisplayMetrics().widthPixels;
-//            Toast cheatSheet = Toast.makeText(context, hint, Toast.LENGTH_SHORT);
-//            if (midy < displayFrame.height()) {
-//                cheatSheet.setGravity(Gravity.TOP | Gravity.RIGHT,
-//                        screenWidth - screenPos[0] - width / 2, height);
-//            } else {
-//                cheatSheet.setGravity(Gravity.BOTTOM | Gravity.CENTER_HORIZONTAL, 0, height);
-//            }
-//            cheatSheet.show();
-//            return true;
-//        }
-//    }
-
 
     public void updateShopCart() {
         if (ui_hot == null) return;
@@ -182,7 +133,6 @@ public class MainMenuActivity extends AppCompatActivity
             }
         });
     }
-
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {

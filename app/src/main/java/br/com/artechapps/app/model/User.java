@@ -1,5 +1,7 @@
 package br.com.artechapps.app.model;
 
+import com.google.gson.annotations.Expose;
+
 import java.io.Serializable;
 
 /**
@@ -7,13 +9,19 @@ import java.io.Serializable;
  */
 public class User implements Serializable{
 
+    @Expose
     private String cpfcnpj;
+    @Expose
     private String nome;
     private String lastName;
+    @Expose
     private String senha;
+    @Expose
     private String tipopessoa;
+    @Expose
     private Long codFilial;
     private Long code;
+    @Expose
     private Long opcad;
     private boolean active;
 
