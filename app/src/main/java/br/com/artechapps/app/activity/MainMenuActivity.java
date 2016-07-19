@@ -3,10 +3,9 @@ package br.com.artechapps.app.activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
+import android.support.design.widget.NavigationView;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
-import android.view.View;
-import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
@@ -14,6 +13,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import br.com.artechapps.app.R;
@@ -97,19 +98,31 @@ public class MainMenuActivity extends AppCompatActivity
 
         final MenuItem menu_hot = menu.findItem(R.id.action_cart);
         menu_hot.setActionView(R.layout.action_bar_notifitcation_icon);
+        menu_hot.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
+            @Override
+            public boolean onMenuItemClick(MenuItem item) {
+                startActivity(new Intent(MainMenuActivity.this, CartActivity.class));
+                return true;
+            }
+        });
+
 
         final View menu_hotlist = menu_hot.getActionView();
 
         ui_hot = (TextView) menu_hotlist.findViewById(R.id.hotlist_hot);
+        RelativeLayout cart_content = (RelativeLayout) menu_hotlist.findViewById(R.id.cart_content);
+        cart_content.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(MainMenuActivity.this, CartActivity.class));
+            }
+        });
+
+
 
         updateShopCart();
 
-//        new MyMenuItemStuffListener(menu_hotlist, "Show hot message") {
-//            @Override
-//            public void onClick(View v) {
-////                onHotlistSelected();
-//            }
-//        };
+
         return super.onCreateOptionsMenu(menu);
 
 
