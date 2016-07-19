@@ -69,6 +69,25 @@ public class PersistenceProduct extends RepositoryProduct {
         return list;
     }
 
+    public Product getProduct(long id) {
+        Product model = new Product();
+        Cursor cursor = persistence.find(" id = ?",new String[]{String.valueOf(id)});
+        if (cursor != null) {
+            if (cursor.moveToFirst()) {
+                do {
+
+                    model.setId(cursor.getLong(cursor.getColumnIndex(RepositoryProduct.COLUMNS[0])));
+                    model.setDescription(cursor.getString(cursor.getColumnIndex(RepositoryProduct.COLUMNS[1])));
+                    model.setValue(cursor.getDouble(cursor.getColumnIndex(RepositoryProduct.COLUMNS[2])));
+                    model.setImage(cursor.getBlob(cursor.getColumnIndex(RepositoryProduct.COLUMNS[3])));
+
+                } while (cursor.moveToNext());
+            }
+            cursor.close();
+        }
+        return model;
+    }
+
 
     private ContentValues getContentValues(Product model) {
         ContentValues contentValues = new ContentValues();

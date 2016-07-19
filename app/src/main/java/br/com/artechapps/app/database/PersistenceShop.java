@@ -12,54 +12,57 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 
 import br.com.artechapps.app.model.Product;
+import br.com.artechapps.app.model.Shop;
 
 /**
  * Persistence Promotion Data
  * <p/>
  * Created by acstapassoli on 13/05/2016.
  */
-public class PersistenceShop extends RepositoryProduct {
+public class PersistenceShop extends RepositoryShop {
 
     private final Persistence persistence;
     private final String TAG = PersistenceShop.class.getSimpleName();
 
+    private final Context mContext;
+
     public PersistenceShop(Context context) {
         super(context);
+        mContext = context;
         persistence = new Persistence(db, TABLE_NAME, COLUMNS);
     }
 
-
-    public void save(JSONArray jsonArray) {
-        Product model;
-        for (int i = 0; i < jsonArray.length(); i++) {
-            try {
-                JSONObject json = jsonArray.getJSONObject(i);
-                model = new Product();
-                model.setId(json.getLong(Product.JSON_CODE));
-                model.setDescription(json.getString(Product.JSON_DESC));
-                model.setValue(json.getDouble(Product.JSON_VALUE));
-                save(model);
-            } catch (JSONException e) {
-                Log.e(TAG, e.getMessage());
-            }
-        }
-    }
-
-    public void save(Product model) {
+    public void save (Shop model){
         persistence.insert(getContentValues(model));
+
     }
 
-    public ArrayList<Product> getProduct() {
-        ArrayList<Product> list = new ArrayList<>();
-        Cursor cursor = persistence.find(RepositoryProduct.COLUMNS[1]);
+    public boolean remove(long id){
+        return persistence.delete(" id = ?", new String[]{String.valueOf(id)});
+    }
+
+    public boolean remove(){
+        return persistence.delete();
+    }
+
+    public ArrayList<Shop> getRecords(){
+        ArrayList<Shop> list = new ArrayList<>();
+        Cursor cursor = persistence.find();
         if (cursor != null) {
             if (cursor.moveToFirst()) {
                 do {
-                    Product model = new Product();
+                    Shop model = new Shop();
                     model.setId(cursor.getLong(cursor.getColumnIndex(RepositoryProduct.COLUMNS[0])));
-                    model.setDescription(cursor.getString(cursor.getColumnIndex(RepositoryProduct.COLUMNS[1])));
-                    model.setValue(cursor.getDouble(cursor.getColumnIndex(RepositoryProduct.COLUMNS[2])));
-                    model.setImage(cursor.getBlob(cursor.getColumnIndex(RepositoryProduct.COLUMNS[3])));
+
+                    PersistenceProduct perProd = null;
+                    try{
+                        perProd = new PersistenceProduct(mContext);
+                        Product product = perProd.getProduct(cursor.getLong(cursor.getColumnIndex(RepositoryShop.COLUMNS[1])));
+
+                        model.setProduct(product);
+                    } finally {
+                        perProd.close();
+                    }
 
                     list.add(model);
                 } while (cursor.moveToNext());
@@ -70,12 +73,50 @@ public class PersistenceShop extends RepositoryProduct {
     }
 
 
-    private ContentValues getContentValues(Product model) {
+//    public void save(JSONArray jsonArray) {
+//        Product model;
+//        for (int i = 0; i < jsonArray.length(); i++) {
+//            try {
+//                JSONObject json = jsonArray.getJSONObject(i);
+//                model = new Product();
+//                model.setId(json.getLong(Product.JSON_CODE));
+//                model.setDescription(json.getString(Product.JSON_DESC));
+//                model.setValue(json.getDouble(Product.JSON_VALUE));
+//                save(model);
+//            } catch (JSONException e) {
+//                Log.e(TAG, e.getMessage());
+//            }
+//        }
+//    }
+//
+//    public void save(Product model) {
+//        persistence.insert(getContentValues(model));
+//    }
+//
+//    public ArrayList<Product> getProduct() {
+//        ArrayList<Product> list = new ArrayList<>();
+//        Cursor cursor = persistence.find(RepositoryProduct.COLUMNS[1]);
+//        if (cursor != null) {
+//            if (cursor.moveToFirst()) {
+//                do {
+//                    Product model = new Product();
+//                    model.setId(cursor.getLong(cursor.getColumnIndex(RepositoryProduct.COLUMNS[0])));
+//                    model.setDescription(cursor.getString(cursor.getColumnIndex(RepositoryProduct.COLUMNS[1])));
+//                    model.setValue(cursor.getDouble(cursor.getColumnIndex(RepositoryProduct.COLUMNS[2])));
+//                    model.setImage(cursor.getBlob(cursor.getColumnIndex(RepositoryProduct.COLUMNS[3])));
+//
+//                    list.add(model);
+//                } while (cursor.moveToNext());
+//            }
+//            cursor.close();
+//        }
+//        return list;
+//    }
+//
+//
+    private ContentValues getContentValues(Shop model) {
         ContentValues contentValues = new ContentValues();
-        contentValues.put("id", model.getId());
-        contentValues.put("description", model.getDescription());
-        contentValues.put("value", model.getValue());
-        contentValues.put("image", model.getImage());
+        contentValues.put("product_id", model.getProduct().getId());
         return contentValues;
     }
 

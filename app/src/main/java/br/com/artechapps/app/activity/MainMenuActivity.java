@@ -1,5 +1,6 @@
 package br.com.artechapps.app.activity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -94,7 +95,7 @@ public class MainMenuActivity extends AppCompatActivity
         getMenuInflater().inflate(R.menu.main_menu, menu);
 
 
-        final MenuItem menu_hot = menu.findItem(R.id.action_buy);
+        final MenuItem menu_hot = menu.findItem(R.id.action_cart);
         menu_hot.setActionView(R.layout.action_bar_notifitcation_icon);
 
         final View menu_hotlist = menu_hot.getActionView();
@@ -136,12 +137,13 @@ public class MainMenuActivity extends AppCompatActivity
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-//        switch (item.getItemId()){
-//            case R.id.action_logout:
-//
-//                break;
-//
-//        }
+        switch (item.getItemId()){
+            case R.id.action_cart:
+                startActivity(new Intent(this, CartActivity.class));
+
+                break;
+
+        }
         return super.onOptionsItemSelected(item);
     }
 

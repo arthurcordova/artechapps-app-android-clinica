@@ -9,6 +9,7 @@ import android.widget.TextView;
 import java.util.ArrayList;
 
 import br.com.artechapps.app.R;
+import br.com.artechapps.app.activity.CartActivity;
 import br.com.artechapps.app.activity.MainMenuActivity;
 import br.com.artechapps.app.database.PersistenceShop;
 import br.com.artechapps.app.model.Product;
@@ -17,12 +18,12 @@ import br.com.artechapps.app.model.Shop;
 /**
  * Created by acstapassoli on 07/12/2015.
  */
-public class RVAdapterProduct extends RecyclerView.Adapter<RVAdapterProduct.ViewHolder> {
+public class RVAdapterCart extends RecyclerView.Adapter<RVAdapterCart.ViewHolder> {
 
-    private ArrayList<Product> mItemsData;
-    private MainMenuActivity mActivity;
+    private ArrayList<Shop> mItemsData;
+    private CartActivity mActivity;
 
-    public RVAdapterProduct(ArrayList<Product> itemsData, MainMenuActivity activity) {
+    public RVAdapterCart(ArrayList<Shop> itemsData, CartActivity activity) {
         mItemsData = itemsData;
         mActivity = activity;
     }
@@ -30,7 +31,7 @@ public class RVAdapterProduct extends RecyclerView.Adapter<RVAdapterProduct.View
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View itemLayoutView = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.list_item_product, null);
+                .inflate(R.layout.list_item_cart, null);
         ViewHolder viewHolder = new ViewHolder(itemLayoutView, mActivity);
         return viewHolder;
     }
@@ -38,11 +39,11 @@ public class RVAdapterProduct extends RecyclerView.Adapter<RVAdapterProduct.View
     // Replace the contents of a view (invoked by the layout manager)
     @Override
     public void onBindViewHolder(ViewHolder viewHolder, int position) {
-        Product model = mItemsData.get(position);
-        viewHolder.tvCode.setText(String.valueOf(model.getId()));
+        Shop model = mItemsData.get(position);
+//        viewHolder.tvCode.setText(String.valueOf(model.getId()));
 
-        viewHolder.tvDescription.setText(model.getDescription());
-        viewHolder.tvValue.setText(model.formatValue(model.getValue()));
+        viewHolder.tvDescription.setText(model.getProduct().getDescription());
+//        viewHolder.tvValue.setText(model.formatValue(model.getValue()));
 
     }
 
@@ -59,9 +60,9 @@ public class RVAdapterProduct extends RecyclerView.Adapter<RVAdapterProduct.View
         TextView tvValue;
         TextView tvAdd;
 
-        MainMenuActivity mActivity;
+        CartActivity mActivity;
 
-        public ViewHolder(View itemLayoutView, final MainMenuActivity activity) {
+        public ViewHolder(View itemLayoutView, final CartActivity activity) {
             super(itemLayoutView);
             mActivity = activity;
             tvCode = (TextView) itemLayoutView.findViewById(R.id.code);
@@ -69,26 +70,26 @@ public class RVAdapterProduct extends RecyclerView.Adapter<RVAdapterProduct.View
             tvValue = (TextView) itemLayoutView.findViewById(R.id.value);
             tvAdd = (TextView)itemLayoutView.findViewById(R.id.add);
 
-            tvAdd.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    mActivity.setCounter(1);
-                    mActivity.updateShopCart();
-
-                    Shop s = new Shop();
-                    Product p = new Product();
-                    p.setId(Long.parseLong(tvCode.getText().toString()));
-                    s.setProduct(p);
-
-                    PersistenceShop persistenceShop = null;
-                    try {
-                        persistenceShop = new PersistenceShop(activity);
-                        persistenceShop.save(s);
-                    } finally {
-                        persistenceShop.close();
-                    }
-                }
-            });
+//            tvAdd.setOnClickListener(new View.OnClickListener() {
+//                @Override
+//                public void onClick(View v) {
+//                    mActivity.setCounter(1);
+//                    mActivity.updateShopCart();
+//
+//                    Shop s = new Shop();
+//                    Product p = new Product();
+//                    p.setId(Long.parseLong(tvCode.getText().toString()));
+//                    s.setProduct(p);
+//
+//                    PersistenceShop persistenceShop = null;
+//                    try {
+//                        persistenceShop = new PersistenceShop(activity);
+//                        persistenceShop.save(s);
+//                    } finally {
+//                        persistenceShop.close();
+//                    }
+//                }
+//            });
         }
     }
 }

@@ -19,6 +19,7 @@ public class DataBaseConfig {
     public static ArrayList loadCreateScripts(){
         ArrayList<String> mCreateScripts = new ArrayList<>();
         mCreateScripts.add(RepositoryProduct.SCRIPT_DATABASE_CREATE[0]);
+        mCreateScripts.add(RepositoryShop.SCRIPT_DATABASE_CREATE[0]);
 
         return mCreateScripts;
     }
@@ -30,6 +31,7 @@ public class DataBaseConfig {
     public static ArrayList loadDropScripts(){
         ArrayList<String> mDropScripts = new ArrayList<>();
         mDropScripts.add(RepositoryProduct.SCRIPT_DATABASE_DELETE);
+        mDropScripts.add(RepositoryShop.SCRIPT_DATABASE_DELETE);
 
         return mDropScripts;
     }
