@@ -1,4 +1,4 @@
-<resources xmlns:android="http://schemas.android.com/apk/res/android">
+<resources>
     <item name="ic_menu_message" type="drawable">@drawable/ic_menu_message</item>
     <item name="ic_menu_event" type="drawable">@drawable/ic_menu_event</item>
     <item name="ic_menu_money" type="drawable">@drawable/ic_menu_money</item>
@@ -7,6 +7,9 @@
     <item name="ic_menu_about" type="drawable">@drawable/ic_menu_about</item>
     <item name="ic_menu_shopping_cart_whi" type="drawable">@drawable/ic_menu_shopping_cart_white</item>
     <item name="ic_menu_shopping_cart_pin" type="drawable">@drawable/ic_menu_shopping_cart_pink</item>
+    <item name="ic_action_add_pin" type="drawable">@drawable/ic_add</item>
+    <item name="ic_action_remove_pin" type="drawable">@drawable/ic_remove</item>
+
 
     <item name="ic_list_image" type="drawable">@drawable/ic_image_black_24dp</item>
 </resources>

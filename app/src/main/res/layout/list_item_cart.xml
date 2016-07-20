@@ -8,39 +8,31 @@
         android:id="@+id/cvDep"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
+        android:layout_marginBottom="6dp"
         android:layout_marginLeft="16dp"
         android:layout_marginRight="16dp"
-        android:layout_marginBottom="6dp"
+        android:layout_marginTop="8dp"
         card_view:cardCornerRadius="2dp"
         card_view:cardElevation="3dp">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:clickable="true"
             android:background="?attr/selectableItemBackgroundBorderless"
-            >
+            android:clickable="true"
+            android:orientation="vertical">
 
-            <LinearLayout
+            <RelativeLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:orientation="vertical"
                 android:padding="16dp">
 
                 <ImageView
+                    android:id="@+id/imageView"
                     android:layout_width="36dp"
                     android:layout_height="36dp"
                     android:alpha="0.3"
                     android:src="@drawable/ic_list_image" />
-
-            </LinearLayout>
-
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical">
 
                 <TextView
                     android:id="@+id/code"
@@ -53,69 +45,113 @@
                     android:id="@+id/description"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:lines="2"
+                    android:layout_alignParentTop="true"
+                    android:layout_toEndOf="@+id/imageView"
+                    android:layout_toRightOf="@+id/imageView"
+                    android:alpha="0.7"
+                    android:lines="3"
+                    android:paddingLeft="12dp"
                     android:paddingRight="16dp"
-                    android:paddingTop="16dp"
                     android:text="Arthur"
                     android:textColor="@color/textBlack"
                     android:textSize="16sp" />
 
-                <RelativeLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_marginBottom="16dp">
 
-                    <TextView
-                        android:id="@+id/textView"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="R$"
-                        android:textSize="16sp"
-                        android:textColor="@color/colorAccent"
-                        android:textStyle="bold" />
-
-                    <TextView
-                        android:id="@+id/value"
-                        android:layout_width="120dp"
-                        android:layout_height="wrap_content"
-                        android:layout_toEndOf="@+id/textView"
-                        android:layout_toRightOf="@+id/textView"
-                        android:paddingLeft="6dp"
-                        android:textSize="16sp"
-                        android:textColor="@color/colorAccent"
-                        android:textStyle="bold" />
-
-                    <ImageView
-                        android:layout_width="12dp"
-                        android:layout_height="12dp"
-                        android:src="@drawable/ic_menu_shopping_cart_pin"
-                        android:layout_marginTop="2dp"
-                        android:layout_alignTop="@+id/add"
-                        android:clickable="true"
-                        android:background="?attr/selectableItemBackgroundBorderless"
-                        android:layout_toLeftOf="@+id/add"
-                        android:layout_toStartOf="@+id/add" />
+            </RelativeLayout>
 
 
-                    <TextView
-                        android:id="@+id/add"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:textSize="12sp"
-                        android:paddingLeft="6dp"
-                        android:paddingRight="16dp"
-                        android:text="@string/action_add_cart"
-                        android:clickable="true"
-                        android:background="?attr/selectableItemBackground"
-                        android:textColor="@color/colorAccent"
-                        android:textStyle="bold"
-                        android:layout_alignBottom="@+id/value"
-                        android:layout_alignParentRight="true"
-                        android:layout_alignParentEnd="true" />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="1dip"
+                android:alpha="0.12"
+                android:background="@color/textBlack"></LinearLayout>
 
-                </RelativeLayout>
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
 
-            </LinearLayout>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:padding="16dp"
+                    android:text="Quantidade" />
+
+                <ImageView
+                    android:id="@+id/add_item"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginRight="16dp"
+                    android:src="@drawable/ic_action_add_pin" />
+
+                <TextView
+                    android:id="@+id/textView2"
+                    android:layout_width="30dp"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_toLeftOf="@+id/add_item"
+                    android:layout_toStartOf="@+id/add_item"
+                    android:alpha="0.7"
+                    android:text="1"
+                    android:textAlignment="center"
+                    android:textColor="@color/textBlack"
+                    android:textSize="15sp" />
+
+                <ImageView
+                    android:id="@+id/remove_item"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_toLeftOf="@+id/textView2"
+                    android:layout_toStartOf="@+id/textView2"
+                    android:src="@drawable/ic_action_remove_pin" />
+
+
+            </RelativeLayout>
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="1dip"
+                android:alpha="0.12"
+                android:background="@color/textBlack"></LinearLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:id="@+id/textView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingTop="16dp"
+                    android:paddingRight="6dp"
+                    android:paddingBottom="16dp"
+                    android:text="R$"
+                    android:textColor="@color/colorAccent"
+                    android:textSize="12sp"
+                    android:textStyle="bold"
+                    android:layout_alignParentTop="true"
+                    android:layout_toLeftOf="@+id/value"
+                    android:layout_toStartOf="@+id/value" />
+
+                <TextView
+                    android:id="@+id/value"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingRight="16dp"
+                    android:paddingTop="16dp"
+                    android:text="34.555,00"
+                    android:textColor="@color/colorAccent"
+                    android:textSize="12sp"
+                    android:textStyle="bold"
+                    android:layout_alignParentTop="true"
+                    android:layout_alignParentRight="true"
+                    android:layout_alignParentEnd="true" />
+
+            </RelativeLayout>
 
         </LinearLayout>
 
