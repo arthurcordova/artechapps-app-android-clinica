@@ -9,7 +9,9 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import br.com.artechapps.app.R;
+import br.com.artechapps.app.model.User;
 import br.com.artechapps.app.task.AsyncTaskMessages;
+import br.com.artechapps.app.utils.SessionManager;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -57,7 +59,10 @@ public class MessageFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        new AsyncTaskMessages("Carregando mensagens...", getContext(), true).execute("1204");
+        SessionManager sm = new SessionManager(getContext());
+        User user = sm.getSessionUser();
+
+        new AsyncTaskMessages("Carregando mensagens...", getContext(), true).execute(String.valueOf(user.getCode()));
 
         if (getArguments() != null) {
             mParam1 = getArguments().getString(ARG_PARAM1);
@@ -69,7 +74,8 @@ public class MessageFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_message, container, false);
+        View view = inflater.inflate(R.layout.fragment_message, container, false);
+        return view;
     }
 
     // TODO: Rename method, update argument and hook method into UI event

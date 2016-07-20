@@ -61,14 +61,13 @@
                 android:textStyle="bold" />
 
             <TextView
-                android:id="@+id/value"
+                android:id="@+id/total_value"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/textView3"
                 android:layout_toEndOf="@+id/textView"
                 android:layout_toRightOf="@+id/textView"
                 android:paddingLeft="6dp"
-                android:text="34.555,00"
                 android:textColor="#FFFFFF"
                 android:textSize="18sp"
                 android:textStyle="bold" />
