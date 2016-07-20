@@ -1,10 +1,9 @@
 <resources>
 
-    <string name="app_name">App</string>
+    <string name="app_name">Beauty Clinic</string>
     <string name="title_activity_login">Login</string>
     <string name="title_activity_new_user">Novo usuário</string>
     <string name="title_dialog_wait">Aguarde...</string>
-
 
     <string name="hint_name">Digite seu nome</string>
     <string name="hint_cpf">Digite seu C.P.F.</string>
@@ -15,7 +14,6 @@
     <string name="action_sign_in">Entrar</string>
     <string name="action_sign_in_short">Entrar</string>
     <string name="action_add_cart">ADICIONAR</string>
-
 
     <string name="error_invalid_cpf">C.P.F. inválido</string>
     <string name="error_invalid_password">Senha inválida</string>

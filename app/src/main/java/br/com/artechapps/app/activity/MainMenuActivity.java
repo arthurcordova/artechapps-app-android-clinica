@@ -18,6 +18,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import br.com.artechapps.app.R;
+import br.com.artechapps.app.fragment.AboutFragment;
 import br.com.artechapps.app.fragment.EventFragment;
 import br.com.artechapps.app.fragment.MessageFragment;
 import br.com.artechapps.app.fragment.MoneyFragment;
@@ -82,10 +83,6 @@ public class MainMenuActivity extends AppCompatActivity
     private int counter = 0;
     private TextView ui_hot = null;
 
-    public int getCounter() {
-        return counter;
-    }
-
     public void setCounter(int counter) {
         this.counter += counter;
     }
@@ -118,10 +115,7 @@ public class MainMenuActivity extends AppCompatActivity
             }
         });
 
-
-
         updateShopCart();
-
 
         return super.onCreateOptionsMenu(menu);
 
@@ -177,6 +171,7 @@ public class MainMenuActivity extends AppCompatActivity
                 replaceFragment(new MoneyFragment());
                 break;
             case R.id.nav_about:
+                replaceFragment(new AboutFragment());
                 break;
             case R.id.nav_logout:
                 SessionManager sm = new SessionManager(MainMenuActivity.this);
