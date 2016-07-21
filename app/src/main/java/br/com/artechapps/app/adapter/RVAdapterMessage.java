@@ -28,7 +28,7 @@ public class RVAdapterMessage extends RecyclerView.Adapter<RVAdapterMessage.View
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View itemLayoutView = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.list_item_product, null);
+                .inflate(R.layout.list_item_message, null);
         ViewHolder viewHolder = new ViewHolder(itemLayoutView, mActivity);
         return viewHolder;
     }
@@ -39,7 +39,9 @@ public class RVAdapterMessage extends RecyclerView.Adapter<RVAdapterMessage.View
         Message model = mItemsData.get(position);
         viewHolder.tvCode.setText(String.valueOf(model.getId()));
 
-        viewHolder.tvDescription.setText(model.getTitle());
+        viewHolder.tvTitle.setText(model.getTitle());
+        viewHolder.tvDescription.setText(model.getMessage());
+        viewHolder.tvSentDate.setText(model.getSentDate());
 
     }
 
@@ -52,9 +54,10 @@ public class RVAdapterMessage extends RecyclerView.Adapter<RVAdapterMessage.View
     public static class ViewHolder extends RecyclerView.ViewHolder {
 
         TextView tvCode;
+        TextView tvTitle;
         TextView tvDescription;
-        TextView tvValue;
-        TextView tvAdd;
+        TextView tvSentDate;
+
 
         MainMenuActivity mActivity;
 
@@ -62,9 +65,9 @@ public class RVAdapterMessage extends RecyclerView.Adapter<RVAdapterMessage.View
             super(itemLayoutView);
             mActivity = activity;
             tvCode = (TextView) itemLayoutView.findViewById(R.id.code);
+            tvTitle = (TextView) itemLayoutView.findViewById(R.id.title);
             tvDescription = (TextView) itemLayoutView.findViewById(R.id.description);
-            tvValue = (TextView) itemLayoutView.findViewById(R.id.value);
-            tvAdd = (TextView)itemLayoutView.findViewById(R.id.add);
+            tvSentDate = (TextView) itemLayoutView.findViewById(R.id.sent_date);
 
 
         }

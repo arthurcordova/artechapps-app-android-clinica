@@ -1,13 +1,20 @@
 package br.com.artechapps.app.task;
 
 import android.content.Context;
+import android.support.v7.widget.DefaultItemAnimator;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
+import br.com.artechapps.app.activity.MainMenuActivity;
+import br.com.artechapps.app.adapter.RVAdapterMessage;
 import br.com.artechapps.app.database.PersistenceMessage;
+import br.com.artechapps.app.model.Message;
 import br.com.artechapps.app.utils.EndPoints;
 
 /**
@@ -16,11 +23,18 @@ import br.com.artechapps.app.utils.EndPoints;
 public class AsyncTaskMessages extends AsyncTaskHttp {
 
     private JSONArray mJson;
+    private PersistenceMessage mPersistence;
+    private RecyclerView mRecyclerView;
+    private ArrayList<Message> mList;
+    private MainMenuActivity mActivity;
 
-    public AsyncTaskMessages(String msg, Context context, boolean showDialog) {
+
+    public AsyncTaskMessages(String msg, Context context, boolean showDialog, RecyclerView recyclerView, MainMenuActivity activity) {
         mMsg = msg;
         mContext = context;
         mShowDialog = showDialog;
+        mRecyclerView = recyclerView;
+        mActivity = activity;
 
     }
 
@@ -42,13 +56,24 @@ public class AsyncTaskMessages extends AsyncTaskHttp {
     protected void onPostExecute(String s) {
         super.onPostExecute(s);
         if (mJson != null && mJson.length() > 0) {
-            PersistenceMessage persistence = null;
+
             try {
-                persistence = new PersistenceMessage(mContext);
-                persistence.save(mJson);
+                mPersistence = new PersistenceMessage(mContext);
+                mPersistence.save(mJson);
             } finally {
-                persistence.close();
+                mPersistence.close();
             }
+
+            mPersistence = new PersistenceMessage(mContext);
+            mList = mPersistence.getRecords();
+
+            RVAdapterMessage adapter = new RVAdapterMessage(mList, mActivity);
+
+            mRecyclerView.setLayoutManager(new LinearLayoutManager(mContext));
+            mRecyclerView.setItemAnimator(new DefaultItemAnimator());
+            mRecyclerView.setAdapter(adapter);
+
+            mPersistence.close();
 
         }
     }

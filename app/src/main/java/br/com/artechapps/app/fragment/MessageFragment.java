@@ -93,7 +93,7 @@ public class MessageFragment extends Fragment {
 
         mActivity = (MainMenuActivity)getActivity();
 
-        new AsyncTaskMessages("Carregando mensagens...", getContext(), true).execute(String.valueOf(user.getCode()));
+        new AsyncTaskMessages("Carregando mensagens...", getContext(), true, mRvMessages, mActivity).execute(String.valueOf(user.getCode()));
 
         mPersistence = new PersistenceMessage(getContext());
         mList = mPersistence.getRecords();
