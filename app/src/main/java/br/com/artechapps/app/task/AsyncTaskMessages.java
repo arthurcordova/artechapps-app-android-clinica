@@ -7,6 +7,7 @@ import org.json.JSONException;
 
 import java.io.IOException;
 
+import br.com.artechapps.app.database.PersistenceMessage;
 import br.com.artechapps.app.utils.EndPoints;
 
 /**
@@ -40,30 +41,15 @@ public class AsyncTaskMessages extends AsyncTaskHttp {
     @Override
     protected void onPostExecute(String s) {
         super.onPostExecute(s);
-        if (mJson != null && mJson.length() > 0){
-//            try {
-//                User user = new User();
-//                user.setName(mJson.getString("nome"));
-//                user.setLastName(mJson.getString("ultimoNome"));
-//                user.setCpfcnpj(mJson.getString("cpfcnpj"));
-//                user.setActive(mJson.getString("situacao").equals("A"));
-//                user.setCodFilial(BuildConfig.FILIAL);
-//                user.setCode(mJson.getLong("codcliente"));
-//
-//                if (user.isActive()){
-//                    SessionManager sm = new SessionManager(mContext);
-//                    sm.createSessionLogin(user);
-//                    sm.redirectToTarget(MainMenuActivity.class);
-//                } else {
-//                    //user inactive
-//                }
-//
-//            } catch (JSONException e) {
-//                e.printStackTrace();
-//            }
+        if (mJson != null && mJson.length() > 0) {
+            PersistenceMessage persistence = null;
+            try {
+                persistence = new PersistenceMessage(mContext);
+                persistence.save(mJson);
+            } finally {
+                persistence.close();
+            }
+
         }
-
     }
-
-
 }
