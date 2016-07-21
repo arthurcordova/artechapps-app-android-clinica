@@ -2,6 +2,7 @@ package br.com.artechapps.app.database;
 
 import android.content.ContentValues;
 import android.content.Context;
+import android.database.Cursor;
 import android.util.Log;
 
 import org.json.JSONArray;
@@ -11,7 +12,6 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 
 import br.com.artechapps.app.model.Message;
-import br.com.artechapps.app.model.Shop;
 
 /**
  * Persistence Promotion Data
@@ -41,11 +41,14 @@ public class PersistenceMessage extends RepositoryMessage {
                 msg.setAuthor(json.getString("autor"));
                 msg.setMessage(json.getString("mensagem"));
                 msg.setType(json.getString("tipoMensagem"));
-                msg.setSentDate(json.getString("dataEnvio"));
-                msg.setSeeDate(json.getString("dataVisualizacao"));
-                msg.setSee(json.getBoolean("visualizada"));
-                msg.setIdClient(json.getLong("idMsgCliente"));
-
+                try {
+                    msg.setSentDate(json.getString("dataEnvio"));
+                    msg.setSeeDate(json.getString("dataVisualizacao"));
+                    msg.setSee(json.getBoolean("visualizada"));
+                    msg.setIdClient(json.getLong("idMsgCliente"));
+                } catch (JSONException e) {
+                    Log.e(TAG, e.getMessage());
+                }
                 save( msg );
             } catch (JSONException ex) {
                 Log.e(TAG, ex.getMessage());
@@ -66,44 +69,31 @@ public class PersistenceMessage extends RepositoryMessage {
         return persistence.delete();
     }
 
-    public ArrayList<Shop> getRecords(){
-        ArrayList<Shop> list = new ArrayList<>();
-//        Cursor cursor = persistence.find();
-//        if (cursor != null) {
-//            if (cursor.moveToFirst()) {
-//                do {
-//                    Shop model = new Shop();
-//                    model.setId(cursor.getLong(cursor.getColumnIndex(RepositoryProduct.COLUMNS[0])));
-//
-//                    PersistenceProduct perProd = null;
-//                    try{
-//                        perProd = new PersistenceProduct(mContext);
-//                        Product product = perProd.getProduct(cursor.getLong(cursor.getColumnIndex(RepositoryShop.COLUMNS[1])));
-//
-//                        model.setProduct(product);
-//                    } finally {
-//                        perProd.close();
-//                    }
-//
-//                    list.add(model);
-//                } while (cursor.moveToNext());
-//            }
-//            cursor.close();
-//        }
+    public ArrayList<Message> getRecords(){
+        ArrayList<Message> list = new ArrayList<>();
+        Cursor cursor = persistence.find();
+        if (cursor != null) {
+            if (cursor.moveToFirst()) {
+                do {
+                    Message model = new Message();
+
+                    model.setId(cursor.getLong(cursor.getColumnIndex(RepositoryMessage.COLUMNS[0])));
+                    model.setTitle(cursor.getString(cursor.getColumnIndex(RepositoryMessage.COLUMNS[1])));
+                    model.setAuthor(cursor.getString(cursor.getColumnIndex(RepositoryMessage.COLUMNS[2])));
+                    model.setMessage(cursor.getString(cursor.getColumnIndex(RepositoryMessage.COLUMNS[3])));
+                    model.setType(cursor.getString(cursor.getColumnIndex(RepositoryMessage.COLUMNS[4])));
+                    model.setSentDate(cursor.getString(cursor.getColumnIndex(RepositoryMessage.COLUMNS[5])));
+                    model.setSeeDate(cursor.getString(cursor.getColumnIndex(RepositoryMessage.COLUMNS[6])));
+                    model.setSee(cursor.getInt(cursor.getColumnIndex(RepositoryMessage.COLUMNS[7]))>0);
+                    model.setIdClient(cursor.getLong(cursor.getColumnIndex(RepositoryMessage.COLUMNS[8])));
+
+                    list.add(model);
+                } while (cursor.moveToNext());
+            }
+            cursor.close();
+        }
         return list;
     }
-
-    public  static final  String[] COLUMNS = new String[]{
-            "id",
-            "title",
-            "author",
-            "message",
-            "type",
-            "sent_date",
-            "see_date",
-            "see",
-            "id_client"
-    };
 
     private ContentValues getContentValues(Message model) {
         ContentValues contentValues = new ContentValues();

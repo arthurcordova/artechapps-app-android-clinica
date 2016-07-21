@@ -2,12 +2,16 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/colorDivider"
     tools:context="br.com.artechapps.app.fragment.MessageFragment">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/rvMessages"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="MENSAGENS" />
+        android:layout_height="match_parent">
+
+
+    </android.support.v7.widget.RecyclerView>
+
 
 </FrameLayout>

@@ -24,6 +24,9 @@ public class User implements Serializable{
     @Expose
     private Long opcad;
     private boolean active;
+    private int appointments;
+    private int messages;
+
 
     public String getCpfcnpj() {
         return cpfcnpj;
@@ -103,5 +106,21 @@ public class User implements Serializable{
 
     public void setActive(boolean active) {
         this.active = active;
+    }
+
+    public int getAppointments() {
+        return appointments;
+    }
+
+    public void setAppointments(int appointments) {
+        this.appointments = appointments;
+    }
+
+    public int getMessages() {
+        return messages;
+    }
+
+    public void setMessages(int messages) {
+        this.messages = messages;
     }
 }

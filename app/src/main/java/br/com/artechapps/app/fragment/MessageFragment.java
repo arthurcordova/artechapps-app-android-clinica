@@ -4,11 +4,20 @@ import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.DefaultItemAnimator;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import java.util.ArrayList;
+
 import br.com.artechapps.app.R;
+import br.com.artechapps.app.activity.MainMenuActivity;
+import br.com.artechapps.app.adapter.RVAdapterMessage;
+import br.com.artechapps.app.database.PersistenceMessage;
+import br.com.artechapps.app.model.Message;
 import br.com.artechapps.app.model.User;
 import br.com.artechapps.app.task.AsyncTaskMessages;
 import br.com.artechapps.app.utils.SessionManager;
@@ -32,6 +41,12 @@ public class MessageFragment extends Fragment {
     private String mParam2;
 
     private OnFragmentInteractionListener mListener;
+
+    private PersistenceMessage mPersistence;
+    private ArrayList<Message> mList;
+    private MainMenuActivity mActivity;
+
+    private RecyclerView mRvMessages;
 
     public MessageFragment() {
         // Required empty public constructor
@@ -59,11 +74,6 @@ public class MessageFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        SessionManager sm = new SessionManager(getContext());
-        User user = sm.getSessionUser();
-
-        new AsyncTaskMessages("Carregando mensagens...", getContext(), true).execute(String.valueOf(user.getCode()));
-
         if (getArguments() != null) {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
@@ -75,6 +85,28 @@ public class MessageFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_message, container, false);
+
+        SessionManager sm = new SessionManager(getContext());
+        User user = sm.getSessionUser();
+
+        mRvMessages = (RecyclerView) view.findViewById(R.id.rvMessages);
+
+        mActivity = (MainMenuActivity)getActivity();
+
+        new AsyncTaskMessages("Carregando mensagens...", getContext(), true).execute(String.valueOf(user.getCode()));
+
+        mPersistence = new PersistenceMessage(getContext());
+        mList = mPersistence.getRecords();
+
+        RVAdapterMessage adapter = new RVAdapterMessage(mList, mActivity);
+
+        mRvMessages.setLayoutManager(new LinearLayoutManager(getContext()));
+        mRvMessages.setItemAnimator(new DefaultItemAnimator());
+        mRvMessages.setAdapter(adapter);
+
+        mPersistence.close();
+
+
         return view;
     }
 

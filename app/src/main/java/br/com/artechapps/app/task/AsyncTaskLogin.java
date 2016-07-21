@@ -7,6 +7,7 @@ import com.google.gson.Gson;
 
 import org.json.JSONException;
 import org.json.JSONObject;
+
 import java.io.IOException;
 
 import br.com.artechapps.app.BuildConfig;
@@ -65,6 +66,10 @@ public class AsyncTaskLogin extends AsyncTaskHttp {
                 user.setActive(mJson.getString("situacao").equals("A"));
                 user.setCodFilial(BuildConfig.FILIAL);
                 user.setCode(mJson.getLong("codcliente"));
+
+                JSONObject status = mJson.getJSONObject("status");
+                user.setAppointments(status.getInt("agendamentos"));
+                user.setAppointments(status.getInt("mensagens"));
 
                 if (user.isActive()){
                     SessionManager sm = new SessionManager(mContext);

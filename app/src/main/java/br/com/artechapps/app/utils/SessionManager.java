@@ -25,6 +25,8 @@ public final class SessionManager {
     private final String KEY_NAME = "name";
     private final String KEY_CODE = "user_code";
     private final String KEY_ACTIVE = "active";
+    private final String KEY_COUNT_MESSAGES = "messages";
+    private final String KEY_COUNT_APPOINTMENTS = "appointments";
 
     public SessionManager(Context context) {
         this.context = context;
@@ -38,6 +40,8 @@ public final class SessionManager {
         editor.putString(KEY_CPF, user.getCpfcnpj());
         editor.putString(KEY_NAME, user.getName());
         editor.putLong(KEY_CODE, user.getCode());
+        editor.putInt(KEY_COUNT_APPOINTMENTS, user.getAppointments());
+        editor.putInt(KEY_COUNT_MESSAGES, user.getMessages());
         editor.commit();
     }
 
@@ -81,6 +85,8 @@ public final class SessionManager {
             user.setCodFilial(preferences.getLong(KEY_FILIAL, 1L));
             user.setActive(preferences.getBoolean(KEY_ACTIVE, false));
             user.setCode(preferences.getLong(KEY_CODE, 0L));
+            user.setAppointments(preferences.getInt(KEY_COUNT_APPOINTMENTS, 0));
+            user.setMessages(preferences.getInt(KEY_COUNT_MESSAGES, 0));
             return user;
         }
         return null;
