@@ -9,7 +9,7 @@ android {
         minSdkVersion 16
         targetSdkVersion 23
         versionCode 1
-        versionName "1.0"
+        versionName "1.0.0"
         buildConfigField 'String', 'HOST', '"http://www2.beautyclinic.com.br"'
         buildConfigField 'Long', 'FILIAL', 3 + 'l'
     }

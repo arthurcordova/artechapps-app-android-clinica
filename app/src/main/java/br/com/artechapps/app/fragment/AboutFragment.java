@@ -70,7 +70,7 @@ public class AboutFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_about, container, false);
 
         TextView appVersion = (TextView) view.findViewById(R.id.app_version);
-        appVersion.setText(BuildConfig.VERSION_NAME);
+        appVersion.setText("Versão: "+BuildConfig.VERSION_NAME);
 
         return view;
     }

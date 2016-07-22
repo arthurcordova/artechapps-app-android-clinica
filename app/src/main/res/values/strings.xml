@@ -11,6 +11,7 @@
     <string name="hint_password">Digite sua senha</string>
     <string name="hint_password_confirm">Confirme sua senha</string>
     <string name="hint_execute_login">Efetuando login...</string>
+    <string name="hint_version">Versão</string>
 
     <string name="action_sign_in">Entrar</string>
     <string name="action_sign_in_short">Entrar</string>
@@ -36,6 +37,6 @@
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
 
-
+    <!-- nonaka 041 057 404 07-->
 
 </resources>
