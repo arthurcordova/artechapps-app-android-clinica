@@ -4,13 +4,24 @@ import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.DefaultItemAnimator;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import br.com.artechapps.app.R;
+import java.util.ArrayList;
 
-public class EventFragment extends Fragment {
+import br.com.artechapps.app.R;
+import br.com.artechapps.app.activity.MainMenuActivity;
+import br.com.artechapps.app.database.PersistenceSchedule;
+import br.com.artechapps.app.model.Schedule;
+import br.com.artechapps.app.model.User;
+import br.com.artechapps.app.task.AsyncTaskSchedule;
+import br.com.artechapps.app.utils.SessionManager;
+
+public class ScheduleFragment extends Fragment {
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -22,7 +33,12 @@ public class EventFragment extends Fragment {
 
     private OnFragmentInteractionListener mListener;
 
-    public EventFragment() {
+    private PersistenceSchedule mPersistence;
+    private ArrayList<Schedule> mList;
+    private MainMenuActivity mActivity;
+    private RecyclerView mRvSchedules;
+
+    public ScheduleFragment() {
         // Required empty public constructor
     }
 
@@ -32,11 +48,11 @@ public class EventFragment extends Fragment {
      *
      * @param param1 Parameter 1.
      * @param param2 Parameter 2.
-     * @return A new instance of fragment EventFragment.
+     * @return A new instance of fragment ScheduleFragment.
      */
     // TODO: Rename and change types and number of parameters
-    public static EventFragment newInstance(String param1, String param2) {
-        EventFragment fragment = new EventFragment();
+    public static ScheduleFragment newInstance(String param1, String param2) {
+        ScheduleFragment fragment = new ScheduleFragment();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);
@@ -56,8 +72,29 @@ public class EventFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_event, container, false);
+        View view = inflater.inflate(R.layout.fragment_schedule, container, false);
+
+        SessionManager sm = new SessionManager(getContext());
+        User user = sm.getSessionUser();
+
+        mRvSchedules = (RecyclerView) view.findViewById(R.id.rvSchedules);
+
+        mActivity = (MainMenuActivity)getActivity();
+
+        new AsyncTaskSchedule("Carregando agendamentos...", getContext(), true).execute(String.valueOf(user.getCode()));
+
+        mPersistence = new PersistenceSchedule(getContext());
+        mList = mPersistence.getRecords();
+
+//        RVAdapterMessage adapter = new RVAdapterMessage(mList, mActivity);
+
+        mRvSchedules.setLayoutManager(new LinearLayoutManager(getContext()));
+        mRvSchedules.setItemAnimator(new DefaultItemAnimator());
+//        mRvSchedules.setAdapter(adapter);
+
+        mPersistence.close();
+
+        return view;
     }
 
     // TODO: Rename method, update argument and hook method into UI event

@@ -12,11 +12,11 @@ import br.com.artechapps.app.utils.EndPoints;
 /**
  * Created by arthurcordova on 7/16/16.
  */
-public class AsyncTaskEvent extends AsyncTaskHttp {
+public class AsyncTaskSchedule extends AsyncTaskHttp {
 
     private JSONArray mJson;
 
-    public AsyncTaskEvent(String msg, Context context, boolean showDialog) {
+    public AsyncTaskSchedule(String msg, Context context, boolean showDialog) {
         mMsg = msg;
         mContext = context;
         mShowDialog = showDialog;
@@ -27,7 +27,7 @@ public class AsyncTaskEvent extends AsyncTaskHttp {
     protected String doInBackground(String... params) {
         try {
             String code = params[0];
-            mJson = connectServerA(EndPoints.MESSAGES.concat(code), null, true);
+            mJson = connectServerA(EndPoints.SCHEDULES.concat(code), null, true);
         } catch (JSONException e) {
             e.printStackTrace();
         } catch (IOException e) {

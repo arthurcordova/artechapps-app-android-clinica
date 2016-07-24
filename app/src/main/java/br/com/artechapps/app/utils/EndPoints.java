@@ -15,4 +15,6 @@ public class EndPoints extends Webservice{
 
     public static final String MONEY_PER_CLIENT = SERVER.concat("/orcporcliente/");
 
+    public static final String SCHEDULES = SERVER.concat("/agendamentos/");
+
 }

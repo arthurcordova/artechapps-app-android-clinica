@@ -2,12 +2,14 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="br.com.artechapps.app.fragment.EventFragment">
+    tools:context=".fragment.ScheduleFragment">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/rvSchedules"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="AGENDAMENTO" />
+        android:layout_height="match_parent">
+
+
+    </android.support.v7.widget.RecyclerView>
 
 </FrameLayout>
