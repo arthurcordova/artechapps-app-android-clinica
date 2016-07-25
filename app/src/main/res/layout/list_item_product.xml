@@ -62,8 +62,9 @@
 
                 <RelativeLayout
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_marginBottom="16dp">
+                    android:layout_height="35dp"
+                    android:layout_marginBottom="16dp"
+                    >
 
                     <TextView
                         android:id="@+id/textView"
@@ -100,7 +101,7 @@
                     <TextView
                         android:id="@+id/add"
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
+                        android:layout_height="match_parent"
                         android:textSize="12sp"
                         android:paddingLeft="6dp"
                         android:paddingRight="16dp"
@@ -109,9 +110,8 @@
                         android:background="?attr/selectableItemBackground"
                         android:textColor="@color/colorAccent"
                         android:textStyle="bold"
-                        android:layout_alignBottom="@+id/value"
-                        android:layout_alignParentRight="true"
-                        android:layout_alignParentEnd="true" />
+
+                        android:layout_alignParentRight="true" />
 
                 </RelativeLayout>
 
