@@ -15,6 +15,7 @@ import java.util.ArrayList;
 
 import br.com.artechapps.app.R;
 import br.com.artechapps.app.activity.MainMenuActivity;
+import br.com.artechapps.app.adapter.RVAdapterSchedule;
 import br.com.artechapps.app.database.PersistenceSchedule;
 import br.com.artechapps.app.model.Schedule;
 import br.com.artechapps.app.model.User;
@@ -81,16 +82,16 @@ public class ScheduleFragment extends Fragment {
 
         mActivity = (MainMenuActivity)getActivity();
 
-        new AsyncTaskSchedule("Carregando agendamentos...", getContext(), true).execute(String.valueOf(user.getCode()));
+        new AsyncTaskSchedule("Carregando agendamentos...", getContext(), true, mRvSchedules, mActivity).execute(String.valueOf(user.getCode()));
 
         mPersistence = new PersistenceSchedule(getContext());
         mList = mPersistence.getRecords();
 
-//        RVAdapterMessage adapter = new RVAdapterMessage(mList, mActivity);
+        RVAdapterSchedule adapter = new RVAdapterSchedule(mList, mActivity);
 
         mRvSchedules.setLayoutManager(new LinearLayoutManager(getContext()));
         mRvSchedules.setItemAnimator(new DefaultItemAnimator());
-//        mRvSchedules.setAdapter(adapter);
+        mRvSchedules.setAdapter(adapter);
 
         mPersistence.close();
 

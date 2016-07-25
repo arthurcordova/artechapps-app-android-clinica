@@ -13,9 +13,8 @@ public class RepositorySchedule extends RepositoryDefault {
     public static final String  SCRIPT_DATABASE_DELETE = "drop table if exists "+TABLE_NAME;
     public static final String[] SCRIPT_DATABASE_CREATE = new String[] {
             "create table "+ TABLE_NAME +"( " +
-                    "                       id integer primary key autoincrement, " +
-                    "                       schedule_code long,"  +
-                    "                       product_code long,"  +
+                    "                       code long primary key,"  +
+                    "                       product_code long primary key,"  +
                     "                       product_desc text,"  +
                     "                       time text,"  +
                     "                       repeat text,"  +
@@ -23,8 +22,7 @@ public class RepositorySchedule extends RepositoryDefault {
     };
 
     public  static final  String[] COLUMNS = new String[]{
-            "id",
-            "schedule_code",
+            "code",
             "product_code",
             "product_desc",
             "time",

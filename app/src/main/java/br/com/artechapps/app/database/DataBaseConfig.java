@@ -9,7 +9,7 @@ import br.com.artechapps.app.BuildConfig;
  */
 public class DataBaseConfig {
 
-    public static final int VERSION = 2;
+    public static final int VERSION = 4;
     public static final String NAME = BuildConfig.APPLICATION_ID.replace(".","_").concat("_db");
 
     /**
@@ -22,6 +22,7 @@ public class DataBaseConfig {
         mCreateScripts.add(RepositoryShop.SCRIPT_DATABASE_CREATE[0]);
         mCreateScripts.add(RepositoryMessage.SCRIPT_DATABASE_CREATE[0]);
         mCreateScripts.add(RepositoryBudget.SCRIPT_DATABASE_CREATE[0]);
+        mCreateScripts.add(RepositorySchedule.SCRIPT_DATABASE_CREATE[0]);
 
         return mCreateScripts;
     }
@@ -36,6 +37,7 @@ public class DataBaseConfig {
         mDropScripts.add(RepositoryShop.SCRIPT_DATABASE_DELETE);
         mDropScripts.add(RepositoryMessage.SCRIPT_DATABASE_DELETE);
         mDropScripts.add(RepositoryBudget.SCRIPT_DATABASE_DELETE);
+        mDropScripts.add(RepositorySchedule.SCRIPT_DATABASE_DELETE);
 
         return mDropScripts;
     }

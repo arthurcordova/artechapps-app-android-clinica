@@ -78,13 +78,12 @@ public class PersistenceSchedule extends RepositorySchedule {
                 do {
                     Schedule model = new Schedule();
 
-                    model.setId(cursor.getLong(cursor.getColumnIndex(RepositoryProduct.COLUMNS[0])));
-                    model.setCode(cursor.getLong(cursor.getColumnIndex(RepositoryProduct.COLUMNS[1])));
-                    model.getProduct().setId(cursor.getLong(cursor.getColumnIndex(RepositoryProduct.COLUMNS[2])));
-                    model.getProduct().setDescription(cursor.getString(cursor.getColumnIndex(RepositoryProduct.COLUMNS[3])));
-                    model.setTime(cursor.getString(cursor.getColumnIndex(RepositoryProduct.COLUMNS[4])));
-                    model.setRepeat(cursor.getString(cursor.getColumnIndex(RepositoryProduct.COLUMNS[5])));
-                    model.setStatus(cursor.getString(cursor.getColumnIndex(RepositoryProduct.COLUMNS[6])));
+                    model.setCode(cursor.getLong(cursor.getColumnIndex(COLUMNS[0])));
+                    model.getProduct().setId(cursor.getLong(cursor.getColumnIndex(COLUMNS[1])));
+                    model.getProduct().setDescription(cursor.getString(cursor.getColumnIndex(COLUMNS[2])));
+                    model.setTime(cursor.getString(cursor.getColumnIndex(COLUMNS[3])));
+                    model.setRepeat(cursor.getString(cursor.getColumnIndex(COLUMNS[4])));
+                    model.setStatus(cursor.getString(cursor.getColumnIndex(COLUMNS[5])));
 
                     list.add(model);
                 } while (cursor.moveToNext());
@@ -96,12 +95,12 @@ public class PersistenceSchedule extends RepositorySchedule {
 
     private ContentValues getContentValues(Schedule model) {
         ContentValues contentValues = new ContentValues();
-        contentValues.put(COLUMNS[1], model.getCode());
-        contentValues.put(COLUMNS[2], model.getProduct().getId());
-        contentValues.put(COLUMNS[3], model.getProduct().getDescription());
-        contentValues.put(COLUMNS[4], model.getTime());
-        contentValues.put(COLUMNS[5], model.getRepeat());
-        contentValues.put(COLUMNS[6], model.getStatus());
+        contentValues.put(COLUMNS[0], model.getCode());
+        contentValues.put(COLUMNS[1], model.getProduct().getId());
+        contentValues.put(COLUMNS[2], model.getProduct().getDescription());
+        contentValues.put(COLUMNS[3], model.getTime());
+        contentValues.put(COLUMNS[4], model.getRepeat());
+        contentValues.put(COLUMNS[5], model.getStatus());
         return contentValues;
     }
 

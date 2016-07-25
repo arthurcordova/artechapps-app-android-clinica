@@ -14,20 +14,11 @@ public class Schedule implements Serializable{
     public static String JSON_REPEAT = "repetido";
     public static String JSON_STATUS = "status";
 
-    private long id;
     private long code;
     private Product product;
     private String time;
     private String repeat;
     private String status;
-
-    public long getId() {
-        return id;
-    }
-
-    public void setId(long id) {
-        this.id = id;
-    }
 
     public long getCode() {
         return code;
