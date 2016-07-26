@@ -1,11 +1,13 @@
 package br.com.artechapps.app.activity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.Switch;
 import android.widget.TextView;
 
 import java.util.Calendar;
@@ -20,6 +22,8 @@ public class FilterMessageActivity extends AppCompatActivity {
 
     public TextView mTvStartDate;
     public TextView mTvEndDate;
+    public Switch mSwRead;
+    public Switch mSwNotRead;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,6 +37,8 @@ public class FilterMessageActivity extends AppCompatActivity {
         mWidgetEndDate = (ImageView) findViewById(R.id.widget_end_date);
         mTvStartDate = (TextView) findViewById(R.id.tv_start_date);
         mTvEndDate = (TextView) findViewById(R.id.tv_end_date);
+        mSwRead = (Switch) findViewById(R.id.sw_read);
+        mSwNotRead = (Switch) findViewById(R.id.sw_not_read);
 
         setCurrentDate(mTvStartDate);
         setCurrentDate(mTvEndDate);
@@ -63,6 +69,16 @@ public class FilterMessageActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case android.R.id.home:
+                finish();
+                return true;
+            case R.id.action_ok:
+
+                Intent result = new Intent();
+                result.putExtra("start_date", mTvStartDate.getText().toString());
+                result.putExtra("end_date", mTvEndDate.getText().toString());
+                result.putExtra("is_read", mSwRead.isChecked());
+                result.putExtra("is_not_read", mSwNotRead.isChecked());
+                setResult(RESULT_OK, result);
                 finish();
                 return true;
         }

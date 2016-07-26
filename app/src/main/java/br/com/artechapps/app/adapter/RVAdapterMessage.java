@@ -50,6 +50,12 @@ public class RVAdapterMessage extends RecyclerView.Adapter<RVAdapterMessage.View
         return (mItemsData != null) ? mItemsData.size() : 0;
     }
 
+    public void setFilter(ArrayList<Message> messages) {
+        mItemsData = new ArrayList<>();
+        mItemsData.addAll(messages);
+        notifyDataSetChanged();
+    }
+
     // inner class to hold a reference to each item of RecyclerView
     public static class ViewHolder extends RecyclerView.ViewHolder {
 
@@ -68,8 +74,6 @@ public class RVAdapterMessage extends RecyclerView.Adapter<RVAdapterMessage.View
             tvTitle = (TextView) itemLayoutView.findViewById(R.id.title);
             tvDescription = (TextView) itemLayoutView.findViewById(R.id.description);
             tvSentDate = (TextView) itemLayoutView.findViewById(R.id.sent_date);
-
-
         }
     }
 }

@@ -1,5 +1,6 @@
 package br.com.artechapps.app.fragment;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
@@ -48,6 +49,7 @@ public class MessageFragment extends Fragment {
     private PersistenceMessage mPersistence;
     private ArrayList<Message> mList;
     private MainMenuActivity mActivity;
+    private RVAdapterMessage mAdapter;
 
     private RecyclerView mRvMessages;
     private FloatingActionButton mFab;
@@ -103,23 +105,52 @@ public class MessageFragment extends Fragment {
         mPersistence = new PersistenceMessage(getContext());
         mList = mPersistence.getRecords();
 
-        RVAdapterMessage adapter = new RVAdapterMessage(mList, mActivity);
+        mAdapter = new RVAdapterMessage(mList, mActivity);
 
         mRvMessages.setLayoutManager(new LinearLayoutManager(getContext()));
         mRvMessages.setItemAnimator(new DefaultItemAnimator());
-        mRvMessages.setAdapter(adapter);
+        mRvMessages.setAdapter(mAdapter);
 
         mPersistence.close();
 
         mFab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(mActivity, FilterMessageActivity.class));
+                startActivityForResult(new Intent(mActivity, FilterMessageActivity.class), 0);
             }
         });
 
         return view;
     }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (resultCode == Activity.RESULT_OK){
+            Bundle args = data.getExtras();
+            String startDate = args.getString("start_date");
+            String endDate = args.getString("end_date");
+            boolean isRead = args.getBoolean("is_read");
+            boolean isNotRead = args.getBoolean("is_not_read");
+
+            final ArrayList<Message> filterList = filter(mList, "hora");
+            mAdapter.setFilter(filterList);
+
+        }
+    }
+
+    private ArrayList<Message> filter(ArrayList<Message> messages, String query) {
+        query = query.toLowerCase();
+
+        final ArrayList<Message> filteredList = new ArrayList<>();
+        for (Message model : messages) {
+            final String text = model.getMessage().toLowerCase();
+            if (text.contains(query)){
+                filteredList.add(model);
+            }
+        }
+        return filteredList;
+    }
+
 
     // TODO: Rename method, update argument and hook method into UI event
     public void onButtonPressed(Uri uri) {
