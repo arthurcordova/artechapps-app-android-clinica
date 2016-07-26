@@ -49,6 +49,7 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="br.com.artechapps.app.activity.MainMenuActivity" />
         </activity>
+        <activity android:name=".activity.FilterMessageActivity"></activity>
     </application>
 
 </manifest>

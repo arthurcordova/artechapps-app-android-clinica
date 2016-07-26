@@ -1,8 +1,10 @@
 package br.com.artechapps.app.fragment;
 
 import android.content.Context;
+import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
@@ -14,6 +16,7 @@ import android.view.ViewGroup;
 import java.util.ArrayList;
 
 import br.com.artechapps.app.R;
+import br.com.artechapps.app.activity.FilterMessageActivity;
 import br.com.artechapps.app.activity.MainMenuActivity;
 import br.com.artechapps.app.adapter.RVAdapterMessage;
 import br.com.artechapps.app.database.PersistenceMessage;
@@ -47,6 +50,7 @@ public class MessageFragment extends Fragment {
     private MainMenuActivity mActivity;
 
     private RecyclerView mRvMessages;
+    private FloatingActionButton mFab;
 
     public MessageFragment() {
         // Required empty public constructor
@@ -90,6 +94,7 @@ public class MessageFragment extends Fragment {
         User user = sm.getSessionUser();
 
         mRvMessages = (RecyclerView) view.findViewById(R.id.rvMessages);
+        mFab = (FloatingActionButton) view.findViewById(R.id.fab_filter);
 
         mActivity = (MainMenuActivity)getActivity();
 
@@ -106,6 +111,12 @@ public class MessageFragment extends Fragment {
 
         mPersistence.close();
 
+        mFab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(mActivity, FilterMessageActivity.class));
+            }
+        });
 
         return view;
     }
