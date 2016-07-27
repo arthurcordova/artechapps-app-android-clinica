@@ -88,7 +88,6 @@ public class MainMenuActivity extends AppCompatActivity
             drawer.closeDrawer(GravityCompat.START);
         } else {
             drawer.openDrawer(Gravity.LEFT);
-//            super.onBackPressed();
         }
         if (getSupportFragmentManager().getBackStackEntryCount() > 0) {
             getSupportFragmentManager().popBackStack();
