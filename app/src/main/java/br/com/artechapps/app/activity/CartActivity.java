@@ -1,7 +1,5 @@
 package br.com.artechapps.app.activity;
 
-import android.animation.TypeEvaluator;
-import android.animation.ValueAnimator;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.DefaultItemAnimator;
@@ -15,6 +13,7 @@ import java.util.ArrayList;
 import br.com.artechapps.app.R;
 import br.com.artechapps.app.adapter.RVAdapterCart;
 import br.com.artechapps.app.database.PersistenceShop;
+import br.com.artechapps.app.model.Product;
 import br.com.artechapps.app.model.Shop;
 
 public class CartActivity extends AppCompatActivity {
@@ -36,6 +35,7 @@ public class CartActivity extends AppCompatActivity {
         mList = mPersistence.getRecords();
 
         RVAdapterCart mAdapter = new RVAdapterCart(mList, this);
+        mAdapter.notifyDataSetChanged();
 
         mRvCart.setLayoutManager(new LinearLayoutManager(this));
         mRvCart.setItemAnimator(new DefaultItemAnimator());
@@ -43,25 +43,30 @@ public class CartActivity extends AppCompatActivity {
 
         final TextView total = (TextView) findViewById(R.id.total_value);
 
+        PersistenceShop persistence = new PersistenceShop(this);
+        ArrayList<Shop> list = persistence.getRecords();
+        persistence.close();
+        double totalValue = 0d;
+        for (Shop model : list){
+            totalValue += model.getProduct().getValue();
+        }
+        total.setText(String.valueOf(Product.formatValue(totalValue)));
 
-//        android:text="34.555,00"
-
-        int count = 34555;
-        ValueAnimator animator = new ValueAnimator();
-        animator.setObjectValues(0, count);
-        animator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
-            public void onAnimationUpdate(ValueAnimator animation) {
-                total.setText(String.valueOf(animation.getAnimatedValue()));
-            }
-        });
-        animator.setEvaluator(new TypeEvaluator<Integer>() {
-            public Integer evaluate(float fraction, Integer startValue, Integer endValue) {
-                return Math.round(startValue + (endValue - startValue) * fraction);
-            }
-        });
-        animator.setDuration(1000);
-        animator.start();
-
+//        int count = (int)totalValue;
+//        ValueAnimator animator = new ValueAnimator();
+//        animator.setObjectValues(0, totalValue);
+//        animator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
+//            public void onAnimationUpdate(ValueAnimator animation) {
+//                total.setText(String.valueOf(animation.getAnimatedValue()));
+//            }
+//        });
+//        animator.setEvaluator(new TypeEvaluator<Integer>() {
+//            public Integer evaluate(float fraction, Integer startValue, Integer endValue) {
+//                return Math.round(startValue + (endValue - startValue) * fraction);
+//            }
+//        });
+//        animator.setDuration(1000);
+//        animator.start();
 
 
     }

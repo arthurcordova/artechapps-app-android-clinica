@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
 import android.support.design.widget.Snackbar;
+import android.support.v4.app.ActivityOptionsCompat;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
@@ -114,7 +115,7 @@ public class MainMenuActivity extends AppCompatActivity
         cart_content.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(MainMenuActivity.this, CartActivity.class));
+                startActivity(new Intent(MainMenuActivity.this, CartActivity.class), ActivityOptionsCompat.makeSceneTransitionAnimation(MainMenuActivity.this).toBundle());
             }
         });
 

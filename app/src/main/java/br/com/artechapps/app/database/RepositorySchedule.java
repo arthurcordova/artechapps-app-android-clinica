@@ -14,7 +14,7 @@ public class RepositorySchedule extends RepositoryDefault {
     public static final String[] SCRIPT_DATABASE_CREATE = new String[] {
             "create table "+ TABLE_NAME +"( " +
                     "                       code long primary key,"  +
-                    "                       product_code long primary key,"  +
+                    "                       product_code long,"  +
                     "                       product_desc text,"  +
                     "                       time text,"  +
                     "                       repeat text,"  +

@@ -9,7 +9,7 @@ import br.com.artechapps.app.BuildConfig;
  */
 public class DataBaseConfig {
 
-    public static final int VERSION = 4;
+    public static final int VERSION = 1;
     public static final String NAME = BuildConfig.APPLICATION_ID.replace(".","_").concat("_db");
 
     /**

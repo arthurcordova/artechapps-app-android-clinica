@@ -79,10 +79,10 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentEnd="true"
-                    android:background="?attr/selectableItemBackgroundBorderless"
-                    android:clickable="true"
                     android:layout_alignParentRight="true"
                     android:layout_centerVertical="true"
+                    android:background="?attr/selectableItemBackgroundBorderless"
+                    android:clickable="true"
                     android:padding="16dp"
                     android:src="@drawable/ic_action_add_pin" />
 
@@ -103,12 +103,12 @@
                     android:id="@+id/remove_item"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:background="?attr/selectableItemBackgroundBorderless"
-                    android:clickable="true"
-                    android:padding="16dp"
                     android:layout_centerVertical="true"
                     android:layout_toLeftOf="@+id/textView2"
                     android:layout_toStartOf="@+id/textView2"
+                    android:background="?attr/selectableItemBackgroundBorderless"
+                    android:clickable="true"
+                    android:padding="16dp"
                     android:src="@drawable/ic_action_remove_pin" />
 
 
@@ -126,41 +126,42 @@
                 android:layout_height="wrap_content">
 
                 <ImageView
+                    android:id="@+id/img_remove"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:src="@drawable/ic_delete"
                     android:clickable="true"
                     android:foreground="?attr/selectableItemBackground"
-                    android:padding="16dp"/>
+                    android:padding="16dp"
+                    android:src="@drawable/ic_delete" />
 
                 <TextView
                     android:id="@+id/textView"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:paddingTop="16dp"
-                    android:paddingRight="6dp"
+                    android:layout_alignParentTop="true"
+                    android:layout_toLeftOf="@+id/value"
+                    android:layout_toStartOf="@+id/value"
                     android:paddingBottom="16dp"
+                    android:paddingRight="6dp"
+                    android:paddingTop="16dp"
                     android:text="R$"
                     android:textColor="@color/colorAccent"
                     android:textSize="12sp"
-                    android:textStyle="bold"
-                    android:layout_alignParentTop="true"
-                    android:layout_toLeftOf="@+id/value"
-                    android:layout_toStartOf="@+id/value" />
+                    android:textStyle="bold" />
 
                 <TextView
                     android:id="@+id/value"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:layout_alignParentRight="true"
+                    android:layout_alignParentTop="true"
                     android:paddingRight="16dp"
                     android:paddingTop="16dp"
                     android:text="34.555,00"
                     android:textColor="@color/colorAccent"
                     android:textSize="12sp"
-                    android:textStyle="bold"
-                    android:layout_alignParentTop="true"
-                    android:layout_alignParentRight="true"
-                    android:layout_alignParentEnd="true" />
+                    android:textStyle="bold" />
 
             </RelativeLayout>
 

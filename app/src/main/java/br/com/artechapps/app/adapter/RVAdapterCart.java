@@ -4,13 +4,13 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import java.util.ArrayList;
 
 import br.com.artechapps.app.R;
 import br.com.artechapps.app.activity.CartActivity;
-import br.com.artechapps.app.activity.MainMenuActivity;
 import br.com.artechapps.app.database.PersistenceShop;
 import br.com.artechapps.app.model.Product;
 import br.com.artechapps.app.model.Shop;
@@ -39,10 +39,13 @@ public class RVAdapterCart extends RecyclerView.Adapter<RVAdapterCart.ViewHolder
     // Replace the contents of a view (invoked by the layout manager)
     @Override
     public void onBindViewHolder(ViewHolder viewHolder, int position) {
-        Shop model = mItemsData.get(position);
-//        viewHolder.tvCode.setText(String.valueOf(model.getId()));
+        final Shop model = mItemsData.get(position);
 
+        viewHolder.tvCode.setText(String.valueOf(model.getId()));
         viewHolder.tvDescription.setText(model.getProduct().getDescription());
+        viewHolder.tvValue.setText(Product.formatValue(model.getProduct().getValue()));
+
+
 //        viewHolder.tvValue.setText(model.formatValue(model.getValue()));
 
     }
@@ -59,6 +62,7 @@ public class RVAdapterCart extends RecyclerView.Adapter<RVAdapterCart.ViewHolder
         TextView tvDescription;
         TextView tvValue;
         TextView tvAdd;
+        ImageView imgRemove;
 
         CartActivity mActivity;
 
@@ -69,27 +73,25 @@ public class RVAdapterCart extends RecyclerView.Adapter<RVAdapterCart.ViewHolder
             tvDescription = (TextView) itemLayoutView.findViewById(R.id.description);
             tvValue = (TextView) itemLayoutView.findViewById(R.id.value);
             tvAdd = (TextView)itemLayoutView.findViewById(R.id.add);
+            imgRemove = (ImageView) itemLayoutView.findViewById(R.id.img_remove);
 
-//            tvAdd.setOnClickListener(new View.OnClickListener() {
-//                @Override
-//                public void onClick(View v) {
-//                    mActivity.setCounter(1);
-//                    mActivity.updateShopCart();
-//
-//                    Shop s = new Shop();
-//                    Product p = new Product();
-//                    p.setId(Long.parseLong(tvCode.getText().toString()));
-//                    s.setProduct(p);
-//
-//                    PersistenceShop persistenceShop = null;
-//                    try {
-//                        persistenceShop = new PersistenceShop(activity);
-//                        persistenceShop.save(s);
-//                    } finally {
-//                        persistenceShop.close();
-//                    }
-//                }
-//            });
+            imgRemove.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    PersistenceShop persistence = new PersistenceShop(v.getContext());
+                    try {
+                        persistence.remove(Long.valueOf(tvCode.getText().toString()));
+                        mActivity.finish();
+                        mActivity.startActivity(mActivity.getIntent());
+
+                    } finally {
+                        persistence.close();
+                    }
+                }
+            });
+
         }
+
+
     }
 }
