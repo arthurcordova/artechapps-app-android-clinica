@@ -1,14 +1,17 @@
 package br.com.artechapps.app.adapter;
 
+import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import java.util.ArrayList;
 
 import br.com.artechapps.app.R;
+import br.com.artechapps.app.activity.DetailMessageActivity;
 import br.com.artechapps.app.activity.MainMenuActivity;
 import br.com.artechapps.app.model.Message;
 
@@ -42,6 +45,12 @@ public class RVAdapterMessage extends RecyclerView.Adapter<RVAdapterMessage.View
         viewHolder.tvTitle.setText(model.getTitle());
         viewHolder.tvDescription.setText(model.getMessage());
         viewHolder.tvSentDate.setText(model.getSentDate());
+        viewHolder.lContent.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                v.getContext().startActivity(new Intent(v.getContext(), DetailMessageActivity.class));
+            }
+        });
 
     }
 
@@ -63,6 +72,7 @@ public class RVAdapterMessage extends RecyclerView.Adapter<RVAdapterMessage.View
         TextView tvTitle;
         TextView tvDescription;
         TextView tvSentDate;
+        LinearLayout lContent;
 
 
         MainMenuActivity mActivity;
@@ -74,6 +84,7 @@ public class RVAdapterMessage extends RecyclerView.Adapter<RVAdapterMessage.View
             tvTitle = (TextView) itemLayoutView.findViewById(R.id.title);
             tvDescription = (TextView) itemLayoutView.findViewById(R.id.description);
             tvSentDate = (TextView) itemLayoutView.findViewById(R.id.sent_date);
+            lContent = (LinearLayout) itemLayoutView.findViewById(R.id.content);
         }
     }
 }

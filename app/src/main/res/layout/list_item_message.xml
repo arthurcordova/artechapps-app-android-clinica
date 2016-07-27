@@ -16,6 +16,7 @@
         card_view:cardElevation="3dp">
 
         <LinearLayout
+            android:id="@+id/content"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:background="?attr/selectableItemBackgroundBorderless"
@@ -45,8 +46,7 @@
 
                 <RelativeLayout
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    >
+                    android:layout_height="match_parent">
 
                     <TextView
                         android:id="@+id/description"
@@ -60,16 +60,16 @@
                 </RelativeLayout>
 
                 <TextView
+                    android:id="@+id/sent_date"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:id="@+id/sent_date"
-                    android:gravity="end"
-                    android:textColor="@color/textBlack"
+                    android:layout_gravity="right"
                     android:alpha="0.4"
+                    android:gravity="end"
                     android:paddingTop="6dp"
                     android:text="10/04/1987"
-                    android:textSize="10sp"
-                    android:layout_gravity="right" />
+                    android:textColor="@color/textBlack"
+                    android:textSize="10sp" />
 
             </LinearLayout>
         </LinearLayout>

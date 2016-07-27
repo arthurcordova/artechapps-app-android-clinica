@@ -29,7 +29,6 @@ public class DatePickerFragment extends DialogFragment
         int month = getArguments().getInt("month");
         int day = getArguments().getInt("day");
 
-        // Create a new instance of DatePickerDialog and return it
         return new DatePickerDialog(getActivity(), this, year, month, day);
     }
 
@@ -37,13 +36,13 @@ public class DatePickerFragment extends DialogFragment
         if (mPosition == 0){
             ((FilterMessageActivity) getActivity()).mTvStartDate.setText(String.valueOf(day)+
                     "/"+
-                    String.valueOf(month) +
+                    String.valueOf(month + 1) +
                     "/"+
                     String.valueOf(year));
         } else {
             ((FilterMessageActivity) getActivity()).mTvEndDate.setText(String.valueOf(day)+
                     "/"+
-                    String.valueOf(month) +
+                    String.valueOf(month + 1) +
                     "/"+
                     String.valueOf(year));
         }

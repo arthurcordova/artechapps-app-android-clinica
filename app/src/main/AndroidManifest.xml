@@ -49,7 +49,11 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="br.com.artechapps.app.activity.MainMenuActivity" />
         </activity>
-        <activity android:name=".activity.FilterMessageActivity"></activity>
+        <activity android:name=".activity.FilterMessageActivity" />
+        <activity
+            android:name=".activity.DetailMessageActivity"
+            android:label="@string/title_activity_detail_message"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 
 </manifest>

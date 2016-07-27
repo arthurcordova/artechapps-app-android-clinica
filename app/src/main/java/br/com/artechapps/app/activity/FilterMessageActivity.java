@@ -38,7 +38,7 @@ public class FilterMessageActivity extends AppCompatActivity {
         mTvStartDate = (TextView) findViewById(R.id.tv_start_date);
         mTvEndDate = (TextView) findViewById(R.id.tv_end_date);
         mSwRead = (Switch) findViewById(R.id.sw_read);
-        mSwNotRead = (Switch) findViewById(R.id.sw_not_read);
+//        mSwNotRead = (Switch) findViewById(R.id.sw_not_read);
 
         setCurrentDate(mTvStartDate);
         setCurrentDate(mTvEndDate);
@@ -77,7 +77,7 @@ public class FilterMessageActivity extends AppCompatActivity {
                 result.putExtra("start_date", mTvStartDate.getText().toString());
                 result.putExtra("end_date", mTvEndDate.getText().toString());
                 result.putExtra("is_read", mSwRead.isChecked());
-                result.putExtra("is_not_read", mSwNotRead.isChecked());
+//                result.putExtra("is_not_read", mSwNotRead.isChecked());
                 setResult(RESULT_OK, result);
                 finish();
                 return true;
@@ -103,7 +103,7 @@ public class FilterMessageActivity extends AppCompatActivity {
 
         args.putInt("position", position);
         args.putInt("year", year);
-        args.putInt("month", month);
+        args.putInt("month", month - 1);
         args.putInt("day", day);
         DatePickerFragment newFragment = new DatePickerFragment();
         newFragment.setArguments(args);
@@ -113,7 +113,7 @@ public class FilterMessageActivity extends AppCompatActivity {
     private void setCurrentDate(TextView tv) {
         final Calendar c = Calendar.getInstance();
         int year = c.get(Calendar.YEAR);
-        int month = c.get(Calendar.MONTH);
+        int month = c.get(Calendar.MONTH) + 1;
         int day = c.get(Calendar.DAY_OF_MONTH);
 
         tv.setText(String.valueOf(day) + "/" + String.valueOf(month) + "/" + String.valueOf(year));

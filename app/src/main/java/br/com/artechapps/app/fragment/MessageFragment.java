@@ -25,6 +25,7 @@ import br.com.artechapps.app.model.Message;
 import br.com.artechapps.app.model.User;
 import br.com.artechapps.app.task.AsyncTaskMessages;
 import br.com.artechapps.app.utils.SessionManager;
+import br.com.artechapps.app.utils.UtilsDate;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -126,26 +127,33 @@ public class MessageFragment extends Fragment {
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (resultCode == Activity.RESULT_OK){
-            Bundle args = data.getExtras();
-            String startDate = args.getString("start_date");
-            String endDate = args.getString("end_date");
-            boolean isRead = args.getBoolean("is_read");
-            boolean isNotRead = args.getBoolean("is_not_read");
-
-            final ArrayList<Message> filterList = filter(mList, "hora");
+            final ArrayList<Message> filterList = filter(mList, data.getExtras());
             mAdapter.setFilter(filterList);
 
         }
     }
 
-    private ArrayList<Message> filter(ArrayList<Message> messages, String query) {
-        query = query.toLowerCase();
+    private ArrayList<Message> filter(ArrayList<Message> messages, Bundle args) {
+        String startDate = args.getString("start_date");
+        String endDate = args.getString("end_date");
+        boolean isRead = args.getBoolean("is_read");
+        boolean isNotRead = args.getBoolean("is_not_read");
+
 
         final ArrayList<Message> filteredList = new ArrayList<>();
         for (Message model : messages) {
-            final String text = model.getMessage().toLowerCase();
-            if (text.contains(query)){
-                filteredList.add(model);
+            boolean insert = true;
+            if (UtilsDate.between( UtilsDate.convert(model.getSentDate()),
+                    UtilsDate.convert(startDate),
+                    UtilsDate.convert(endDate))){
+
+                if (!isRead && model.isSee()){
+                    insert = false;
+
+                }
+
+                if (insert)
+                    filteredList.add(model);
             }
         }
         return filteredList;
