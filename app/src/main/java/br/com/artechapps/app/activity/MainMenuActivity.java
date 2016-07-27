@@ -2,6 +2,7 @@ package br.com.artechapps.app.activity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
 import android.support.design.widget.Snackbar;
@@ -18,8 +19,10 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import br.com.artechapps.app.R;
+import br.com.artechapps.app.database.PersistenceShop;
 import br.com.artechapps.app.fragment.AboutFragment;
 import br.com.artechapps.app.fragment.BudgetFragment;
 import br.com.artechapps.app.fragment.MessageFragment;
@@ -72,6 +75,10 @@ public class MainMenuActivity extends AppCompatActivity
 
         mTvHeaderUserName.setText(user.getName());
 
+        PersistenceShop pers = new PersistenceShop(this);
+        counter = pers.count();
+        pers.close();
+
     }
 
     @Override
@@ -80,9 +87,30 @@ public class MainMenuActivity extends AppCompatActivity
         if (drawer.isDrawerOpen(GravityCompat.START)) {
             drawer.closeDrawer(GravityCompat.START);
         } else {
-            super.onBackPressed();
+            drawer.openDrawer(Gravity.LEFT);
+//            super.onBackPressed();
         }
+        if (getSupportFragmentManager().getBackStackEntryCount() > 0) {
+            getSupportFragmentManager().popBackStack();
+        } else if (!doubleBackToExitPressedOnce) {
+            this.doubleBackToExitPressedOnce = true;
+            Toast.makeText(this,"Click novamente em voltar para fechar o app.", Toast.LENGTH_SHORT).show();
+
+            new Handler().postDelayed(new Runnable() {
+
+                @Override
+                public void run() {
+                    doubleBackToExitPressedOnce = false;
+                }
+            }, 2000);
+        } else {
+            super.onBackPressed();
+            return;
+        }
+
     }
+
+    boolean doubleBackToExitPressedOnce = false;
 
     private int counter = 0;
     private TextView ui_hot = null;

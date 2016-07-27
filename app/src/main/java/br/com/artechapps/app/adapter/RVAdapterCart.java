@@ -45,9 +45,6 @@ public class RVAdapterCart extends RecyclerView.Adapter<RVAdapterCart.ViewHolder
         viewHolder.tvDescription.setText(model.getProduct().getDescription());
         viewHolder.tvValue.setText(Product.formatValue(model.getProduct().getValue()));
 
-
-//        viewHolder.tvValue.setText(model.formatValue(model.getValue()));
-
     }
 
     @Override

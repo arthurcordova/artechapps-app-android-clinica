@@ -3,11 +3,6 @@ package br.com.artechapps.app.database;
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
-import android.util.Log;
-
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
 
 import java.util.ArrayList;
 
@@ -43,6 +38,17 @@ public class PersistenceShop extends RepositoryShop {
 
     public boolean remove(){
         return persistence.delete();
+    }
+
+    public int count(){
+        int count = 0;
+        Cursor cursor = persistence.getDataBase().rawQuery("select count(*) c from "+TABLE_NAME, null);
+        if (cursor != null) {
+            if (cursor.moveToFirst()){
+                count = cursor.getInt(cursor.getColumnIndex("c"));
+            }
+        }
+        return count;
     }
 
     public ArrayList<Shop> getRecords(){
