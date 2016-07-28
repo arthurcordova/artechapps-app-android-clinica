@@ -39,7 +39,7 @@ public class RVAdapterMessage extends RecyclerView.Adapter<RVAdapterMessage.View
     // Replace the contents of a view (invoked by the layout manager)
     @Override
     public void onBindViewHolder(ViewHolder viewHolder, int position) {
-        Message model = mItemsData.get(position);
+        final Message model = mItemsData.get(position);
         viewHolder.tvCode.setText(String.valueOf(model.getId()));
 
         viewHolder.tvTitle.setText(model.getTitle());
@@ -48,7 +48,9 @@ public class RVAdapterMessage extends RecyclerView.Adapter<RVAdapterMessage.View
         viewHolder.lContent.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                v.getContext().startActivity(new Intent(v.getContext(), DetailMessageActivity.class));
+                Intent it = new Intent(v.getContext(), DetailMessageActivity.class);
+                it.putExtra("model", model);
+                v.getContext().startActivity(it);
             }
         });
 
