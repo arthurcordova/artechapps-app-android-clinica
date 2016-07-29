@@ -5,6 +5,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 
@@ -84,6 +85,8 @@ public class RVAdapterProduct extends RecyclerView.Adapter<RVAdapterProduct.View
                     try {
                         persistenceShop = new PersistenceShop(activity);
                         persistenceShop.save(s);
+                        Toast.makeText(v.getContext(), "Produto adicionado ao carrinho.", Toast.LENGTH_SHORT).show();
+
                     } finally {
                         persistenceShop.close();
                     }
