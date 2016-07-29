@@ -10,13 +10,13 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:orientation="vertical">
 
         <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
             xmlns:tools="http://schemas.android.com/tools"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:layout_marginLeft="16dp"
             android:layout_marginRight="16dp"
             android:layout_marginTop="32dp"
@@ -27,8 +27,7 @@
                 android:id="@+id/imageView5"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:alpha="0.5"
-                android:src="@drawable/ic_account_circle_black_24dp" />
+                android:src="@drawable/ic_receipt_black" />
 
             <RelativeLayout
                 android:layout_width="wrap_content"
@@ -36,7 +35,7 @@
                 android:paddingLeft="48dp">
 
                 <TextView
-                    android:id="@+id/date"
+                    android:id="@+id/tv_msg_title"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:alpha="0.75"
@@ -45,10 +44,10 @@
                     android:textSize="17sp" />
 
                 <TextView
-                    android:id="@+id/period"
+                    android:id="@+id/tv_msg_content"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_below="@+id/date"
+                    android:layout_below="@+id/tv_msg_title"
                     android:layout_marginTop="6dp"
                     android:alpha="0.5"
                     android:text="aaaaaaaa"
@@ -71,7 +70,7 @@
         <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
             xmlns:tools="http://schemas.android.com/tools"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="70dp"
             android:layout_marginLeft="16dp"
             android:layout_marginRight="16dp"
             android:layout_marginTop="32dp"
@@ -82,8 +81,7 @@
                 android:id="@+id/imageView2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:alpha="0.5"
-                android:src="@drawable/ic_account_circle_black_24dp" />
+                android:src="@drawable/ic_date_range" />
 
             <RelativeLayout
                 android:layout_width="wrap_content"
@@ -91,58 +89,24 @@
                 android:paddingLeft="48dp">
 
                 <TextView
-                    android:id="@+id/date1"
+                    android:id="@+id/tv_date_sent"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:alpha="0.75"
-                    android:text="Arthur Cordova Stapassoli"
+                    android:alpha="0.5"
+                    android:layout_marginTop="3dp"
+                    android:text="Enviada"
                     android:textColor="@color/black"
-                    android:textSize="17sp" />
-
-            </RelativeLayout>
-
-        </RelativeLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="1dip"
-            android:layout_marginLeft="64dp"
-            android:layout_marginTop="32dp"
-            android:alpha="0.12"
-            android:background="@color/black" />
-
-        <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-            xmlns:tools="http://schemas.android.com/tools"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:id="@+id/line_legend"
-            android:clickable="true"
-            android:layout_marginLeft="16dp"
-            android:layout_marginRight="16dp"
-            android:layout_marginTop="32dp"
-            android:descendantFocusability="beforeDescendants"
-            android:focusableInTouchMode="true">
-
-            <ImageView
-                android:id="@+id/img_legend"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:src="@drawable/ic_account_circle_black_24dp" />
-
-            <RelativeLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:paddingLeft="48dp"
-                >
+                    android:textSize="13sp" />
 
                 <TextView
-                    android:id="@+id/label_legend"
+                    android:id="@+id/tv_date_see"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:alpha="0.75"
-                    android:text="Consulta"
+                    android:layout_below="@+id/tv_date_sent"
+                    android:layout_marginTop="6dp"
+                    android:alpha="0.5"
                     android:textColor="@color/black"
-                    android:textSize="17sp" />
+                    android:textSize="13sp" />
 
             </RelativeLayout>
 
