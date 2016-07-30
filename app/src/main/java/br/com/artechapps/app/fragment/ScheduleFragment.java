@@ -1,8 +1,10 @@
 package br.com.artechapps.app.fragment;
 
 import android.content.Context;
+import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
@@ -15,6 +17,7 @@ import java.util.ArrayList;
 
 import br.com.artechapps.app.R;
 import br.com.artechapps.app.activity.MainMenuActivity;
+import br.com.artechapps.app.activity.NewScheduleActivity;
 import br.com.artechapps.app.adapter.RVAdapterSchedule;
 import br.com.artechapps.app.database.PersistenceSchedule;
 import br.com.artechapps.app.model.Schedule;
@@ -38,6 +41,7 @@ public class ScheduleFragment extends Fragment {
     private ArrayList<Schedule> mList;
     private MainMenuActivity mActivity;
     private RecyclerView mRvSchedules;
+    private FloatingActionButton mFab;
 
     public ScheduleFragment() {
         // Required empty public constructor
@@ -79,8 +83,16 @@ public class ScheduleFragment extends Fragment {
         User user = sm.getSessionUser();
 
         mRvSchedules = (RecyclerView) view.findViewById(R.id.rvSchedules);
+        mFab = (FloatingActionButton) view.findViewById(R.id.fab_new_schedule);
 
         mActivity = (MainMenuActivity)getActivity();
+
+        mFab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(mActivity, NewScheduleActivity.class));
+            }
+        });
 
         new AsyncTaskSchedule("Carregando agendamentos...", getContext(), true, mRvSchedules, mActivity).execute(String.valueOf(user.getCode()));
 
