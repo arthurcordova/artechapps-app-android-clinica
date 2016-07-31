@@ -1,9 +1,11 @@
 package br.com.artechapps.app.model;
 
+import java.io.Serializable;
+
 /**
  * Created by arthurcordova on 7/22/16.
  */
-public class Budget {
+public class Budget implements Serializable {
 
     private long code;
     private String status;

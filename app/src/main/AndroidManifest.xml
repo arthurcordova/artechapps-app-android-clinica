@@ -61,7 +61,8 @@
             android:label="@string/title_activity_detail_message"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".activity.NewScheduleActivity"></activity>
+        <activity android:name=".activity.NewScheduleActivity" />
+        <activity android:name=".activity.DetailBudgetActivity"></activity>
     </application>
 
 </manifest>

@@ -1,16 +1,20 @@
 package br.com.artechapps.app.adapter;
 
+import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import java.util.ArrayList;
 
 import br.com.artechapps.app.R;
+import br.com.artechapps.app.activity.DetailBudgetActivity;
 import br.com.artechapps.app.activity.MainMenuActivity;
 import br.com.artechapps.app.model.Budget;
+import br.com.artechapps.app.model.Product;
 
 /**
  * Created by acstapassoli on 07/12/2015.
@@ -36,12 +40,19 @@ public class RVAdapterBudget extends RecyclerView.Adapter<RVAdapterBudget.ViewHo
     // Replace the contents of a view (invoked by the layout manager)
     @Override
     public void onBindViewHolder(ViewHolder viewHolder, int position) {
-        Budget model = mItemsData.get(position);
+        final Budget model = mItemsData.get(position);
         viewHolder.tvCode.setText(String.valueOf(model.getCode()));
         viewHolder.tvTitle.setText("Orçamento: " + String.valueOf(model.getCode()));
-
-//        viewHolder.tvDescription.setText(model.getMessage());
-//        viewHolder.tvSentDate.setText(model.getSentDate());
+        viewHolder.tvTotalValue.setText("Valor: R$ " + Product.formatValue(model.getValueTotal()));
+        viewHolder.tvDate.setText(model.getDate());
+        viewHolder.lContent.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent it = new Intent(v.getContext(), DetailBudgetActivity.class);
+                it.putExtra("model", model);
+                v.getContext().startActivity(it);
+            }
+        });
 
     }
 
@@ -55,9 +66,9 @@ public class RVAdapterBudget extends RecyclerView.Adapter<RVAdapterBudget.ViewHo
 
         TextView tvCode;
         TextView tvTitle;
-        TextView tvDescription;
-        TextView tvSentDate;
-
+        TextView tvTotalValue;
+        TextView tvDate;
+        LinearLayout lContent;
 
         MainMenuActivity mActivity;
 
@@ -66,9 +77,9 @@ public class RVAdapterBudget extends RecyclerView.Adapter<RVAdapterBudget.ViewHo
             mActivity = activity;
             tvCode = (TextView) itemLayoutView.findViewById(R.id.code);
             tvTitle = (TextView) itemLayoutView.findViewById(R.id.title);
-            tvDescription = (TextView) itemLayoutView.findViewById(R.id.description);
-            tvSentDate = (TextView) itemLayoutView.findViewById(R.id.sent_date);
-
+            tvTotalValue = (TextView) itemLayoutView.findViewById(R.id.tv_total_value);
+            tvDate = (TextView) itemLayoutView.findViewById(R.id.tv_date);
+            lContent = (LinearLayout) itemLayoutView.findViewById(R.id.content);
 
         }
     }

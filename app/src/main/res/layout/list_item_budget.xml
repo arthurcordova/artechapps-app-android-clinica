@@ -16,6 +16,7 @@
         card_view:cardElevation="3dp">
 
         <LinearLayout
+            android:id="@+id/content"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:background="?attr/selectableItemBackgroundBorderless"
@@ -41,35 +42,34 @@
                     android:lines="2"
                     android:text="title"
                     android:textColor="@color/textBlack"
-                    android:textSize="15sp" />
+                    android:textSize="16sp" />
 
                 <RelativeLayout
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    >
+                    android:layout_height="match_parent">
 
                     <TextView
-                        android:id="@+id/description"
+                        android:id="@+id/tv_total_value"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:lines="4"
+                        android:lines="1"
                         android:text="desc"
-                        android:textSize="12sp" />
+                        android:textSize="14sp" />
 
 
                 </RelativeLayout>
 
                 <TextView
+                    android:id="@+id/tv_date"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:id="@+id/sent_date"
-                    android:gravity="end"
-                    android:textColor="@color/textBlack"
+                    android:layout_gravity="right"
                     android:alpha="0.4"
+                    android:gravity="end"
                     android:paddingTop="6dp"
                     android:text="10/04/1987"
-                    android:textSize="10sp"
-                    android:layout_gravity="right" />
+                    android:textColor="@color/textBlack"
+                    android:textSize="10sp" />
 
             </LinearLayout>
         </LinearLayout>
