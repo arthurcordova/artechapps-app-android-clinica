@@ -29,6 +29,7 @@ public class AsyncTaskBudget extends AsyncTaskHttp {
     private MainMenuActivity mActivity;
 
     public AsyncTaskBudget(String msg, Context context, boolean showDialog, RecyclerView recyclerView, MainMenuActivity activity) {
+        mMsg = msg;
         mContext = context;
         mShowDialog = showDialog;
         mRecyclerView = recyclerView;

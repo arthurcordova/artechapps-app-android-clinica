@@ -38,8 +38,8 @@ public class RVAdapterBudget extends RecyclerView.Adapter<RVAdapterBudget.ViewHo
     public void onBindViewHolder(ViewHolder viewHolder, int position) {
         Budget model = mItemsData.get(position);
         viewHolder.tvCode.setText(String.valueOf(model.getCode()));
+        viewHolder.tvTitle.setText("Orçamento: " + String.valueOf(model.getCode()));
 
-        viewHolder.tvTitle.setText(String.valueOf(model.getValueBudget()));
 //        viewHolder.tvDescription.setText(model.getMessage());
 //        viewHolder.tvSentDate.setText(model.getSentDate());
 
