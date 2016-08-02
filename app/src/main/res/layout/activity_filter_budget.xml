@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorDivider"
+    tools:context="br.com.artechapps.app.activity.FilterBudgetActivity">
+
+    <TextView
+        android:id="@+id/title_period"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:alpha="0.6"
+        android:padding="16dp"
+        android:text="Status"
+        android:textColor="@color/textBlack"
+        android:textSize="18sp"
+        android:textStyle="bold" />
+
+    <android.support.v7.widget.CardView xmlns:card_view="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/cv_period"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/title_period"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp"
+        card_view:cardCornerRadius="2dp"
+        card_view:cardElevation="3dp">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:padding="16dp">
+
+            <Switch
+                android:id="@+id/sw_all"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="16dp"
+                android:layout_marginTop="16dp"
+                android:checked="true"
+                android:text="Todos"
+                android:textSize="16dp" />
+
+            <LinearLayout
+                android:id="@+id/divider_1"
+                android:layout_width="match_parent"
+                android:layout_height="1dip"
+                android:layout_below="@+id/sw_all"
+                android:alpha="0.12"
+                android:background="@color/textBlack"
+                android:orientation="horizontal"
+
+                ></LinearLayout>
+
+            <Switch
+                android:id="@+id/sw_confirmed"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/divider_1"
+                android:layout_marginBottom="16dp"
+                android:layout_marginTop="16dp"
+                android:checked="true"
+                android:text="Confirmados"
+                android:textSize="16dp" />
+
+            <LinearLayout
+                android:id="@+id/divider_2"
+                android:layout_width="match_parent"
+                android:layout_height="1dip"
+                android:layout_below="@+id/sw_confirmed"
+                android:alpha="0.12"
+                android:background="@color/textBlack"
+                android:orientation="horizontal"
+
+                ></LinearLayout>
+
+            <Switch
+                android:id="@+id/sw_cancelled"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/divider_2"
+                android:layout_marginBottom="16dp"
+                android:layout_marginTop="16dp"
+                android:checked="true"
+                android:text="Cancelados"
+                android:textSize="16dp" />
+
+        </RelativeLayout>
+
+
+    </android.support.v7.widget.CardView>
+
+
+</RelativeLayout>

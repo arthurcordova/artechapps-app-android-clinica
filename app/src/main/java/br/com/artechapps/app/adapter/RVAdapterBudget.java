@@ -56,6 +56,12 @@ public class RVAdapterBudget extends RecyclerView.Adapter<RVAdapterBudget.ViewHo
 
     }
 
+    public void setFilter(ArrayList<Budget> messages) {
+        mItemsData = new ArrayList<>();
+        mItemsData.addAll(messages);
+        notifyDataSetChanged();
+    }
+
     @Override
     public int getItemCount() {
         return (mItemsData != null) ? mItemsData.size() : 0;

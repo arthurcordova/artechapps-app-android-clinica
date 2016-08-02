@@ -1,8 +1,11 @@
 package br.com.artechapps.app.fragment;
 
+import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
@@ -14,6 +17,7 @@ import android.view.ViewGroup;
 import java.util.ArrayList;
 
 import br.com.artechapps.app.R;
+import br.com.artechapps.app.activity.FilterBudgetActivity;
 import br.com.artechapps.app.activity.MainMenuActivity;
 import br.com.artechapps.app.adapter.RVAdapterBudget;
 import br.com.artechapps.app.database.PersistenceBudget;
@@ -37,6 +41,8 @@ public class BudgetFragment extends Fragment {
     private MainMenuActivity mActivity;
     private PersistenceBudget mPersistence;
     private ArrayList<Budget> mList;
+    private FloatingActionButton mFab;
+    private RVAdapterBudget mAdapter;
 
 
     public BudgetFragment() {
@@ -71,6 +77,8 @@ public class BudgetFragment extends Fragment {
         User user = sm.getSessionUser();
 
         mRvMessages = (RecyclerView) view.findViewById(R.id.rvBudget);
+        mFab = (FloatingActionButton) view.findViewById(R.id.fab_filter);
+
         mActivity = (MainMenuActivity) getActivity();
 
 
@@ -78,11 +86,11 @@ public class BudgetFragment extends Fragment {
             mPersistence = new PersistenceBudget(mActivity);
             mList = mPersistence.getRecords();
 
-            RVAdapterBudget adapter = new RVAdapterBudget(mList, mActivity);
+            mAdapter = new RVAdapterBudget(mList, mActivity);
 
             mRvMessages.setLayoutManager(new LinearLayoutManager(mActivity));
             mRvMessages.setItemAnimator(new DefaultItemAnimator());
-            mRvMessages.setAdapter(adapter);
+            mRvMessages.setAdapter(mAdapter);
 
         } finally {
             mPersistence.close();
@@ -91,9 +99,51 @@ public class BudgetFragment extends Fragment {
 
         new AsyncTaskBudget("Carregando orçamentos...",getContext(),true, mRvMessages, mActivity).execute(String.valueOf(user.getCode()));
 
+        mFab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivityForResult(new Intent(mActivity, FilterBudgetActivity.class), 0);
+            }
+        });
 
         return view;
     }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (resultCode == Activity.RESULT_OK){
+            final ArrayList<Budget> filterList = filter(mList, data.getExtras());
+            mAdapter.setFilter(filterList);
+
+        }
+    }
+
+    private ArrayList<Budget> filter(ArrayList<Budget> messages, Bundle args) {
+        boolean isAll = args.getBoolean("sw_all");
+        boolean isConfirmed = args.getBoolean("sw_confirmed");
+        boolean isCancelled = args.getBoolean("sw_cancelled");
+
+
+        final ArrayList<Budget> filteredList = new ArrayList<>();
+//        for (Message model : messages) {
+//            boolean insert = true;
+//            if (UtilsDate.between( UtilsDate.convert(model.getSentDate()),
+//                    UtilsDate.convert(startDate),
+//                    UtilsDate.convert(endDate))){
+//
+//                if (!isRead && model.isSee()){
+//                    insert = false;
+//
+//                }
+//
+//                if (insert)
+//                    filteredList.add(model);
+//            }
+//        }
+        return filteredList;
+    }
+
+
 
     // TODO: Rename method, update argument and hook method into UI event
     public void onButtonPressed(Uri uri) {
