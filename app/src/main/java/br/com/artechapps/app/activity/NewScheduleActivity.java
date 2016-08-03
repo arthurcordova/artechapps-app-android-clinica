@@ -25,6 +25,10 @@ public class NewScheduleActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_new_schedule);
 
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setTitle("Escolha o procedimento");
+
+
         mRvProduct = (RecyclerView) findViewById(R.id.rvProducts);
 
 //        new AsyncTaskProduct("Carregando produtos...",this,true, mRvProduct, ).execute(String.valueOf(BuildConfig.FILIAL));

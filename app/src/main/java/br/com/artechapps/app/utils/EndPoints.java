@@ -17,4 +17,6 @@ public class EndPoints extends Webservice{
 
     public static final String SCHEDULES = SERVER.concat("/agendamentos/");
 
+    public static final String DOCTORS = SERVER.concat("/medicos/");
+
 }

@@ -1,15 +1,18 @@
 package br.com.artechapps.app.adapter;
 
+import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import java.util.ArrayList;
 
 import br.com.artechapps.app.R;
 import br.com.artechapps.app.activity.NewScheduleActivity;
+import br.com.artechapps.app.activity.NewScheduleDoctorActivity;
 import br.com.artechapps.app.model.Product;
 
 /**
@@ -41,6 +44,12 @@ public class RVAdapterProductSchedule extends RecyclerView.Adapter<RVAdapterProd
 
         viewHolder.tvDescription.setText(model.getDescription());
         viewHolder.tvAdd.setText("R$ " + model.formatValue(model.getValue()));
+        viewHolder.lContent.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                v.getContext().startActivity(new Intent(v.getContext(), NewScheduleDoctorActivity.class));
+            }
+        });
 
     }
 
@@ -56,6 +65,7 @@ public class RVAdapterProductSchedule extends RecyclerView.Adapter<RVAdapterProd
         TextView tvDescription;
         TextView tvValue;
         TextView tvAdd;
+        LinearLayout lContent;
 
         NewScheduleActivity mActivity;
 
@@ -66,6 +76,7 @@ public class RVAdapterProductSchedule extends RecyclerView.Adapter<RVAdapterProd
             tvDescription = (TextView) itemLayoutView.findViewById(R.id.description);
             tvValue = (TextView) itemLayoutView.findViewById(R.id.value);
             tvAdd = (TextView)itemLayoutView.findViewById(R.id.add);
+            lContent = (LinearLayout) itemLayoutView.findViewById(R.id.content);
 
 //            tvAdd.setOnClickListener(new View.OnClickListener() {
 //                @Override
