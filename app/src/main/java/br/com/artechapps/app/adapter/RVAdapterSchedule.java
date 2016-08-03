@@ -39,9 +39,9 @@ public class RVAdapterSchedule extends RecyclerView.Adapter<RVAdapterSchedule.Vi
         Schedule model = mItemsData.get(position);
         viewHolder.tvCode.setText(String.valueOf(model.getCode()));
 
-        viewHolder.tvTitle.setText(model.getStatus());
-//        viewHolder.tvDescription.setText(model.getMessage());
-//        viewHolder.tvSentDate.setText(model.getSentDate());
+        viewHolder.tvTitle.setText("Procedimento: " + model.getProduct().getDescription());
+        viewHolder.tvDescription.setText("Horário: " + model.getTime());
+        viewHolder.tvSentDate.setText(model.getStatus());
 
     }
 
