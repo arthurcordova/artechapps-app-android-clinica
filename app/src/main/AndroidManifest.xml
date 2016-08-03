@@ -62,12 +62,19 @@
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".activity.NewScheduleActivity" />
+
         <activity
             android:name=".activity.DetailBudgetActivity"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar" />
+
         <activity android:name=".activity.FilterBudgetActivity" />
-        <activity android:name=".activity.NewScheduleDoctorActivity"></activity>
+
+        <activity android:name=".activity.NewScheduleDoctorActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="br.com.artechapps.app.activity.NewScheduleActivity" />
+        </activity>
     </application>
 
 </manifest>

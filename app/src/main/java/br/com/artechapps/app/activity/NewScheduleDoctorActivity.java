@@ -14,6 +14,10 @@ public class NewScheduleDoctorActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_new_schedule_doctor);
 
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setTitle("Escolha o médico");
+
+
         new AsyncTaskDoctor("Carregando médicos...", this, true).execute(String.valueOf(BuildConfig.FILIAL));
 
     }
