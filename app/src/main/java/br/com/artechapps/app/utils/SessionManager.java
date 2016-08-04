@@ -27,6 +27,8 @@ public final class SessionManager {
     private final String KEY_ACTIVE = "active";
     private final String KEY_COUNT_MESSAGES = "messages";
     private final String KEY_COUNT_APPOINTMENTS = "appointments";
+    private final String KEY_COUNT_SCORE = "score";
+    private final String KEY_COUNT_DISCOUNT = "discount";
 
     public SessionManager(Context context) {
         this.context = context;
@@ -42,6 +44,8 @@ public final class SessionManager {
         editor.putLong(KEY_CODE, user.getCode());
         editor.putInt(KEY_COUNT_APPOINTMENTS, user.getAppointments());
         editor.putInt(KEY_COUNT_MESSAGES, user.getMessages());
+        editor.putInt(KEY_COUNT_SCORE, user.getScore());
+        editor.putInt(KEY_COUNT_DISCOUNT, user.getDiscount());
         editor.commit();
     }
 
@@ -87,6 +91,8 @@ public final class SessionManager {
             user.setCode(preferences.getLong(KEY_CODE, 0L));
             user.setAppointments(preferences.getInt(KEY_COUNT_APPOINTMENTS, 0));
             user.setMessages(preferences.getInt(KEY_COUNT_MESSAGES, 0));
+            user.setScore(preferences.getInt(KEY_COUNT_SCORE, 0));
+            user.setDiscount(preferences.getInt(KEY_COUNT_DISCOUNT, 0));
             return user;
         }
         return null;

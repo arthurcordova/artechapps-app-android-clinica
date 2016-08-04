@@ -13,11 +13,14 @@ import android.widget.TextView;
 
 import br.com.artechapps.app.R;
 import br.com.artechapps.app.activity.MainMenuActivity;
+import br.com.artechapps.app.model.User;
+import br.com.artechapps.app.utils.SessionManager;
 
 public class DashboardFragment extends Fragment {
 
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
+    private static final int TIME_ANIMATION = 1000;
 
     private String mParam1;
     private String mParam2;
@@ -28,7 +31,6 @@ public class DashboardFragment extends Fragment {
     private TextView tvNumDiscount;
     private TextView tvNumMessage;
     private TextView tvNumSchedule;
-
 
 
     public DashboardFragment() {
@@ -73,17 +75,24 @@ public class DashboardFragment extends Fragment {
         tvNumMessage = (TextView) view.findViewById(R.id.num_message);
         tvNumSchedule = (TextView) view.findViewById(R.id.num_schedule);
 
-//        int count = 100;
-        setAnimationCounter(67, 1000, tvNumScore);
-        setAnimationCounter(15, 1000, tvNumDiscount);
-        setAnimationCounter(20, 1000, tvNumMessage);
-        setAnimationCounter(1, 1000, tvNumSchedule);
+        SessionManager sm = new SessionManager(getActivity());
+        User user = sm.getSessionUser();
+
+        setAnimationCounter(user.getScore(), TIME_ANIMATION, tvNumScore);
+        setAnimationCounter(user.getDiscount(), TIME_ANIMATION, tvNumDiscount);
+        setAnimationCounter(user.getMessages(), TIME_ANIMATION, tvNumMessage);
+        setAnimationCounter(user.getScore(), TIME_ANIMATION, tvNumScore);
+
+//        setAnimationCounter(10, TIME_ANIMATION, tvNumScore);
+//        setAnimationCounter(55, TIME_ANIMATION, tvNumDiscount);
+//        setAnimationCounter(12, TIME_ANIMATION, tvNumMessage);
+//        setAnimationCounter(33, TIME_ANIMATION, tvNumSchedule);
 
         return view;
     }
 
 
-    public void setAnimationCounter(int value, int duration, final TextView textView){
+    public void setAnimationCounter(int value, int duration, final TextView textView) {
         ValueAnimator animator = new ValueAnimator();
         animator.setObjectValues(0, value);
         animator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {

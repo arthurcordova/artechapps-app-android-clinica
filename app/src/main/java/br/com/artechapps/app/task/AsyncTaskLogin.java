@@ -66,10 +66,12 @@ public class AsyncTaskLogin extends AsyncTaskHttp {
                 user.setActive(mJson.getString("situacao").equals("A"));
                 user.setCodFilial(BuildConfig.FILIAL);
                 user.setCode(mJson.getLong("codcliente"));
+                user.setScore(mJson.getInt("score"));
+                user.setDiscount(mJson.getInt("percdesconto"));
 
                 JSONObject status = mJson.getJSONObject("status");
                 user.setAppointments(status.getInt("agendamentos"));
-                user.setAppointments(status.getInt("mensagens"));
+                user.setMessages(status.getInt("mensagens"));
 
                 if (user.isActive()){
                     SessionManager sm = new SessionManager(mContext);
