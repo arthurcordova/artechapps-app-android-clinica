@@ -25,6 +25,7 @@ import br.com.artechapps.app.R;
 import br.com.artechapps.app.database.PersistenceShop;
 import br.com.artechapps.app.fragment.AboutFragment;
 import br.com.artechapps.app.fragment.BudgetFragment;
+import br.com.artechapps.app.fragment.DashboardFragment;
 import br.com.artechapps.app.fragment.MessageFragment;
 import br.com.artechapps.app.fragment.ProductFragment;
 import br.com.artechapps.app.fragment.ScheduleFragment;
@@ -37,6 +38,7 @@ public class MainMenuActivity extends AppCompatActivity
     private TextView mTvHeaderUserName;
     private TextView mTvHeaderUserEmail;
     private SessionManager mSM;
+    private DrawerLayout mDrawer;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,16 +56,17 @@ public class MainMenuActivity extends AppCompatActivity
             }
         });
 
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        mDrawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
-                this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
-        drawer.setDrawerListener(toggle);
+                this, mDrawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
+        mDrawer.setDrawerListener(toggle);
         toggle.syncState();
 
-        drawer.openDrawer(Gravity.LEFT);
+//        mDrawer.openDrawer(Gravity.LEFT);
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+
 
         View header =
                 navigationView.getHeaderView(0);
@@ -79,7 +82,24 @@ public class MainMenuActivity extends AppCompatActivity
         counter = pers.count();
         pers.close();
 
+        replaceFragment(new DashboardFragment());
+
+//        runThread();
+
     }
+
+//    private void runThread() {
+//        runOnUiThread(new Thread(new Runnable() {
+//            public void run() {
+//                try {
+//                    Thread.sleep(5000);
+//                    mDrawer.closeDrawer(Gravity.LEFT);
+//                } catch (InterruptedException e) {
+//                    e.printStackTrace();
+//                }
+//            }
+//        }));
+//    }
 
     @Override
     public void onBackPressed() {
@@ -93,7 +113,7 @@ public class MainMenuActivity extends AppCompatActivity
             getSupportFragmentManager().popBackStack();
         } else if (!doubleBackToExitPressedOnce) {
             this.doubleBackToExitPressedOnce = true;
-            Toast.makeText(this,"Click novamente em voltar para fechar o app.", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Click novamente em voltar para fechar o app.", Toast.LENGTH_SHORT).show();
 
             new Handler().postDelayed(new Runnable() {
 
@@ -162,7 +182,7 @@ public class MainMenuActivity extends AppCompatActivity
                     ui_hot.setVisibility(View.INVISIBLE);
                 else {
                     ui_hot.setVisibility(View.VISIBLE);
-                    if (counter > 9){
+                    if (counter > 9) {
                         ui_hot.setText("+9");
                     } else {
                         ui_hot.setText(Integer.toString(counter));
@@ -175,7 +195,7 @@ public class MainMenuActivity extends AppCompatActivity
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()){
+        switch (item.getItemId()) {
             case R.id.action_cart:
                 startActivity(new Intent(this, CartActivity.class));
 
