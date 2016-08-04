@@ -68,9 +68,13 @@
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar" />
 
-        <activity android:name=".activity.FilterBudgetActivity" />
+        <activity
+            android:name=".activity.FilterBudgetActivity"
+            android:screenOrientation="portrait" />
 
-        <activity android:name=".activity.NewScheduleDoctorActivity">
+        <activity
+            android:name=".activity.NewScheduleDoctorActivity"
+            android:screenOrientation="portrait">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="br.com.artechapps.app.activity.NewScheduleActivity" />

@@ -1,12 +1,20 @@
 package br.com.artechapps.app.task;
 
 import android.content.Context;
+import android.support.v7.widget.DefaultItemAnimator;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 
 import org.json.JSONArray;
 import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.io.IOException;
+import java.util.ArrayList;
+
+import br.com.artechapps.app.adapter.RVAdapterDoctor;
+import br.com.artechapps.app.model.Doctor;
 
 /**
  * Created by arthurcordova on 7/16/16.
@@ -15,14 +23,15 @@ public class AsyncTaskDoctor extends AsyncTaskHttp {
 
     private JSONArray mJson;
     private RecyclerView mRecyclerView;
-//    private ArrayList<Product> mList;
-//    private MainMenuActivity mActivity;
+    private ArrayList<Doctor> mList;
+    private RVAdapterDoctor mRvAdapter;
 
-    public AsyncTaskDoctor(String msg, Context context, boolean showDialog) {
+
+    public AsyncTaskDoctor(String msg, Context context, boolean showDialog, RecyclerView recyclerView) {
         mMsg = msg;
         mContext = context;
         mShowDialog = showDialog;
-//        mRecyclerView = recyclerView;
+        mRecyclerView = recyclerView;
     }
 
     @Override
@@ -46,18 +55,26 @@ public class AsyncTaskDoctor extends AsyncTaskHttp {
     protected void onPostExecute(String s) {
         super.onPostExecute(s);
         if (mJson != null && mJson.length() > 0){
-//            mPersistence = new PersistenceProduct(mContext);
-//            mPersistence.save(mJson);
-//
-//            mList = mPersistence.getProduct();
-//
-//            RVAdapterProduct mAdapterPatient = new RVAdapterProduct(mList, mActivity);
-//
-//            mRecyclerView.setLayoutManager(new LinearLayoutManager(mContext));
-//            mRecyclerView.setItemAnimator(new DefaultItemAnimator());
-//            mRecyclerView.setAdapter(mAdapterPatient);
-//
-//            mPersistence.close();
+
+            mList = new ArrayList<>();
+            for (int i = 0; i < mJson.length(); i++) {
+                try {
+                    JSONObject json = mJson.getJSONObject(i);
+                    Doctor doctor = new Doctor();
+                    doctor.setCode(json.getLong("codFunc"));
+                    doctor.setName(json.getString("nome"));
+                    mList.add(doctor);
+
+                } catch (JSONException e) {
+                    Log.e("JSON", e.getMessage());
+                }
+            }
+
+            mRvAdapter = new RVAdapterDoctor(mList);
+
+            mRecyclerView.setLayoutManager(new LinearLayoutManager(mRecyclerView.getContext()));
+            mRecyclerView.setItemAnimator(new DefaultItemAnimator());
+            mRecyclerView.setAdapter(mRvAdapter);
 
         }
     }
