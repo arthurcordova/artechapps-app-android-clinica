@@ -3,8 +3,9 @@
     xmlns:tools="http://schemas.android.com/tools"
     tools:context="br.com.artechapps.app.activity.DetailMessageActivity">
     <item
-        android:id="@+id/action_settings"
+        android:id="@+id/action_delete"
         android:orderInCategory="100"
-        android:title="@string/action_settings"
-        app:showAsAction="never" />
+        android:title="Remover"
+        android:icon="@drawable/ic_delete_white"
+        app:showAsAction="always" />
 </menu>
