@@ -125,6 +125,25 @@ public class MessageFragment extends Fragment {
     }
 
     @Override
+    public void onResume() {
+        try {
+            mPersistence = new PersistenceMessage(getContext());
+            mList = mPersistence.getRecords();
+
+            mAdapter = new RVAdapterMessage(mList, mActivity);
+
+            mRvMessages.setLayoutManager(new LinearLayoutManager(getContext()));
+            mRvMessages.setItemAnimator(new DefaultItemAnimator());
+            mRvMessages.setAdapter(mAdapter);
+        } finally {
+
+            mPersistence.close();
+        }
+
+        super.onResume();
+    }
+
+    @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (resultCode == Activity.RESULT_OK){
             final ArrayList<Message> filterList = filter(mList, data.getExtras());

@@ -10,7 +10,9 @@ import android.view.MenuItem;
 import android.widget.TextView;
 
 import br.com.artechapps.app.R;
+import br.com.artechapps.app.database.PersistenceMessage;
 import br.com.artechapps.app.model.Message;
+import br.com.artechapps.app.task.AsyncTaskMessagesDelete;
 
 public class DetailMessageActivity extends AppCompatActivity {
 
@@ -55,7 +57,15 @@ public class DetailMessageActivity extends AppCompatActivity {
                 builder.setMessage("Deseja excluir a mensagem?")
                         .setPositiveButton("Sim", new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int id) {
-                                // FIRE ZE MISSILES!
+                                new AsyncTaskMessagesDelete("",DetailMessageActivity.this,false).execute(String.valueOf(mModel.getId()));
+                                PersistenceMessage persistenceMessage = null;
+                                try {
+                                    persistenceMessage = new PersistenceMessage(DetailMessageActivity.this);
+                                    persistenceMessage.remove(mModel.getId());
+                                } finally {
+                                    persistenceMessage.close();
+                                    finish();
+                                }
                             }
                         })
                         .setNegativeButton("Não", new DialogInterface.OnClickListener() {
