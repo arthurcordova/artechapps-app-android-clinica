@@ -7,5 +7,5 @@ import br.com.artechapps.app.BuildConfig;
  */
 public abstract class Webservice {
 
-    protected static final String SERVER = BuildConfig.HOST.concat("/clinwebservice/servidor");
+    protected static final String SERVER = BuildConfig.HOST.concat("/clinwebservice2/servidor");
 }

@@ -13,10 +13,12 @@ public class Product implements Serializable {
     public static final String JSON_CODE = "codProduto";
     public static final String JSON_DESC = "descricao";
     public static final String JSON_VALUE = "valorProduto";
+    public static final String JSON_TYPE = "tipoExame";
 
     private long id;
     private String Description;
     private Double value;
+    private String type;
     private byte[] image;
 
     public long getId() {
@@ -41,6 +43,14 @@ public class Product implements Serializable {
 
     public void setValue(Double value) {
         this.value = value;
+    }
+
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
     }
 
     public byte[] getImage() {

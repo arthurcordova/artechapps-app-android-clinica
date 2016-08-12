@@ -13,6 +13,7 @@ import java.util.ArrayList;
 import br.com.artechapps.app.R;
 import br.com.artechapps.app.activity.NewScheduleActivity;
 import br.com.artechapps.app.activity.NewScheduleDoctorActivity;
+import br.com.artechapps.app.activity.NewScheduleFinalActivity;
 import br.com.artechapps.app.model.Product;
 
 /**
@@ -39,7 +40,7 @@ public class RVAdapterProductSchedule extends RecyclerView.Adapter<RVAdapterProd
     // Replace the contents of a view (invoked by the layout manager)
     @Override
     public void onBindViewHolder(ViewHolder viewHolder, int position) {
-        Product model = mItemsData.get(position);
+        final Product model = mItemsData.get(position);
         viewHolder.tvCode.setText(String.valueOf(model.getId()));
 
         viewHolder.tvDescription.setText(model.getDescription());
@@ -47,7 +48,13 @@ public class RVAdapterProductSchedule extends RecyclerView.Adapter<RVAdapterProd
         viewHolder.lContent.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                v.getContext().startActivity(new Intent(v.getContext(), NewScheduleDoctorActivity.class));
+                Intent it;
+                if (model.getType().equals("M")){
+                    it = new Intent(v.getContext(), NewScheduleDoctorActivity.class);
+                } else {
+                    it = new Intent(v.getContext(), NewScheduleFinalActivity.class);
+                }
+                v.getContext().startActivity(it);
             }
         });
 

@@ -16,12 +16,14 @@ public class RepositoryProduct extends RepositoryDefault {
                     "                       id integer primary key, " +
                     "                       description  text,"  +
                     "                       value  numeric(10,5),"  +
+                    "                       type  text,"  +
                     "                       image blob); "
     };
     public  static final  String[] COLUMNS = new String[]{
             "id",
             "description",
             "value",
+            "type",
             "image"
 
     };
