@@ -52,22 +52,5 @@ public class CartActivity extends AppCompatActivity {
         }
         total.setText(String.valueOf(Product.formatValue(totalValue)));
 
-//        int count = (int)totalValue;
-//        ValueAnimator animator = new ValueAnimator();
-//        animator.setObjectValues(0, totalValue);
-//        animator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
-//            public void onAnimationUpdate(ValueAnimator animation) {
-//                total.setText(String.valueOf(animation.getAnimatedValue()));
-//            }
-//        });
-//        animator.setEvaluator(new TypeEvaluator<Integer>() {
-//            public Integer evaluate(float fraction, Integer startValue, Integer endValue) {
-//                return Math.round(startValue + (endValue - startValue) * fraction);
-//            }
-//        });
-//        animator.setDuration(1000);
-//        animator.start();
-
-
     }
 }

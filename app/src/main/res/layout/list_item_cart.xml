@@ -87,7 +87,7 @@
                     android:src="@drawable/ic_action_add_pin" />
 
                 <TextView
-                    android:id="@+id/textView2"
+                    android:id="@+id/tv_qtd"
                     android:layout_width="30dp"
                     android:layout_height="wrap_content"
                     android:layout_centerVertical="true"
@@ -104,13 +104,13 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_centerVertical="true"
-                    android:layout_toLeftOf="@+id/textView2"
-                    android:layout_toStartOf="@+id/textView2"
+                    android:layout_toLeftOf="@+id/tv_qtd"
+                    android:alpha="0.12"
+                    android:clickable="false"
+                    android:layout_toStartOf="@+id/tv_qtd"
                     android:background="?attr/selectableItemBackgroundBorderless"
-                    android:clickable="true"
                     android:padding="16dp"
                     android:src="@drawable/ic_action_remove_pin" />
-
 
             </RelativeLayout>
 

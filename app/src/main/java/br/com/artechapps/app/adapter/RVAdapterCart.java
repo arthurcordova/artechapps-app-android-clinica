@@ -38,12 +38,28 @@ public class RVAdapterCart extends RecyclerView.Adapter<RVAdapterCart.ViewHolder
 
     // Replace the contents of a view (invoked by the layout manager)
     @Override
-    public void onBindViewHolder(ViewHolder viewHolder, int position) {
+    public void onBindViewHolder(final ViewHolder viewHolder, int position) {
         final Shop model = mItemsData.get(position);
 
         viewHolder.tvCode.setText(String.valueOf(model.getId()));
         viewHolder.tvDescription.setText(model.getProduct().getDescription());
         viewHolder.tvValue.setText(Product.formatValue(model.getProduct().getValue()));
+        viewHolder.btnAdd.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                PersistenceShop persistence = new PersistenceShop(v.getContext());
+                try {
+                    persistence.save(model);
+                    viewHolder.tvQtd.setText(String.valueOf( Integer.parseInt(viewHolder.tvQtd.getText().toString()) +1 ));
+
+                } finally {
+                    persistence.close();
+                }
+
+
+            }
+        });
+
 
     }
 
@@ -58,8 +74,11 @@ public class RVAdapterCart extends RecyclerView.Adapter<RVAdapterCart.ViewHolder
         TextView tvCode;
         TextView tvDescription;
         TextView tvValue;
-        TextView tvAdd;
+        TextView tvQtd;
+
         ImageView imgRemove;
+        ImageView btnAdd;
+        ImageView btnDelete;
 
         CartActivity mActivity;
 
@@ -69,9 +88,12 @@ public class RVAdapterCart extends RecyclerView.Adapter<RVAdapterCart.ViewHolder
             tvCode = (TextView) itemLayoutView.findViewById(R.id.code);
             tvDescription = (TextView) itemLayoutView.findViewById(R.id.description);
             tvValue = (TextView) itemLayoutView.findViewById(R.id.value);
-            tvAdd = (TextView)itemLayoutView.findViewById(R.id.add);
+            btnAdd = (ImageView) itemLayoutView.findViewById(R.id.add_item);
+            btnDelete = (ImageView) itemLayoutView.findViewById(R.id.remove_item);
             imgRemove = (ImageView) itemLayoutView.findViewById(R.id.img_remove);
+            tvQtd = (TextView) itemLayoutView.findViewById(R.id.tv_qtd);
 
+            // Remove all
             imgRemove.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
