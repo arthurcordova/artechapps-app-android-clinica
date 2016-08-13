@@ -51,8 +51,10 @@ public class RVAdapterProductSchedule extends RecyclerView.Adapter<RVAdapterProd
                 Intent it;
                 if (model.getType().equals("M")){
                     it = new Intent(v.getContext(), NewScheduleDoctorActivity.class);
+                    it.putExtra("model", model);
                 } else {
                     it = new Intent(v.getContext(), NewScheduleFinalActivity.class);
+                    it.putExtra("model", model);
                 }
                 v.getContext().startActivity(it);
             }
