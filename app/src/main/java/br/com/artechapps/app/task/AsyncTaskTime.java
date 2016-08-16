@@ -16,10 +16,10 @@ public class AsyncTaskTime extends AsyncTaskHttp {
 
     private JSONArray mJson;
 
-    public AsyncTaskTime(String msg, Context context, boolean showDialog) {
-        mMsg = msg;
+    public AsyncTaskTime(Context context) {
         mContext = context;
-        mShowDialog = showDialog;
+        mShowDialog = false;
+
     }
 
     @Override

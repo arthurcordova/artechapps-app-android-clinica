@@ -21,6 +21,8 @@ public class DataBaseManager extends SQLiteOpenHelper {
     public DataBaseManager(Context context) {
         super(context, DataBaseConfig.NAME, null, DataBaseConfig.VERSION);
         mDb = getWritableDatabase();
+
+
     }
 
     private void forEachScript(ArrayList<String> scripts, SQLiteDatabase db){
