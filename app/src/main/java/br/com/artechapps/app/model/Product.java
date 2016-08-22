@@ -20,6 +20,7 @@ public class Product implements Serializable {
     private Double value;
     private String type;
     private byte[] image;
+    private Doctor doctor;
 
     public long getId() {
         return id;
@@ -59,6 +60,14 @@ public class Product implements Serializable {
 
     public void setImage(byte[] image) {
         this.image = image;
+    }
+
+    public Doctor getDoctor() {
+        return doctor;
+    }
+
+    public void setDoctor(Doctor doctor) {
+        this.doctor = doctor;
     }
 
     public static String formatValue(Double value){

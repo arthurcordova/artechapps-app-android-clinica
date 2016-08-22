@@ -8,6 +8,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.DatePicker;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import java.util.Calendar;
@@ -25,6 +26,7 @@ public class NewScheduleFinalActivity extends AppCompatActivity {
     private TextView mTvProcedureName;
     private TextView mTvDoctorName;
     private TextView mTVProcedureCode;
+    private RelativeLayout mLineDoctor;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,9 +42,16 @@ public class NewScheduleFinalActivity extends AppCompatActivity {
         mTvDoctorName = (TextView) findViewById(R.id.tv_doctor_name);
         mTvProcedureName = (TextView) findViewById(R.id.tv_procedure_name);
         mTVProcedureCode = (TextView) findViewById(R.id.tv_procedure_code);
+        mTvDoctorName = (TextView) findViewById(R.id.tv_doctor_name);
+        mLineDoctor = (RelativeLayout) findViewById(R.id.line_2);
 
         mTvProcedureName.setText(mModel.getDescription());
-//        mTVProcedureCode.setText();
+
+        if(mModel.getDoctor() != null){
+            mLineDoctor.setVisibility(View.VISIBLE);
+            mTvDoctorName.setText(mModel.getDoctor().getName());
+        }
+
 
         showDatePickerDialog();
     }

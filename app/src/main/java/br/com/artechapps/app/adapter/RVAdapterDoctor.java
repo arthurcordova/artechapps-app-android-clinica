@@ -1,5 +1,6 @@
 package br.com.artechapps.app.adapter;
 
+import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -10,7 +11,10 @@ import android.widget.TextView;
 import java.util.ArrayList;
 
 import br.com.artechapps.app.R;
+import br.com.artechapps.app.activity.NewScheduleDoctorActivity;
+import br.com.artechapps.app.activity.NewScheduleFinalActivity;
 import br.com.artechapps.app.model.Doctor;
+import br.com.artechapps.app.model.Product;
 
 /**
  * Created by acstapassoli on 07/12/2015.
@@ -18,9 +22,11 @@ import br.com.artechapps.app.model.Doctor;
 public class RVAdapterDoctor extends RecyclerView.Adapter<RVAdapterDoctor.ViewHolder> {
 
     private ArrayList<Doctor> mItemsData;
+    private Product mProduct;
 
-    public RVAdapterDoctor(ArrayList<Doctor> itemsData) {
+    public RVAdapterDoctor(ArrayList<Doctor> itemsData, Product product) {
         mItemsData = itemsData;
+        mProduct = product;
     }
 
     @Override
@@ -34,17 +40,20 @@ public class RVAdapterDoctor extends RecyclerView.Adapter<RVAdapterDoctor.ViewHo
     // Replace the contents of a view (invoked by the layout manager)
     @Override
     public void onBindViewHolder(ViewHolder viewHolder, int position) {
-        Doctor model = mItemsData.get(position);
+        final Doctor model = mItemsData.get(position);
         viewHolder.tvCode.setText(String.valueOf(model.getCode()));
         viewHolder.tvName.setText(model.getName());
 
-//        viewHolder.tvAdd.setText("R$ " + model.formatValue(model.getValue()));
-//        viewHolder.lContent.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                v.getContext().startActivity(new Intent(v.getContext(), NewScheduleDoctorActivity.class));
-//            }
-//        });
+        viewHolder.lContent.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mProduct.setDoctor(model);
+
+                Intent it = new Intent(v.getContext(), NewScheduleFinalActivity.class);
+                it.putExtra("model", mProduct);
+                v.getContext().startActivity(it);
+            }
+        });
 
     }
 

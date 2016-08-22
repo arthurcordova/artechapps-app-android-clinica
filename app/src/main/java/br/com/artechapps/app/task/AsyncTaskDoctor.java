@@ -15,6 +15,7 @@ import java.util.ArrayList;
 
 import br.com.artechapps.app.adapter.RVAdapterDoctor;
 import br.com.artechapps.app.model.Doctor;
+import br.com.artechapps.app.model.Product;
 
 /**
  * Created by arthurcordova on 7/16/16.
@@ -25,13 +26,14 @@ public class AsyncTaskDoctor extends AsyncTaskHttp {
     private RecyclerView mRecyclerView;
     private ArrayList<Doctor> mList;
     private RVAdapterDoctor mRvAdapter;
+    private Product mProduct;
 
-
-    public AsyncTaskDoctor(String msg, Context context, boolean showDialog, RecyclerView recyclerView) {
+    public AsyncTaskDoctor(String msg, Context context, boolean showDialog, RecyclerView recyclerView, Product product) {
         mMsg = msg;
         mContext = context;
         mShowDialog = showDialog;
         mRecyclerView = recyclerView;
+        mProduct = product;
     }
 
     @Override
@@ -70,7 +72,7 @@ public class AsyncTaskDoctor extends AsyncTaskHttp {
                 }
             }
 
-            mRvAdapter = new RVAdapterDoctor(mList);
+            mRvAdapter = new RVAdapterDoctor(mList, mProduct);
 
             mRecyclerView.setLayoutManager(new LinearLayoutManager(mRecyclerView.getContext()));
             mRecyclerView.setItemAnimator(new DefaultItemAnimator());

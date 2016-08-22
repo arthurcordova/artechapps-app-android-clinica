@@ -27,9 +27,9 @@
                 android:id="@+id/label_1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:fontFamily="sans-serif"
+                android:fontFamily="sans-serif-medium"
                 android:text="Procedimento"
-                android:textSize="14sp" />
+                android:textSize="12sp" />
 
             <TextView
                 android:id="@+id/tv_procedure_code"
@@ -67,6 +67,7 @@
 
         <RelativeLayout
             android:id="@+id/line_2"
+            android:visibility="gone"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@+id/line_1"
@@ -78,9 +79,9 @@
                 android:id="@+id/label_2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:fontFamily="sans-serif"
+                android:fontFamily="sans-serif-medium"
                 android:text="Médico"
-                android:textSize="14sp" />
+                android:textSize="12sp" />
 
             <TextView
                 android:id="@+id/tv_doctor_name"
@@ -90,7 +91,7 @@
                 android:layout_marginTop="14dp"
                 android:fontFamily="sans-serif"
                 android:singleLine="true"
-                android:text="BOTOX"
+                android:text="DOCTOR"
                 android:textColor="@color/colorPrimary"
                 android:textSize="16sp" />
 
