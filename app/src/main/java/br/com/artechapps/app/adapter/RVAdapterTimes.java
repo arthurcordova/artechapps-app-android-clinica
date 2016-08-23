@@ -11,8 +11,6 @@ import android.widget.TextView;
 import java.util.ArrayList;
 
 import br.com.artechapps.app.R;
-import br.com.artechapps.app.activity.NewScheduleDoctorActivity;
-import br.com.artechapps.app.activity.NewScheduleFinalActivity;
 import br.com.artechapps.app.activity.NewScheduleTimeActivity;
 import br.com.artechapps.app.model.Doctor;
 import br.com.artechapps.app.model.Product;
@@ -20,12 +18,12 @@ import br.com.artechapps.app.model.Product;
 /**
  * Created by acstapassoli on 07/12/2015.
  */
-public class RVAdapterDoctor extends RecyclerView.Adapter<RVAdapterDoctor.ViewHolder> {
+public class RVAdapterTimes extends RecyclerView.Adapter<RVAdapterTimes.ViewHolder> {
 
-    private ArrayList<Doctor> mItemsData;
+    private ArrayList<String> mItemsData;
     private Product mProduct;
 
-    public RVAdapterDoctor(ArrayList<Doctor> itemsData, Product product) {
+    public RVAdapterTimes(ArrayList<String> itemsData, Product product) {
         mItemsData = itemsData;
         mProduct = product;
     }
@@ -33,7 +31,7 @@ public class RVAdapterDoctor extends RecyclerView.Adapter<RVAdapterDoctor.ViewHo
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View itemLayoutView = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.list_item_doctor, null);
+                .inflate(R.layout.list_item_times, null);
         ViewHolder viewHolder = new ViewHolder(itemLayoutView);
         return viewHolder;
     }
@@ -41,14 +39,14 @@ public class RVAdapterDoctor extends RecyclerView.Adapter<RVAdapterDoctor.ViewHo
     // Replace the contents of a view (invoked by the layout manager)
     @Override
     public void onBindViewHolder(ViewHolder viewHolder, int position) {
-        final Doctor model = mItemsData.get(position);
-        viewHolder.tvCode.setText(String.valueOf(model.getCode()));
-        viewHolder.tvName.setText(model.getName());
+        final String time = mItemsData.get(position);
+//        viewHolder.tvCode.setText(String.valueOf(model.getCode()));
+        viewHolder.tvTime.setText(time);
 
         viewHolder.lContent.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                mProduct.setDoctor(model);
+                mProduct.setTime(time);
 
                 Intent it = new Intent(v.getContext(), NewScheduleTimeActivity.class);
                 it.putExtra("model", mProduct);
@@ -66,15 +64,13 @@ public class RVAdapterDoctor extends RecyclerView.Adapter<RVAdapterDoctor.ViewHo
     // inner class to hold a reference to each item of RecyclerView
     public static class ViewHolder extends RecyclerView.ViewHolder {
 
-        TextView tvCode;
-        TextView tvName;
+        TextView tvTime;
         LinearLayout lContent;
 
         public ViewHolder(View itemLayoutView) {
             super(itemLayoutView);
 
-            tvCode = (TextView) itemLayoutView.findViewById(R.id.code);
-            tvName = (TextView) itemLayoutView.findViewById(R.id.name);
+            tvTime = (TextView) itemLayoutView.findViewById(R.id.tv_time);
             lContent = (LinearLayout) itemLayoutView.findViewById(R.id.content);
 
         }

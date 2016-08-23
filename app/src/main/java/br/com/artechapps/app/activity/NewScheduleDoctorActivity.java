@@ -3,6 +3,7 @@ package br.com.artechapps.app.activity;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.RecyclerView;
+import android.view.MenuItem;
 
 import br.com.artechapps.app.BuildConfig;
 import br.com.artechapps.app.R;
@@ -28,5 +29,15 @@ public class NewScheduleDoctorActivity extends AppCompatActivity {
 
         new AsyncTaskDoctor("Carregando médicos...", this, true, mRecyclerView, product).execute(String.valueOf(BuildConfig.FILIAL));
 
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                finish();
+                return true;
+        }
+        return super.onOptionsItemSelected(item);
     }
 }

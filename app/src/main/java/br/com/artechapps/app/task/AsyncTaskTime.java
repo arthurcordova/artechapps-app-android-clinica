@@ -1,12 +1,20 @@
 package br.com.artechapps.app.task;
 
 import android.content.Context;
+import android.support.v7.widget.DefaultItemAnimator;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 
 import org.json.JSONArray;
 import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
+import br.com.artechapps.app.adapter.RVAdapterDoctor;
+import br.com.artechapps.app.adapter.RVAdapterTimes;
+import br.com.artechapps.app.model.Product;
 import br.com.artechapps.app.utils.EndPoints;
 
 /**
@@ -15,11 +23,14 @@ import br.com.artechapps.app.utils.EndPoints;
 public class AsyncTaskTime extends AsyncTaskHttp {
 
     private JSONArray mJson;
+    private RecyclerView mRecyclerView;
+    private Product mProduct;
 
-    public AsyncTaskTime(Context context) {
+    public AsyncTaskTime(Context context, RecyclerView recyclerView, Product product) {
         mContext = context;
         mShowDialog = false;
-
+        mRecyclerView = recyclerView;
+        mProduct = product;
     }
 
     @Override
@@ -43,6 +54,23 @@ public class AsyncTaskTime extends AsyncTaskHttp {
     protected void onPostExecute(String s) {
         super.onPostExecute(s);
         if (mJson != null && mJson.length() > 0){
+
+            ArrayList<String> list = new ArrayList<>();
+            for (int i = 0; i < mJson.length(); i++) {
+                try {
+                    JSONObject json = mJson.getJSONObject(i);
+                    list.add(json.getString("horarioInicial"));
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+
+            }
+
+            RVAdapterTimes rvAdapter = new RVAdapterTimes(list, mProduct);
+
+            mRecyclerView.setLayoutManager(new LinearLayoutManager(mRecyclerView.getContext()));
+            mRecyclerView.setItemAnimator(new DefaultItemAnimator());
+            mRecyclerView.setAdapter(rvAdapter);
 
         }
     }

@@ -21,6 +21,7 @@ public class Product implements Serializable {
     private String type;
     private byte[] image;
     private Doctor doctor;
+    private String time;
 
     public long getId() {
         return id;
@@ -68,6 +69,14 @@ public class Product implements Serializable {
 
     public void setDoctor(Doctor doctor) {
         this.doctor = doctor;
+    }
+
+    public String getTime() {
+        return time;
+    }
+
+    public void setTime(String time) {
+        this.time = time;
     }
 
     public static String formatValue(Double value){

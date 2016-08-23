@@ -14,6 +14,7 @@ import br.com.artechapps.app.R;
 import br.com.artechapps.app.activity.NewScheduleActivity;
 import br.com.artechapps.app.activity.NewScheduleDoctorActivity;
 import br.com.artechapps.app.activity.NewScheduleFinalActivity;
+import br.com.artechapps.app.activity.NewScheduleTimeActivity;
 import br.com.artechapps.app.model.Product;
 
 /**
@@ -53,7 +54,7 @@ public class RVAdapterProductSchedule extends RecyclerView.Adapter<RVAdapterProd
                     it = new Intent(v.getContext(), NewScheduleDoctorActivity.class);
                     it.putExtra("model", model);
                 } else {
-                    it = new Intent(v.getContext(), NewScheduleFinalActivity.class);
+                    it = new Intent(v.getContext(), NewScheduleTimeActivity.class);
                     it.putExtra("model", model);
                 }
                 v.getContext().startActivity(it);
