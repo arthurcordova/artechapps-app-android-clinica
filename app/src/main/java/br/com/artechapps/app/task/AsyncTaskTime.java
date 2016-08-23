@@ -28,7 +28,8 @@ public class AsyncTaskTime extends AsyncTaskHttp {
 
     public AsyncTaskTime(Context context, RecyclerView recyclerView, Product product) {
         mContext = context;
-        mShowDialog = false;
+        mMsg = "Atualizando horários...";
+        mShowDialog = true;
         mRecyclerView = recyclerView;
         mProduct = product;
     }

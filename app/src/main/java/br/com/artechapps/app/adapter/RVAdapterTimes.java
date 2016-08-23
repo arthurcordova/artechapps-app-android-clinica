@@ -11,6 +11,7 @@ import android.widget.TextView;
 import java.util.ArrayList;
 
 import br.com.artechapps.app.R;
+import br.com.artechapps.app.activity.NewScheduleFinalActivity;
 import br.com.artechapps.app.activity.NewScheduleTimeActivity;
 import br.com.artechapps.app.model.Doctor;
 import br.com.artechapps.app.model.Product;
@@ -48,7 +49,7 @@ public class RVAdapterTimes extends RecyclerView.Adapter<RVAdapterTimes.ViewHold
             public void onClick(View v) {
                 mProduct.setTime(time);
 
-                Intent it = new Intent(v.getContext(), NewScheduleTimeActivity.class);
+                Intent it = new Intent(v.getContext(), NewScheduleFinalActivity.class);
                 it.putExtra("model", mProduct);
                 v.getContext().startActivity(it);
             }

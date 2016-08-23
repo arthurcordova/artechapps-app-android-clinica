@@ -21,6 +21,7 @@ public class Product implements Serializable {
     private String type;
     private byte[] image;
     private Doctor doctor;
+    private String date;
     private String time;
 
     public long getId() {
@@ -73,6 +74,14 @@ public class Product implements Serializable {
 
     public String getTime() {
         return time;
+    }
+
+    public String getDate() {
+        return date;
+    }
+
+    public void setDate(String date) {
+        this.date = date;
     }
 
     public void setTime(String time) {
