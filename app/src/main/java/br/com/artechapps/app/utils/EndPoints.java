@@ -23,4 +23,7 @@ public class EndPoints extends Webservice{
 
     public static final String TIME = SERVER.concat("/horarios/");
 
+    public static final String CONFIRM_APPOINTMENT = SERVER.concat("/realizaragendamento/");
+
+
 }

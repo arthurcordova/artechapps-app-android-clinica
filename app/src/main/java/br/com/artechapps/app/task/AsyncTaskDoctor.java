@@ -16,6 +16,7 @@ import java.util.ArrayList;
 import br.com.artechapps.app.adapter.RVAdapterDoctor;
 import br.com.artechapps.app.model.Doctor;
 import br.com.artechapps.app.model.Product;
+import br.com.artechapps.app.utils.EndPoints;
 
 /**
  * Created by arthurcordova on 7/16/16.
@@ -40,7 +41,7 @@ public class AsyncTaskDoctor extends AsyncTaskHttp {
     protected String doInBackground(String... params) {
         try {
             String code = params[0];
-            mJson = connectServerA("http://www2.beautyclinic.com.br/clinwebservice2/servidor/medicos/".concat(code), null, true);
+            mJson = connectServerA(EndPoints.DOCTORS.concat(code), null, true);
         } catch (JSONException e) {
             e.printStackTrace();
         } catch (IOException e) {
