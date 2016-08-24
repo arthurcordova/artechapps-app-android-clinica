@@ -43,7 +43,8 @@ public class RVAdapterCart extends RecyclerView.Adapter<RVAdapterCart.ViewHolder
 
         viewHolder.tvCode.setText(String.valueOf(model.getId()));
         viewHolder.tvDescription.setText(model.getProduct().getDescription());
-        viewHolder.tvValue.setText(Product.formatValue(model.getProduct().getValue()));
+        viewHolder.tvValue.setText(Product.formatValue(model.getProduct().getValue() * model.getAmount()));
+        viewHolder.tvQtd.setText(String.valueOf(model.getAmount()));
         viewHolder.btnAdd.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

@@ -9,6 +9,7 @@ public class Shop implements Serializable {
 
     private long id;
     private Product product;
+    private long amount;
 
     public long getId() {
         return id;
@@ -24,5 +25,13 @@ public class Shop implements Serializable {
 
     public void setProduct(Product product) {
         this.product = product;
+    }
+
+    public long getAmount() {
+        return amount;
+    }
+
+    public void setAmount(long amount) {
+        this.amount = amount;
     }
 }

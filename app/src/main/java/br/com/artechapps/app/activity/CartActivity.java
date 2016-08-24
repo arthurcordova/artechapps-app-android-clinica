@@ -48,7 +48,7 @@ public class CartActivity extends AppCompatActivity {
         persistence.close();
         double totalValue = 0d;
         for (Shop model : list){
-            totalValue += model.getProduct().getValue();
+            totalValue += (model.getProduct().getValue() * model.getAmount()) ;
         }
         total.setText(String.valueOf(Product.formatValue(totalValue)));
 

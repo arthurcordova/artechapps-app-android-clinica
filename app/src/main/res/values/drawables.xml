@@ -10,6 +10,5 @@
     <item name="ic_action_add_pin" type="drawable">@drawable/ic_add_pin</item>
     <item name="ic_action_remove_pin" type="drawable">@drawable/ic_remove</item>
 
-
     <item name="ic_list_image" type="drawable">@drawable/ic_image_black_24dp</item>
 </resources>
