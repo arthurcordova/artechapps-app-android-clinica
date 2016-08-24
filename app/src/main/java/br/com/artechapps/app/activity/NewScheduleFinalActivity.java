@@ -51,7 +51,9 @@ public class NewScheduleFinalActivity extends AppCompatActivity {
             mLineDoctor.setVisibility(View.VISIBLE);
             mTvDoctorName.setText(mModel.getDoctor().getName());
         }
-        mTvDateTime.setText(mModel.getDate() + "  " + mModel.getTime());
+        String dateFormat = mModel.getDate().replace("-","/");
+
+        mTvDateTime.setText( dateFormat + "  " + mModel.getTime());
 
         SessionManager sm = new SessionManager(this);
         final User user = sm.getSessionUser();
@@ -68,7 +70,7 @@ public class NewScheduleFinalActivity extends AppCompatActivity {
                 model.setData(mModel.getDate());
                 model.setHorario(mModel.getTime());
 
-                new AsyncTaskNewAppointment("Salvando agendamento...", v.getContext(), true, model).execute();
+                new AsyncTaskNewAppointment("Salvando agendamento...", v.getContext(), true, model, NewScheduleFinalActivity.this).execute();
             }
         });
 

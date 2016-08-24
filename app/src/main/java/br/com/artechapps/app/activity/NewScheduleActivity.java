@@ -9,10 +9,12 @@ import android.view.MenuItem;
 
 import java.util.ArrayList;
 
+import br.com.artechapps.app.BuildConfig;
 import br.com.artechapps.app.R;
 import br.com.artechapps.app.adapter.RVAdapterProductSchedule;
 import br.com.artechapps.app.database.PersistenceProduct;
 import br.com.artechapps.app.model.Product;
+import br.com.artechapps.app.task.AsyncTaskProduct;
 
 public class NewScheduleActivity extends AppCompatActivity {
 

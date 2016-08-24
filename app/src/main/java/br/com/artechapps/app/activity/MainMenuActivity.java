@@ -13,6 +13,7 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -83,6 +84,16 @@ public class MainMenuActivity extends AppCompatActivity
         pers.close();
 
         replaceFragment(new DashboardFragment());
+
+        try {
+            String origin = getIntent().getExtras().getString("origin");
+            if (origin.equals(NewScheduleFinalActivity.class.getName())) {
+                replaceFragment(new ScheduleFragment());
+            }
+        } catch (Exception e) {
+            Log.e("ERROR", e.getMessage());
+        }
+
 
 //        runThread();
 
@@ -169,7 +180,6 @@ public class MainMenuActivity extends AppCompatActivity
         updateShopCart();
 
         return super.onCreateOptionsMenu(menu);
-
 
     }
 

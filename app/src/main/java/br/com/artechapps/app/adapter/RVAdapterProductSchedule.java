@@ -88,26 +88,6 @@ public class RVAdapterProductSchedule extends RecyclerView.Adapter<RVAdapterProd
             tvAdd = (TextView)itemLayoutView.findViewById(R.id.add);
             lContent = (LinearLayout) itemLayoutView.findViewById(R.id.content);
 
-//            tvAdd.setOnClickListener(new View.OnClickListener() {
-//                @Override
-//                public void onClick(View v) {
-//
-//                    Shop s = new Shop();
-//                    Product p = new Product();
-//                    p.setId(Long.parseLong(tvCode.getText().toString()));
-//                    s.setProduct(p);
-//
-//                    PersistenceShop persistenceShop = null;
-//                    try {
-//                        persistenceShop = new PersistenceShop(activity);
-//                        persistenceShop.save(s);
-//                        Toast.makeText(v.getContext(), "Produto adicionado ao carrinho.", Toast.LENGTH_SHORT).show();
-//
-//                    } finally {
-//                        persistenceShop.close();
-//                    }
-//                }
-//            });
         }
     }
 }
