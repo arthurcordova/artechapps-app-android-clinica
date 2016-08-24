@@ -73,43 +73,63 @@
                 android:textStyle="bold" />
 
 
-            <android.support.v7.widget.CardView xmlns:card_view="http://schemas.android.com/apk/res-auto"
-                android:id="@+id/cv_btn_finally"
-                android:layout_width="wrap_content"
-                android:layout_height="50dp"
-                android:layout_alignParentEnd="true"
+            <RelativeLayout
+                android:layout_width="100dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="12dp"
+                android:layout_marginRight="12dp"
                 android:layout_alignParentRight="true"
-                android:layout_centerVertical="true"
-                android:layout_gravity="bottom|end"
-                android:layout_marginBottom="8dp"
-                android:layout_marginRight="16dp"
-                android:layout_marginTop="8dp"
-                card_view:cardBackgroundColor="@color/green"
-                card_view:cardCornerRadius="3dp"
-                card_view:cardElevation="2dp">
+                >
 
-                <LinearLayout
+                <Button
+                    android:id="@+id/btn_confirm"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent">
+                    android:layout_height="wrap_content"
+                    android:backgroundTint="#ffae00"
+                    android:text="Finalizar"
+                    android:textSize="12sp"
+                    android:textColor="#ffffff"
+                    android:textStyle="bold" />
 
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:background="?attr/selectableItemBackgroundBorderless"
-                        android:clickable="true"
-                        android:paddingBottom="9dp"
-                        android:paddingLeft="16dp"
-                        android:paddingRight="16dp"
-                        android:paddingTop="9dp"
-                        android:text="FINALIZAR"
-                        android:textColor="#FFFFFF"
-                        android:textSize="13dp"
-                        android:textStyle="bold" />
+            </RelativeLayout>
 
-                </LinearLayout>
+            <!--<android.support.v7.widget.CardView xmlns:card_view="http://schemas.android.com/apk/res-auto"-->
+                <!--android:id="@+id/cv_btn_finally"-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="50dp"-->
+                <!--android:layout_alignParentEnd="true"-->
+                <!--android:layout_alignParentRight="true"-->
+                <!--android:layout_centerVertical="true"-->
+                <!--android:layout_gravity="bottom|end"-->
+                <!--android:layout_marginBottom="8dp"-->
+                <!--android:layout_marginRight="16dp"-->
+                <!--android:layout_marginTop="8dp"-->
+                <!--card_view:cardBackgroundColor="@color/green"-->
+                <!--card_view:cardCornerRadius="3dp"-->
+                <!--card_view:cardElevation="2dp">-->
 
-            </android.support.v7.widget.CardView>
+                <!--<LinearLayout-->
+                    <!--android:layout_width="match_parent"-->
+                    <!--android:layout_height="match_parent">-->
+
+                    <!--<TextView-->
+                        <!--android:layout_width="wrap_content"-->
+                        <!--android:layout_height="wrap_content"-->
+                        <!--android:layout_weight="1"-->
+                        <!--android:background="?attr/selectableItemBackgroundBorderless"-->
+                        <!--android:clickable="true"-->
+                        <!--android:paddingBottom="9dp"-->
+                        <!--android:paddingLeft="16dp"-->
+                        <!--android:paddingRight="16dp"-->
+                        <!--android:paddingTop="9dp"-->
+                        <!--android:text="FINALIZAR"-->
+                        <!--android:textColor="#FFFFFF"-->
+                        <!--android:textSize="13dp"-->
+                        <!--android:textStyle="bold" />-->
+
+                <!--</LinearLayout>-->
+
+            <!--</android.support.v7.widget.CardView>-->
 
 
         </RelativeLayout>

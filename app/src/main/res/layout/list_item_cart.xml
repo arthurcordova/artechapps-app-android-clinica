@@ -105,7 +105,7 @@
                     android:layout_height="wrap_content"
                     android:layout_centerVertical="true"
                     android:layout_toLeftOf="@+id/tv_qtd"
-                    android:alpha="0.12"
+                    android:visibility="invisible"
                     android:clickable="false"
                     android:layout_toStartOf="@+id/tv_qtd"
                     android:background="?attr/selectableItemBackgroundBorderless"

@@ -40,23 +40,47 @@ public class RVAdapterCart extends RecyclerView.Adapter<RVAdapterCart.ViewHolder
     @Override
     public void onBindViewHolder(final ViewHolder viewHolder, int position) {
         final Shop model = mItemsData.get(position);
+        final CartActivity activity = mActivity;
 
         viewHolder.tvCode.setText(String.valueOf(model.getId()));
         viewHolder.tvDescription.setText(model.getProduct().getDescription());
         viewHolder.tvValue.setText(Product.formatValue(model.getProduct().getValue() * model.getAmount()));
         viewHolder.tvQtd.setText(String.valueOf(model.getAmount()));
+
         viewHolder.btnAdd.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 PersistenceShop persistence = new PersistenceShop(v.getContext());
                 try {
                     persistence.save(model);
-                    viewHolder.tvQtd.setText(String.valueOf( Integer.parseInt(viewHolder.tvQtd.getText().toString()) +1 ));
+                    int amount = Integer.parseInt(viewHolder.tvQtd.getText().toString()) + 1;
+                    viewHolder.tvQtd.setText(String.valueOf(amount));
+                    viewHolder.tvValue.setText(Product.formatValue(model.getProduct().getValue() * amount));
+                    viewHolder.btnDelete.setVisibility(Integer.parseInt(viewHolder.tvQtd.getText().toString())>1 ? View.VISIBLE : View.INVISIBLE);
 
                 } finally {
                     persistence.close();
+                    activity.updateTotalValue();
                 }
+            }
+        });
 
+        viewHolder.btnDelete.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                PersistenceShop persistence = new PersistenceShop(v.getContext());
+                try {
+                    persistence.delete(viewHolder.tvCode.getText().toString());
+                    int amount = Integer.parseInt(viewHolder.tvQtd.getText().toString()) - 1;
+                    viewHolder.tvQtd.setText(String.valueOf(amount));
+                    viewHolder.tvCode.setText(String.valueOf(persistence.getMaxId(model.getProduct().getId())));
+                    viewHolder.tvValue.setText(Product.formatValue(model.getProduct().getValue() * amount));
+                    viewHolder.btnDelete.setVisibility(Integer.parseInt(viewHolder.tvQtd.getText().toString())>1 ? View.VISIBLE : View.INVISIBLE);
+
+                } finally {
+                    persistence.close();
+                    activity.updateTotalValue();
+                }
 
             }
         });

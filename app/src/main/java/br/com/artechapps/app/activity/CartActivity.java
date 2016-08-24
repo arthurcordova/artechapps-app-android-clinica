@@ -41,6 +41,11 @@ public class CartActivity extends AppCompatActivity {
         mRvCart.setItemAnimator(new DefaultItemAnimator());
         mRvCart.setAdapter(mAdapter);
 
+        updateTotalValue();
+
+    }
+
+    public void updateTotalValue(){
         final TextView total = (TextView) findViewById(R.id.total_value);
 
         PersistenceShop persistence = new PersistenceShop(this);
@@ -51,6 +56,7 @@ public class CartActivity extends AppCompatActivity {
             totalValue += (model.getProduct().getValue() * model.getAmount()) ;
         }
         total.setText(String.valueOf(Product.formatValue(totalValue)));
-
     }
+
+
 }

@@ -20,7 +20,8 @@ public class PersistenceShop extends RepositoryShop {
     private final String TAG = PersistenceShop.class.getSimpleName();
     private final Context mContext;
 
-    private String sql = "select    count(1) amount, "+
+    private String sql = "select    max(id) code," +
+                        "           count(1) amount, "+
                         "           product_id " +
                         "   from    " + RepositoryShop.TABLE_NAME +
                         " group by   product_id";
@@ -55,6 +56,22 @@ public class PersistenceShop extends RepositoryShop {
         return count;
     }
 
+    public long getMaxId(long productId){
+        long id = 0;
+        Cursor cursor = persistence.getDataBase().rawQuery("select max(id) id from "+TABLE_NAME+" where product_id = ?", new String[]{String.valueOf(productId)});
+        if (cursor != null) {
+            if (cursor.moveToFirst()){
+                id = cursor.getLong(cursor.getColumnIndex("id"));
+            }
+        }
+        return id;
+    }
+
+    public void delete(String id){
+        persistence.delete("id = ?", new String[]{id});
+    }
+
+
     public ArrayList<Shop> getRecords(){
         ArrayList<Shop> list = new ArrayList<>();
 //        Cursor cursor = persistence.find();
@@ -63,6 +80,7 @@ public class PersistenceShop extends RepositoryShop {
             if (cursor.moveToFirst()) {
                 do {
                     Shop model = new Shop();
+                    model.setId(cursor.getLong(cursor.getColumnIndex("code")));
                     model.setAmount(cursor.getLong(cursor.getColumnIndex("amount")));
 
                     PersistenceProduct perProd = null;
