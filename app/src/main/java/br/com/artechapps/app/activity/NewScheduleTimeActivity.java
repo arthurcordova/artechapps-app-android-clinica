@@ -51,9 +51,6 @@ public class NewScheduleTimeActivity extends AppCompatActivity {
         showDatePickerDialog();
     }
 
-    public RecyclerView getRecyclerView() {
-        return mRecyclerView;
-    }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
@@ -97,10 +94,9 @@ public class NewScheduleTimeActivity extends AppCompatActivity {
             TextView date = (TextView) getActivity().findViewById(R.id.label_date);
             RecyclerView recyclerView = (RecyclerView) getActivity().findViewById(R.id.rvTimes);
             date.setText(String.valueOf(day).concat("/") + String.valueOf(month+1).concat("/") + String.valueOf(year));
-            model.setDate(date.getText().toString());
-            String dt = String.valueOf(day).concat("-") + String.valueOf(month+1).concat("-") + String.valueOf(year);
+            model.setDate(String.valueOf(day).concat("-") + String.valueOf(month+1).concat("-") + String.valueOf(year));
             AsyncTaskTime async = new AsyncTaskTime(getActivity(), recyclerView, model);
-            async.execute(String.valueOf(BuildConfig.FILIAL), String.valueOf(model.getId()),dt);
+            async.execute(String.valueOf(BuildConfig.FILIAL), String.valueOf(model.getId()),model.getDate());
         }
     }
 

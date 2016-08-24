@@ -12,6 +12,7 @@ import java.io.IOException;
 
 import br.com.artechapps.app.BuildConfig;
 import br.com.artechapps.app.activity.MainMenuActivity;
+import br.com.artechapps.app.model.Appointment;
 import br.com.artechapps.app.model.User;
 import br.com.artechapps.app.utils.EndPoints;
 import br.com.artechapps.app.utils.SessionManager;
@@ -22,27 +23,22 @@ import br.com.artechapps.app.utils.SessionManager;
 public class AsyncTaskNewAppointment extends AsyncTaskHttp {
 
     private JSONObject mJson;
+    private Appointment mModel;
 
-    public AsyncTaskNewAppointment(String msg, Context context, boolean showDialog) {
+    public AsyncTaskNewAppointment(String msg, Context context, boolean showDialog, Appointment model) {
         mMsg = msg;
         mContext = context;
         mShowDialog = showDialog;
+        mModel = model;
 
     }
 
     @Override
     protected String doInBackground(String... params) {
         try {
-            String cpf = params[0].replace(".","").replace("-","");
-            String pwd = params[1];
-
-            User user = new User();
-            user.setCodFilial(BuildConfig.FILIAL);
-            user.setSenha(pwd);
-            user.setCpfcnpj(cpf);
 
             Gson gson = new Gson();
-            String userJson = gson.toJson(user);
+            String userJson = gson.toJson(mModel);
 
             mJson = connectServerO(EndPoints.CONFIRM_APPOINTMENT, userJson,false);
         } catch (JSONException e) {

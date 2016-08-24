@@ -60,7 +60,8 @@ public class AsyncTaskTime extends AsyncTaskHttp {
             for (int i = 0; i < mJson.length(); i++) {
                 try {
                     JSONObject json = mJson.getJSONObject(i);
-                    list.add(json.getString("horarioInicial"));
+                    String [] d = json.getString("horarioInicial").split(":");
+                    list.add(d[0].concat(":").concat(d[1]));
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }

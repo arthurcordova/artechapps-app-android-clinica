@@ -1,28 +1,20 @@
 package br.com.artechapps.app.activity;
 
-import android.app.DatePickerDialog;
-import android.app.Dialog;
-import android.content.DialogInterface;
 import android.os.Bundle;
-import android.support.v4.app.DialogFragment;
-import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.DatePicker;
+import android.widget.Button;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import java.util.Calendar;
-
-import br.com.artechapps.app.BuildConfig;
 import br.com.artechapps.app.R;
-import br.com.artechapps.app.database.PersistenceMessage;
+import br.com.artechapps.app.model.Appointment;
 import br.com.artechapps.app.model.Product;
-import br.com.artechapps.app.task.AsyncTaskMessagesDelete;
-import br.com.artechapps.app.task.AsyncTaskTime;
-import br.com.artechapps.app.utils.DatePickerFragment;
+import br.com.artechapps.app.model.User;
+import br.com.artechapps.app.task.AsyncTaskNewAppointment;
+import br.com.artechapps.app.utils.SessionManager;
 
 public class NewScheduleFinalActivity extends AppCompatActivity {
 
@@ -32,6 +24,7 @@ public class NewScheduleFinalActivity extends AppCompatActivity {
     private TextView mTvDoctorName;
     private TextView mTvDateTime;
     private RelativeLayout mLineDoctor;
+    private Button mBtnConfirm;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,6 +43,7 @@ public class NewScheduleFinalActivity extends AppCompatActivity {
         mTvDateTime = (TextView) findViewById(R.id.tv_date_time);
         mTvDoctorName = (TextView) findViewById(R.id.tv_doctor_name);
         mLineDoctor = (RelativeLayout) findViewById(R.id.line_2);
+        mBtnConfirm = (Button) findViewById(R.id.btn_confirm);
 
         mTvProcedureName.setText(mModel.getDescription());
 
@@ -58,6 +52,26 @@ public class NewScheduleFinalActivity extends AppCompatActivity {
             mTvDoctorName.setText(mModel.getDoctor().getName());
         }
         mTvDateTime.setText(mModel.getDate() + "  " + mModel.getTime());
+
+        SessionManager sm = new SessionManager(this);
+        final User user = sm.getSessionUser();
+
+
+        mBtnConfirm.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                Appointment model = new Appointment();
+                model.setCodCliente(user.getCode());
+                model.setCodFilial(user.getCodFilial());
+                model.setCodProcedimento(mModel.getId());
+                model.setData(mModel.getDate());
+                model.setHorario(mModel.getTime());
+
+                new AsyncTaskNewAppointment("Salvando agendamento...", v.getContext(), true, model).execute();
+            }
+        });
+
 
     }
 

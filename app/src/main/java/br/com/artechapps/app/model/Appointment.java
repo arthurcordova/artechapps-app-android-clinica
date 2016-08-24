@@ -7,28 +7,17 @@ import java.io.Serializable;
  */
 public class Appointment implements Serializable {
 
-    private int codCliente;
+    private long codCliente;
     private String data;
     private String horario;
-    private int codFilial;
-    private int codProcedimento;
+    private long codFilial;
+    private long codProcedimento;
 
-    public Appointment(int codCliente, String data, String horario, int codFilial, int codProcedimento) {
-        this.codCliente = codCliente;
-        this.data = data;
-        this.horario = horario;
-        this.codFilial = codFilial;
-        this.codProcedimento = codProcedimento;
-    }
-
-    public Appointment() {
-    }
-
-    public int getCodCliente() {
+    public long getCodCliente() {
         return codCliente;
     }
 
-    public void setCodCliente(int codCliente) {
+    public void setCodCliente(long codCliente) {
         this.codCliente = codCliente;
     }
 
@@ -48,19 +37,19 @@ public class Appointment implements Serializable {
         this.horario = horario;
     }
 
-    public int getCodFilial() {
+    public long getCodFilial() {
         return codFilial;
     }
 
-    public void setCodFilial(int codFilial) {
+    public void setCodFilial(long codFilial) {
         this.codFilial = codFilial;
     }
 
-    public int getCodProcedimento() {
+    public long getCodProcedimento() {
         return codProcedimento;
     }
 
-    public void setCodProcedimento(int codProcedimento) {
+    public void setCodProcedimento(long codProcedimento) {
         this.codProcedimento = codProcedimento;
     }
 }
