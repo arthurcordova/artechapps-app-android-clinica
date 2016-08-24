@@ -46,6 +46,7 @@ public class RVAdapterCart extends RecyclerView.Adapter<RVAdapterCart.ViewHolder
         viewHolder.tvDescription.setText(model.getProduct().getDescription());
         viewHolder.tvValue.setText(Product.formatValue(model.getProduct().getValue() * model.getAmount()));
         viewHolder.tvQtd.setText(String.valueOf(model.getAmount()));
+        viewHolder.btnDelete.setVisibility(model.getAmount()>1 ? View.VISIBLE : View.INVISIBLE);
 
         viewHolder.btnAdd.setOnClickListener(new View.OnClickListener() {
             @Override
