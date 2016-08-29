@@ -10,31 +10,37 @@
     <RelativeLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
         android:layout_margin="64dp"
-        android:gravity="center_horizontal">
+        android:gravity="center_horizontal"
+        android:orientation="vertical">
 
         <TextView
             android:id="@+id/app_name"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center"
-            android:textSize="20sp"
             android:text="@string/app_name"
+            android:textSize="20sp"
             android:textStyle="bold"
 
             />
 
 
         <TextView
+            android:id="@+id/app_version"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_below="@+id/app_name"
             android:gravity="center"
             android:text="@string/app_name"
-            android:textStyle="bold"
-            android:id="@+id/app_version"
-            android:layout_below="@+id/app_name"
-            />
+            android:textStyle="bold" />
+
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="36dp"
+            android:src="@drawable/logo_bc" />
 
 
     </RelativeLayout>
