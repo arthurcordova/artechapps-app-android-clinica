@@ -13,6 +13,7 @@ import android.widget.TextView;
 
 import br.com.artechapps.app.R;
 import br.com.artechapps.app.activity.MainMenuActivity;
+import br.com.artechapps.app.database.PersistenceSchedule;
 import br.com.artechapps.app.model.User;
 import br.com.artechapps.app.utils.SessionManager;
 
@@ -82,6 +83,18 @@ public class DashboardFragment extends Fragment {
         setAnimationCounter(user.getDiscount(), TIME_ANIMATION, tvNumDiscount);
         setAnimationCounter(user.getMessages(), TIME_ANIMATION, tvNumMessage);
         setAnimationCounter(user.getScore(), TIME_ANIMATION, tvNumScore);
+
+        int counter=0;
+        PersistenceSchedule per = null;
+        try {
+            per = new PersistenceSchedule(getContext());
+            counter = per.count();
+        } finally {
+            per.close();
+            setAnimationCounter(counter, TIME_ANIMATION, tvNumSchedule);
+        }
+
+
 
 //        setAnimationCounter(10, TIME_ANIMATION, tvNumScore);
 //        setAnimationCounter(55, TIME_ANIMATION, tvNumDiscount);

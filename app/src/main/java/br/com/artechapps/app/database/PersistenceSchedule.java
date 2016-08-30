@@ -93,6 +93,17 @@ public class PersistenceSchedule extends RepositorySchedule {
         return list;
     }
 
+    public int count(){
+        int count = 0;
+        Cursor cursor = persistence.getDataBase().rawQuery("select count(*) c from "+TABLE_NAME, null);
+        if (cursor != null) {
+            if (cursor.moveToFirst()){
+                count = cursor.getInt(cursor.getColumnIndex("c"));
+            }
+        }
+        return count;
+    }
+
     private ContentValues getContentValues(Schedule model) {
         ContentValues contentValues = new ContentValues();
         contentValues.put(COLUMNS[0], model.getCode());
