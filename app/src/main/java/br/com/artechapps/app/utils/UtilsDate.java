@@ -15,6 +15,11 @@ public class UtilsDate {
         return c.getTime();
     }
 
+    public static String getCurrentDate(){
+        Calendar c = Calendar.getInstance();
+        return c.get(Calendar.DAY_OF_MONTH) + "/" + c.get(Calendar.MONTH) + "/" + c.get(Calendar.YEAR);
+    }
+
     public static boolean between (Date target, Date start, Date end){
         return (target.after(start) || target.equals(start)) && (target.before(end) || target.equals(end));
     }

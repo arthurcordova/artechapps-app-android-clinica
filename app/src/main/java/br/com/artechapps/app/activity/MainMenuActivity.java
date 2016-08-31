@@ -31,6 +31,7 @@ import br.com.artechapps.app.fragment.MessageFragment;
 import br.com.artechapps.app.fragment.ProductFragment;
 import br.com.artechapps.app.fragment.ScheduleFragment;
 import br.com.artechapps.app.model.User;
+import br.com.artechapps.app.task.AsyncTaskConfirmCartProducts;
 import br.com.artechapps.app.utils.SessionManager;
 
 public class MainMenuActivity extends AppCompatActivity
@@ -89,6 +90,8 @@ public class MainMenuActivity extends AppCompatActivity
             String origin = getIntent().getExtras().getString("origin");
             if (origin.equals(NewScheduleFinalActivity.class.getName())) {
                 replaceFragment(new ScheduleFragment());
+            } else if (origin.equals(AsyncTaskConfirmCartProducts.class.getName())) {
+                replaceFragment(new BudgetFragment());
             }
         } catch (Exception e) {
             Log.e("ERROR", e.getMessage());

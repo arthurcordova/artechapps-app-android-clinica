@@ -88,10 +88,10 @@ public class Product implements Serializable {
         this.time = time;
     }
 
-    public static String formatValue(Double value){
+    public static String formatValue(Double value) {
         DecimalFormat moneyReal = new DecimalFormat("###,###,##0.00", new DecimalFormatSymbols(new Locale("pt", "BR")));
         String formated = moneyReal.format(value);
         return formated;
-   }
+    }
 
 }

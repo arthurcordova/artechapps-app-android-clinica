@@ -71,6 +71,9 @@ public class PersistenceShop extends RepositoryShop {
         persistence.delete("id = ?", new String[]{id});
     }
 
+    public void deleteAll(){
+        persistence.delete("1 = 1", null);
+    }
 
     public ArrayList<Shop> getRecords(){
         ArrayList<Shop> list = new ArrayList<>();
