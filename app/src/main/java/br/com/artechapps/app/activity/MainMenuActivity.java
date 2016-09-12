@@ -94,7 +94,7 @@ public class MainMenuActivity extends AppCompatActivity
                 replaceFragment(new BudgetFragment());
             }
         } catch (Exception e) {
-            Log.e("ERROR", e.getMessage());
+            Log.e("ERROR", "Replace fragment parameter");
         }
 
 
