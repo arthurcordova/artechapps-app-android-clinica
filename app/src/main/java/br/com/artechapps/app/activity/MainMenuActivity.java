@@ -222,6 +222,9 @@ public class MainMenuActivity extends AppCompatActivity
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
         switch (item.getItemId()) {
+            case R.id.nav_dashboard:
+                replaceFragment(new DashboardFragment());
+                break;
             case R.id.nav_message:
                 replaceFragment(new MessageFragment());
                 break;
