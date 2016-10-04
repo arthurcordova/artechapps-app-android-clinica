@@ -40,6 +40,7 @@ public class PersistenceSchedule extends RepositorySchedule {
                 model = new Schedule();
                 model.setCode(json.getLong(Schedule.JSON_CODE));
                 model.setTime(json.getString(Schedule.JSON_TIME));
+                model.setDate(json.getString(Schedule.JSON_DATE));
                 model.setRepeat(json.getString(Schedule.JSON_REPEAT));
                 model.setStatus(json.getString(Schedule.JSON_STATUS));
 
@@ -84,6 +85,7 @@ public class PersistenceSchedule extends RepositorySchedule {
                     model.setTime(cursor.getString(cursor.getColumnIndex(COLUMNS[3])));
                     model.setRepeat(cursor.getString(cursor.getColumnIndex(COLUMNS[4])));
                     model.setStatus(cursor.getString(cursor.getColumnIndex(COLUMNS[5])));
+                    model.setDate(cursor.getString(cursor.getColumnIndex(COLUMNS[6])));
 
                     list.add(model);
                 } while (cursor.moveToNext());
@@ -112,6 +114,8 @@ public class PersistenceSchedule extends RepositorySchedule {
         contentValues.put(COLUMNS[3], model.getTime());
         contentValues.put(COLUMNS[4], model.getRepeat());
         contentValues.put(COLUMNS[5], model.getStatus());
+        contentValues.put(COLUMNS[6], model.getDate());
+
         return contentValues;
     }
 

@@ -18,7 +18,8 @@ public class RepositorySchedule extends RepositoryDefault {
                     "                       product_desc text,"  +
                     "                       time text,"  +
                     "                       repeat text,"  +
-                    "                       status text); "
+                    "                       status text, " +
+                    "                       date text); "
     };
 
     public  static final  String[] COLUMNS = new String[]{
@@ -27,7 +28,8 @@ public class RepositorySchedule extends RepositoryDefault {
             "product_desc",
             "time",
             "repeat",
-            "status"
+            "status",
+            "date"
     };
 
     /**

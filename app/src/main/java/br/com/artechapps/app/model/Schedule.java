@@ -11,12 +11,14 @@ public class Schedule implements Serializable{
     public static String JSON_PRODUCT_CODE = "codProcedimento";
     public static String JSON_PRODUCT_DESC = "descProcedimento";
     public static String JSON_TIME = "horario";
+    public static String JSON_DATE = "data";
     public static String JSON_REPEAT = "repetido";
     public static String JSON_STATUS = "status";
 
     private long code;
     private Product product;
     private String time;
+    private String date;
     private String repeat;
     private String status;
 
@@ -45,6 +47,14 @@ public class Schedule implements Serializable{
 
     public void setTime(String time) {
         this.time = time;
+    }
+
+    public String getDate() {
+        return date;
+    }
+
+    public void setDate(String date) {
+        this.date = date;
     }
 
     public String getRepeat() {
