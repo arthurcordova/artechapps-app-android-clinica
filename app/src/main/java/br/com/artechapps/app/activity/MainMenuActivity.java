@@ -41,13 +41,14 @@ public class MainMenuActivity extends AppCompatActivity
     private TextView mTvHeaderUserEmail;
     private SessionManager mSM;
     private DrawerLayout mDrawer;
+    private Toolbar mToolbar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_menu);
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
+        mToolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(mToolbar);
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
@@ -60,7 +61,7 @@ public class MainMenuActivity extends AppCompatActivity
 
         mDrawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
-                this, mDrawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
+                this, mDrawer, mToolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         mDrawer.setDrawerListener(toggle);
         toggle.syncState();
 
@@ -223,18 +224,23 @@ public class MainMenuActivity extends AppCompatActivity
     public boolean onNavigationItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.nav_dashboard:
+                mToolbar.setTitle("Beauty Clinic");
                 replaceFragment(new DashboardFragment());
                 break;
             case R.id.nav_message:
+                mToolbar.setTitle("Mensagens");
                 replaceFragment(new MessageFragment());
                 break;
             case R.id.nav_event:
+                mToolbar.setTitle("Agendamentos");
                 replaceFragment(new ScheduleFragment());
                 break;
             case R.id.nav_products:
+                mToolbar.setTitle("Produtos");
                 replaceFragment(new ProductFragment());
                 break;
             case R.id.nav_money:
+                mToolbar.setTitle("Orçamentos");
                 replaceFragment(new BudgetFragment());
                 break;
             case R.id.nav_about:
