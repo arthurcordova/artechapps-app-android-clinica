@@ -119,4 +119,9 @@ public class PersistenceSchedule extends RepositorySchedule {
         return contentValues;
     }
 
+    public void updateStatusCancel(String id){
+        String sql = "update " + TABLE_NAME + " set " + COLUMNS[5] + " = \"CANCELADO\" where " + COLUMNS[0] + " = " + id;
+        persistence.getDataBase().execSQL(sql);
+    }
+
 }

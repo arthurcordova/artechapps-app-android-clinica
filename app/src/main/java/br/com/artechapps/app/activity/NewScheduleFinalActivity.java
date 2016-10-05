@@ -13,6 +13,7 @@ import br.com.artechapps.app.R;
 import br.com.artechapps.app.model.Appointment;
 import br.com.artechapps.app.model.Product;
 import br.com.artechapps.app.model.User;
+import br.com.artechapps.app.task.AsyncTaskCancelAppointment;
 import br.com.artechapps.app.task.AsyncTaskNewAppointment;
 import br.com.artechapps.app.utils.SessionManager;
 
@@ -75,6 +76,8 @@ public class NewScheduleFinalActivity extends AppCompatActivity {
 
                 if (mModel.getDateTimeFormatted() != null) { //CANCEL
 //                    http://www2.beautyclinic.com.br/clinwebservice2/servidor/cancelaragendamento/
+                    String json = "{\"codAgenda\":"+ mModel.getCodeSchedule() +"}";
+                    new AsyncTaskCancelAppointment("Cancelando agendamento...", NewScheduleFinalActivity.this, false, NewScheduleFinalActivity.this).execute(json, String.valueOf(mModel.getCodeSchedule()));
 
                 } else {// CONFIRM
                     Appointment model = new Appointment();
@@ -86,11 +89,8 @@ public class NewScheduleFinalActivity extends AppCompatActivity {
 
                     new AsyncTaskNewAppointment("Salvando agendamento...", v.getContext(), true, model, NewScheduleFinalActivity.this).execute();
                 }
-
             }
         });
-
-
     }
 
     @Override

@@ -51,6 +51,7 @@ public class RVAdapterSchedule extends RecyclerView.Adapter<RVAdapterSchedule.Vi
                 Product product = new Product();
                 product.setDescription(model.getProduct().getDescription());
                 product.setDateTimeFormatted(viewHolder.tvDescription.getText().toString());
+                product.setCodeSchedule(model.getCode());
                 Intent it = new Intent(mActivity, NewScheduleFinalActivity.class);
                 it.putExtra("model", product);
                 mActivity.startActivity(it);

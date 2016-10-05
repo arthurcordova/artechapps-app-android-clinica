@@ -24,6 +24,7 @@ public class Product implements Serializable {
     private String date;
     private String time;
     private String dateTimeFormatted;
+    private long codeSchedule;
 
     public long getId() {
         return id;
@@ -95,6 +96,14 @@ public class Product implements Serializable {
 
     public void setDateTimeFormatted(String dateTimeFormatted) {
         this.dateTimeFormatted = dateTimeFormatted;
+    }
+
+    public long getCodeSchedule() {
+        return codeSchedule;
+    }
+
+    public void setCodeSchedule(long codeSchedule) {
+        this.codeSchedule = codeSchedule;
     }
 
     public static String formatValue(Double value) {
