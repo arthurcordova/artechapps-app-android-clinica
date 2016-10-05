@@ -25,6 +25,8 @@ public class EndPoints extends Webservice{
 
     public static final String CONFIRM_APPOINTMENT = SERVER.concat("/realizaragendamento/");
 
+    public static final String CANCEL_APPOINTMENT = SERVER.concat("/cancelaragendamento/");
+
     public static final String CONFIRM_CART = SERVER.concat("/cadorcamento/");
 
     public static final String CONFIRM_CART_PRODUCTS = SERVER.concat("/cadprodorcamento/");
