@@ -50,25 +50,29 @@
 
                     <TextView
                         android:id="@+id/description"
-                        android:layout_width="match_parent"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:lines="1"
+                        android:text="sadnadinaid"
                         android:textSize="12sp" />
+
+                    <TextView
+                        android:id="@+id/sent_date"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="right"
+                        android:alpha="0.4"
+                        android:gravity="end"
+                        android:text="STATUS"
+                        android:textColor="@color/textBlack"
+                        android:textSize="10sp"
+                        android:layout_alignParentRight="true"
+                        android:layout_alignParentEnd="true" />
 
 
                 </RelativeLayout>
 
-                <TextView
-                    android:id="@+id/sent_date"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="right"
-                    android:alpha="0.4"
-                    android:gravity="end"
-                    android:paddingTop="6dp"
-                    android:text="10/04/1987"
-                    android:textColor="@color/textBlack"
-                    android:textSize="10sp" />
+
 
             </LinearLayout>
         </LinearLayout>

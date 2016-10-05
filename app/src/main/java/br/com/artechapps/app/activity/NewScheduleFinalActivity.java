@@ -47,13 +47,23 @@ public class NewScheduleFinalActivity extends AppCompatActivity {
 
         mTvProcedureName.setText(mModel.getDescription());
 
-        if(mModel.getDoctor() != null){
+        if (mModel.getDoctor() != null) {
             mLineDoctor.setVisibility(View.VISIBLE);
             mTvDoctorName.setText(mModel.getDoctor().getName());
         }
-        String dateFormat = mModel.getDate().replace("-","/");
 
-        mTvDateTime.setText( dateFormat + "  " + mModel.getTime());
+        String dateFormat = "";
+        if (mModel.getDate() != null) {
+            dateFormat = mModel.getDate().replace("-", "/");
+        }
+
+        if (mModel.getTime() != null) {
+            mTvDateTime.setText(dateFormat + "  " + mModel.getTime());
+        } else {
+            // From Detail, user can cancel the appointment
+            mTvDateTime.setText(mModel.getDateTimeFormatted());
+            mBtnConfirm.setText("Cancelar");
+        }
 
         SessionManager sm = new SessionManager(this);
         final User user = sm.getSessionUser();
@@ -63,14 +73,20 @@ public class NewScheduleFinalActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                Appointment model = new Appointment();
-                model.setCodCliente(user.getCode());
-                model.setCodFilial(user.getCodFilial());
-                model.setCodProcedimento(mModel.getId());
-                model.setData(mModel.getDate());
-                model.setHorario(mModel.getTime());
+                if (mModel.getDateTimeFormatted() != null) { //CANCEL
+//                    http://www2.beautyclinic.com.br/clinwebservice2/servidor/cancelaragendamento/
 
-                new AsyncTaskNewAppointment("Salvando agendamento...", v.getContext(), true, model, NewScheduleFinalActivity.this).execute();
+                } else {// CONFIRM
+                    Appointment model = new Appointment();
+                    model.setCodCliente(user.getCode());
+                    model.setCodFilial(user.getCodFilial());
+                    model.setCodProcedimento(mModel.getId());
+                    model.setData(mModel.getDate());
+                    model.setHorario(mModel.getTime());
+
+                    new AsyncTaskNewAppointment("Salvando agendamento...", v.getContext(), true, model, NewScheduleFinalActivity.this).execute();
+                }
+
             }
         });
 

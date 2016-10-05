@@ -23,6 +23,7 @@ public class Product implements Serializable {
     private Doctor doctor;
     private String date;
     private String time;
+    private String dateTimeFormatted;
 
     public long getId() {
         return id;
@@ -86,6 +87,14 @@ public class Product implements Serializable {
 
     public void setTime(String time) {
         this.time = time;
+    }
+
+    public String getDateTimeFormatted() {
+        return dateTimeFormatted;
+    }
+
+    public void setDateTimeFormatted(String dateTimeFormatted) {
+        this.dateTimeFormatted = dateTimeFormatted;
     }
 
     public static String formatValue(Double value) {

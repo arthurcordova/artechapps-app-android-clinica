@@ -38,7 +38,7 @@ public class RVAdapterSchedule extends RecyclerView.Adapter<RVAdapterSchedule.Vi
 
     // Replace the contents of a view (invoked by the layout manager)
     @Override
-    public void onBindViewHolder(ViewHolder viewHolder, int position) {
+    public void onBindViewHolder(final ViewHolder viewHolder, int position) {
         final Schedule model = mItemsData.get(position);
         viewHolder.tvCode.setText(String.valueOf(model.getCode()));
 
@@ -50,7 +50,7 @@ public class RVAdapterSchedule extends RecyclerView.Adapter<RVAdapterSchedule.Vi
             public void onClick(View v) {
                 Product product = new Product();
                 product.setDescription(model.getProduct().getDescription());
-                product.setDate(model.getTime());
+                product.setDateTimeFormatted(viewHolder.tvDescription.getText().toString());
                 Intent it = new Intent(mActivity, NewScheduleFinalActivity.class);
                 it.putExtra("model", product);
                 mActivity.startActivity(it);
