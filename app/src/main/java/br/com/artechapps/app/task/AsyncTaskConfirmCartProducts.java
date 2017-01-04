@@ -40,7 +40,7 @@ public class AsyncTaskConfirmCartProducts extends AsyncTaskHttp {
         mCodOrcamento = params[0];
         try {
             mPersistence = new PersistenceShop(mContext);
-            list = mPersistence.getRecords();
+            list = mPersistence.getProducts();
 
             for (Shop model: list) {
                 BudgetConfirmProduct product = new BudgetConfirmProduct(model.getProduct().getId(), model.getProduct().getValue());
