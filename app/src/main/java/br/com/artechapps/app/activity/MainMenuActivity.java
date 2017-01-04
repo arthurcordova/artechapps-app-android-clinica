@@ -12,6 +12,7 @@ import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.SearchView;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.Gravity;
@@ -42,6 +43,7 @@ public class MainMenuActivity extends AppCompatActivity
     private SessionManager mSM;
     private DrawerLayout mDrawer;
     private Toolbar mToolbar;
+    private MenuItem mSearchItem;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -152,6 +154,8 @@ public class MainMenuActivity extends AppCompatActivity
 
 
         final MenuItem menu_hot = menu.findItem(R.id.action_cart);
+        mSearchItem = menu.findItem(R.id.action_search);
+        mSearchItem.setVisible(false);
         menu_hot.setActionView(R.layout.action_bar_notifitcation_icon);
         menu_hot.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
             @Override
@@ -217,25 +221,31 @@ public class MainMenuActivity extends AppCompatActivity
         switch (item.getItemId()) {
             case R.id.nav_dashboard:
                 mToolbar.setTitle("Beauty Clinic");
+                mSearchItem.setVisible(false);
                 replaceFragment(new DashboardFragment());
                 break;
             case R.id.nav_message:
                 mToolbar.setTitle("Mensagens");
+                mSearchItem.setVisible(false);
                 replaceFragment(new MessageFragment());
                 break;
             case R.id.nav_event:
                 mToolbar.setTitle("Agendamentos");
+                mSearchItem.setVisible(false);
                 replaceFragment(new ScheduleFragment());
                 break;
             case R.id.nav_products:
                 mToolbar.setTitle("Produtos");
-                replaceFragment(new ProductFragment());
+                mSearchItem.setVisible(true);
+                replaceFragment(new ProductFragment((SearchView) mSearchItem.getActionView()));
                 break;
             case R.id.nav_money:
                 mToolbar.setTitle("Orçamentos");
+                mSearchItem.setVisible(false);
                 replaceFragment(new BudgetFragment());
                 break;
             case R.id.nav_about:
+                mSearchItem.setVisible(false);
                 replaceFragment(new AboutFragment());
                 break;
             case R.id.nav_logout:

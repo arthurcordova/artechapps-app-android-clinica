@@ -47,6 +47,12 @@ public class RVAdapterProduct extends RecyclerView.Adapter<RVAdapterProduct.View
 
     }
 
+    public void setFilter(ArrayList<Product> list) {
+        mItemsData = new ArrayList<>();
+        mItemsData.addAll(list);
+        notifyDataSetChanged();
+    }
+
     @Override
     public int getItemCount() {
         return (mItemsData != null) ? mItemsData.size() : 0;

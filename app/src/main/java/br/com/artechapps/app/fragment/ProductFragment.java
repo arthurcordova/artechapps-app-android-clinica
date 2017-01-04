@@ -7,6 +7,7 @@ import android.support.v4.app.Fragment;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.SearchView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -44,9 +45,15 @@ public class ProductFragment extends Fragment {
     private MainMenuActivity mActivity;
 
     private RecyclerView mRvProduct;
+    private SearchView mSearchItem;
+
 
     public ProductFragment() {
         // Required empty public constructor
+    }
+
+    public ProductFragment(SearchView searchItem) {
+        mSearchItem = searchItem;
     }
 
     /**
@@ -91,16 +98,75 @@ public class ProductFragment extends Fragment {
         mPersistence = new PersistenceProduct(getContext());
         mList = mPersistence.getProduct();
 
-        RVAdapterProduct mAdapterPatient = new RVAdapterProduct(mList, mActivity);
+        final RVAdapterProduct mAdapter = new RVAdapterProduct(mList, mActivity);
 
         mRvProduct.setLayoutManager(new LinearLayoutManager(getContext()));
         mRvProduct.setItemAnimator(new DefaultItemAnimator());
-        mRvProduct.setAdapter(mAdapterPatient);
+        mRvProduct.setAdapter(mAdapter);
 
         mPersistence.close();
 
+        mSearchItem.setIconified(true);
+        mSearchItem.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String query) {
+                if (query.length() > 2) {
+                    ArrayList<Product> list = filter(mList, query);
+                    if (list != null && list.size() > 0) {
+
+                        mAdapter.setFilter(list);
+                        loadListProviders(mAdapter);
+
+                    } else {
+                        mAdapter.setFilter(list);
+                        loadListProviders(mAdapter);
+
+                    }
+                }
+                if (query.equals("")){
+                    mPersistence = new PersistenceProduct(getContext());
+                    mAdapter.setFilter(mPersistence.getProduct());
+                    loadListProviders(mAdapter);
+                }
+                return true;
+            }
+        });
+
+//        mSearchItem.setOnCloseListener(new SearchView.OnCloseListener() {
+//            @Override
+//            public boolean onClose() {
+//                mAdapter.setFilter(mPersistence.getProduct());
+//                loadListProviders(mAdapter);
+//                return true;
+//            }
+//        });
+
         return view;
     }
+
+    private void loadListProviders(RVAdapterProduct adapterProduct) {
+        mRvProduct.setLayoutManager(new LinearLayoutManager(mRvProduct.getContext()));
+        mRvProduct.setHasFixedSize(true);
+        mRvProduct.setAdapter(adapterProduct);
+
+    }
+
+    private ArrayList<Product> filter(ArrayList<Product> list, String query) {
+        final ArrayList<Product> filteredModelList = new ArrayList<>();
+        for (Product model : list) {
+            if (model.getDescription().toUpperCase().contains(query.toUpperCase())) {
+                filteredModelList.add(model);
+            }
+        }
+        return filteredModelList;
+    }
+
 
     // TODO: Rename method, update argument and hook method into UI event
     public void onButtonPressed(Uri uri) {
