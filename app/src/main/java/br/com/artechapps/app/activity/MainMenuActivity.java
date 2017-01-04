@@ -78,6 +78,7 @@ public class MainMenuActivity extends AppCompatActivity
 
         replaceFragment(new DashboardFragment());
 
+
         try {
             String origin = getIntent().getExtras().getString("origin");
             if (origin.equals(NewScheduleFinalActivity.class.getName())) {

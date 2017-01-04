@@ -198,8 +198,11 @@
             card_view:cardElevation="3dp">
 
             <LinearLayout
+                android:id="@+id/line_messages"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:background="?attr/selectableItemBackgroundBorderless"
+                android:clickable="true"
                 android:orientation="horizontal">
 
                 <RelativeLayout
@@ -274,8 +277,11 @@
             card_view:cardElevation="3dp">
 
             <LinearLayout
+                android:id="@+id/line_schedule"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:background="?attr/selectableItemBackgroundBorderless"
+                android:clickable="true"
                 android:orientation="horizontal">
 
                 <RelativeLayout

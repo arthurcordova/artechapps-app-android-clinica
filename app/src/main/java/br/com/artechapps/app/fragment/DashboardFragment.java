@@ -32,6 +32,9 @@ public class DashboardFragment extends Fragment {
     private TextView tvNumDiscount;
     private TextView tvNumMessage;
     private TextView tvNumSchedule;
+    private View mLineMessages;
+    private View mLineSchedule;
+
 
 
     public DashboardFragment() {
@@ -75,6 +78,8 @@ public class DashboardFragment extends Fragment {
         tvNumDiscount = (TextView) view.findViewById(R.id.num_discount);
         tvNumMessage = (TextView) view.findViewById(R.id.num_message);
         tvNumSchedule = (TextView) view.findViewById(R.id.num_schedule);
+        mLineMessages = view.findViewById(R.id.line_messages);
+        mLineSchedule = view.findViewById(R.id.line_schedule);
 
         SessionManager sm = new SessionManager(getActivity());
         User user = sm.getSessionUser();
@@ -93,6 +98,20 @@ public class DashboardFragment extends Fragment {
             per.close();
             setAnimationCounter(counter, TIME_ANIMATION, tvNumSchedule);
         }
+
+        mLineMessages.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                getFragmentManager().beginTransaction().replace(R.id.container, new MessageFragment()).commit();
+            }
+        });
+        mLineSchedule.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                getFragmentManager().beginTransaction().replace(R.id.container, new ScheduleFragment()).commit();
+            }
+        });
+
 
 
 
