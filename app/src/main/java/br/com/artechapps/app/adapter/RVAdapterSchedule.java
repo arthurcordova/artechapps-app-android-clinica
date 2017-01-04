@@ -54,6 +54,7 @@ public class RVAdapterSchedule extends RecyclerView.Adapter<RVAdapterSchedule.Vi
                 product.setCodeSchedule(model.getCode());
                 Intent it = new Intent(mActivity, NewScheduleFinalActivity.class);
                 it.putExtra("model", product);
+                it.putExtra("schedule", model);
                 mActivity.startActivity(it);
             }
         });

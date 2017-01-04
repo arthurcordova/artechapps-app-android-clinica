@@ -127,7 +127,42 @@
                 android:layout_below="@+id/label_3"
                 android:layout_marginTop="14dp"
                 android:fontFamily="sans-serif"
-                android:singleLine="true"
+                android:textColor="@color/colorPrimary"
+                android:textSize="16sp" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginTop="54dp"
+                android:alpha="0.12"
+                android:background="@color/black" />
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/line_4"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/line_3"
+            android:layout_marginLeft="12dp"
+            android:layout_marginRight="12dp"
+            android:layout_marginTop="32dp">
+
+            <TextView
+                android:id="@+id/label_4"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="sans-serif-medium"
+                android:text="Status"
+                android:textSize="12sp" />
+
+            <TextView
+                android:id="@+id/tv_status"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/label_4"
+                android:layout_marginTop="14dp"
+                android:fontFamily="sans-serif"
                 android:textColor="@color/colorPrimary"
                 android:textSize="16sp" />
 
@@ -143,7 +178,7 @@
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/line_3"
+            android:layout_below="@+id/line_4"
             android:layout_marginLeft="12dp"
             android:layout_marginRight="12dp"
             android:layout_marginTop="28dp">
