@@ -3,6 +3,7 @@ package br.com.artechapps.app.database;
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
+import android.util.Log;
 
 import java.util.ArrayList;
 
@@ -26,6 +27,9 @@ public class PersistenceShop extends RepositoryShop {
                         "   from    " + RepositoryShop.TABLE_NAME +
                         " group by   product_id";
 
+    private String sqlproducts = "select product_id " +
+                        "   from    " + RepositoryShop.TABLE_NAME;
+
     public PersistenceShop(Context context) {
         super(context);
         mContext = context;
@@ -33,7 +37,8 @@ public class PersistenceShop extends RepositoryShop {
     }
 
     public void save (Shop model){
-        persistence.insert(getContentValues(model));
+        boolean isSave = persistence.insert(getContentValues(model));
+        Log.i("SAVE CART", String.valueOf(isSave));
 
     }
 
@@ -85,6 +90,35 @@ public class PersistenceShop extends RepositoryShop {
                     Shop model = new Shop();
                     model.setId(cursor.getLong(cursor.getColumnIndex("code")));
                     model.setAmount(cursor.getLong(cursor.getColumnIndex("amount")));
+
+                    PersistenceProduct perProd = null;
+                    try{
+                        perProd = new PersistenceProduct(mContext);
+                        Product product = perProd.getProduct(cursor.getLong(cursor.getColumnIndex("product_id")));
+
+                        model.setProduct(product);
+                    } finally {
+                        perProd.close();
+                    }
+
+                    list.add(model);
+                } while (cursor.moveToNext());
+            }
+            cursor.close();
+        }
+        return list;
+    }
+
+    public ArrayList<Shop> getProducts(){
+        ArrayList<Shop> list = new ArrayList<>();
+//        Cursor cursor = persistence.find();
+        Cursor cursor = persistence.getDataBase().rawQuery(sqlproducts,null);
+        if (cursor != null) {
+            if (cursor.moveToFirst()) {
+                do {
+                    Shop model = new Shop();
+//                    model.setId(cursor.getLong(cursor.getColumnIndex("code")));
+//                    model.setAmount(cursor.getLong(cursor.getColumnIndex("amount")));
 
                     PersistenceProduct perProd = null;
                     try{

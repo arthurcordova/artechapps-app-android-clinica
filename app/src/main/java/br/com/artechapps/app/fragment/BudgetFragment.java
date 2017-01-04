@@ -114,32 +114,34 @@ public class BudgetFragment extends Fragment {
         if (resultCode == Activity.RESULT_OK){
             final ArrayList<Budget> filterList = filter(mList, data.getExtras());
             mAdapter.setFilter(filterList);
-
+            mRvMessages.setLayoutManager(new LinearLayoutManager(mRvMessages.getContext()));
+            mRvMessages.setHasFixedSize(true);
+            mRvMessages.setAdapter(mAdapter);
         }
     }
 
-    private ArrayList<Budget> filter(ArrayList<Budget> messages, Bundle args) {
+    private ArrayList<Budget> filter(ArrayList<Budget> budgets, Bundle args) {
         boolean isAll = args.getBoolean("sw_all");
         boolean isConfirmed = args.getBoolean("sw_confirmed");
         boolean isCancelled = args.getBoolean("sw_cancelled");
+        ArrayList<Budget> filteredList = new ArrayList<>();
 
-
-        final ArrayList<Budget> filteredList = new ArrayList<>();
-//        for (Message model : messages) {
-//            boolean insert = true;
-//            if (UtilsDate.between( UtilsDate.convert(model.getSentDate()),
-//                    UtilsDate.convert(startDate),
-//                    UtilsDate.convert(endDate))){
-//
-//                if (!isRead && model.isSee()){
-//                    insert = false;
-//
-//                }
-//
-//                if (insert)
-//                    filteredList.add(model);
-//            }
-//        }
+        if (!isAll) {
+            for (Budget model : budgets) {
+                if (isConfirmed){
+                    if (model.getStatus().equalsIgnoreCase("CONFIRMADO")){
+                        filteredList.add(model);
+                    }
+                }
+                if (isCancelled){
+                    if (model.getStatus().equalsIgnoreCase("CANCELADO")) {
+                        filteredList.add(model);
+                    }
+                }
+            }
+        } else {
+            filteredList.addAll(budgets);
+        }
         return filteredList;
     }
 
