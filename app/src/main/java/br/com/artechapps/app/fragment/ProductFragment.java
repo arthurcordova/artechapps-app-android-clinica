@@ -48,13 +48,18 @@ public class ProductFragment extends Fragment {
     private SearchView mSearchItem;
 
 
-    public ProductFragment() {
-        // Required empty public constructor
-    }
-
-    public ProductFragment(SearchView searchItem) {
+    public void setSearchView(SearchView searchItem){
         mSearchItem = searchItem;
     }
+
+    public ProductFragment() {
+        // Required empty public constructor
+
+    }
+
+//    public ProductFragment(SearchView searchItem) {
+//        mSearchItem = searchItem;
+//    }
 
     /**
      * Use this factory method to create a new instance of

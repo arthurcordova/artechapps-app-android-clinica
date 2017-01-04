@@ -237,7 +237,9 @@ public class MainMenuActivity extends AppCompatActivity
             case R.id.nav_products:
                 mToolbar.setTitle("Produtos");
                 mSearchItem.setVisible(true);
-                replaceFragment(new ProductFragment((SearchView) mSearchItem.getActionView()));
+                ProductFragment frag = new ProductFragment();
+                frag.setSearchView((SearchView) mSearchItem.getActionView());
+                replaceFragment(frag);
                 break;
             case R.id.nav_money:
                 mToolbar.setTitle("Orçamentos");
