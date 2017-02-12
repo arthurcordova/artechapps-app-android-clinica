@@ -22,7 +22,7 @@ import br.com.artechapps.app.adapter.RVAdapterSchedule;
 import br.com.artechapps.app.database.PersistenceSchedule;
 import br.com.artechapps.app.model.Schedule;
 import br.com.artechapps.app.model.User;
-import br.com.artechapps.app.task.AsyncTaskSchedule;
+import br.com.artechapps.app.task.AsyncTaskAppointment;
 import br.com.artechapps.app.utils.SessionManager;
 
 public class ScheduleFragment extends Fragment {
@@ -94,7 +94,7 @@ public class ScheduleFragment extends Fragment {
             }
         });
 
-        new AsyncTaskSchedule("Carregando agendamentos...", getContext(), true, mRvSchedules, mActivity).execute(String.valueOf(user.getCode()));
+        new AsyncTaskAppointment("Carregando agendamentos...", getContext(), true, mRvSchedules, mActivity).execute(String.valueOf(user.getCode()));
 
         mPersistence = new PersistenceSchedule(getContext());
         mList = mPersistence.getRecords();

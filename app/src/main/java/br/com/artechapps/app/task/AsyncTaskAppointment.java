@@ -20,7 +20,7 @@ import br.com.artechapps.app.utils.EndPoints;
 /**
  * Created by arthurcordova on 7/16/16.
  */
-public class AsyncTaskSchedule extends AsyncTaskHttp {
+public class AsyncTaskAppointment extends AsyncTaskHttp {
 
     private JSONArray mJson;
     private PersistenceSchedule mPersistence;
@@ -28,7 +28,7 @@ public class AsyncTaskSchedule extends AsyncTaskHttp {
     private ArrayList<Schedule> mList;
     private MainMenuActivity mActivity;
 
-    public AsyncTaskSchedule(String msg, Context context, boolean showDialog, RecyclerView recyclerView, MainMenuActivity activity) {
+    public AsyncTaskAppointment(String msg, Context context, boolean showDialog, RecyclerView recyclerView, MainMenuActivity activity) {
         mMsg = msg;
         mContext = context;
         mShowDialog = showDialog;

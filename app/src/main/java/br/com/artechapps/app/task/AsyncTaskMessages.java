@@ -1,6 +1,8 @@
 package br.com.artechapps.app.task;
 
 import android.content.Context;
+import android.support.v7.widget.DefaultItemAnimator;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 
 import org.json.JSONArray;
@@ -10,6 +12,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 import br.com.artechapps.app.activity.MainMenuActivity;
+import br.com.artechapps.app.adapter.RVAdapterMessage;
 import br.com.artechapps.app.database.PersistenceMessage;
 import br.com.artechapps.app.model.Message;
 import br.com.artechapps.app.utils.EndPoints;
