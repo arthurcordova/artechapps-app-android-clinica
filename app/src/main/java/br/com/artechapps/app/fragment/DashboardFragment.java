@@ -74,8 +74,8 @@ public class DashboardFragment extends Fragment {
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_dashboard, container, false);
 
-        tvNumScore = (TextView) view.findViewById(R.id.num_score);
-        tvNumDiscount = (TextView) view.findViewById(R.id.num_discount);
+//        tvNumScore = (TextView) view.findViewById(R.id.num_score);
+//        tvNumDiscount = (TextView) view.findViewById(R.id.num_discount);
         tvNumMessage = (TextView) view.findViewById(R.id.num_message);
         tvNumSchedule = (TextView) view.findViewById(R.id.num_schedule);
         mLineMessages = view.findViewById(R.id.line_messages);
@@ -84,10 +84,10 @@ public class DashboardFragment extends Fragment {
         SessionManager sm = new SessionManager(getActivity());
         User user = sm.getSessionUser();
 
-        setAnimationCounter(user.getScore(), TIME_ANIMATION, tvNumScore);
-        setAnimationCounter(user.getDiscount(), TIME_ANIMATION, tvNumDiscount);
+//        setAnimationCounter(user.getScore(), TIME_ANIMATION, tvNumScore);
+//        setAnimationCounter(user.getDiscount(), TIME_ANIMATION, tvNumDiscount);
         setAnimationCounter(user.getMessages(), TIME_ANIMATION, tvNumMessage);
-        setAnimationCounter(user.getScore(), TIME_ANIMATION, tvNumScore);
+//        setAnimationCounter(user.getScore(), TIME_ANIMATION, tvNumScore);
 
         int counter=0;
         PersistenceSchedule per = null;
