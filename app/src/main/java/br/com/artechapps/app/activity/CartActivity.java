@@ -34,6 +34,7 @@ public class CartActivity extends AppCompatActivity {
     private ArrayList<Shop> mList;
     private Button mButton;
     private TextView mTvTotal;
+    private TextView mTvNullList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,15 +47,23 @@ public class CartActivity extends AppCompatActivity {
         mButton = (Button) findViewById(R.id.btn_confirm);
         mRvCart = (RecyclerView) findViewById(R.id.rv_cart_detail);
         mTvTotal = (TextView) findViewById(R.id.total_value);
+        mTvNullList = (TextView) findViewById(R.id.tv_null_list);
         mPersistence = new PersistenceShop(this);
         mList = mPersistence.getRecords();
 
-        RVAdapterCart mAdapter = new RVAdapterCart(mList, this);
-        mAdapter.notifyDataSetChanged();
 
-        mRvCart.setLayoutManager(new LinearLayoutManager(this));
-        mRvCart.setItemAnimator(new DefaultItemAnimator());
-        mRvCart.setAdapter(mAdapter);
+        if (mList.size() > 0) {
+            mTvNullList.setVisibility(View.INVISIBLE);
+            RVAdapterCart mAdapter = new RVAdapterCart(mList, this);
+            mAdapter.notifyDataSetChanged();
+
+            mRvCart.setLayoutManager(new LinearLayoutManager(this));
+            mRvCart.setItemAnimator(new DefaultItemAnimator());
+            mRvCart.setAdapter(mAdapter);
+
+        } else {
+            mTvNullList.setVisibility(View.VISIBLE);
+        }
 
         updateTotalValue();
 
