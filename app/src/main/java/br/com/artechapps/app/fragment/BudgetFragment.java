@@ -13,6 +13,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import java.util.ArrayList;
 
@@ -78,14 +79,19 @@ public class BudgetFragment extends Fragment {
 
         mRvMessages = (RecyclerView) view.findViewById(R.id.rvBudget);
         mFab = (FloatingActionButton) view.findViewById(R.id.fab_filter);
+        TextView mTvNullList = (TextView) view.findViewById(R.id.tv_null_list);
 
         mActivity = (MainMenuActivity) getActivity();
-
 
         try {
             mPersistence = new PersistenceBudget(mActivity);
             mList = mPersistence.getRecords();
 
+            if (mList.size() > 0) {
+                mTvNullList.setVisibility(View.INVISIBLE);
+            } else {
+                mTvNullList.setVisibility(View.VISIBLE);
+            }
             mAdapter = new RVAdapterBudget(mList, mActivity);
 
             mRvMessages.setLayoutManager(new LinearLayoutManager(mActivity));
