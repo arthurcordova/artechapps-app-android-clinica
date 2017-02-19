@@ -12,6 +12,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import java.util.ArrayList;
 
@@ -84,6 +85,7 @@ public class ScheduleFragment extends Fragment {
 
         mRvSchedules = (RecyclerView) view.findViewById(R.id.rvSchedules);
         mFab = (FloatingActionButton) view.findViewById(R.id.fab_new_schedule);
+        TextView mTvNullList = (TextView) view.findViewById(R.id.tv_null_list);
 
         mActivity = (MainMenuActivity)getActivity();
 
@@ -98,6 +100,12 @@ public class ScheduleFragment extends Fragment {
 
         mPersistence = new PersistenceSchedule(getContext());
         mList = mPersistence.getRecords();
+
+        if (mList.size() > 0) {
+            mTvNullList.setVisibility(View.INVISIBLE);
+        } else {
+            mTvNullList.setVisibility(View.VISIBLE);
+        }
 
         RVAdapterSchedule adapter = new RVAdapterSchedule(mList, mActivity);
 

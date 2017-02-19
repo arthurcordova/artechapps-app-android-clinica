@@ -11,6 +11,20 @@
 
     </android.support.v7.widget.RecyclerView>
 
+    <TextView
+        android:id="@+id/tv_null_list"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="77dp"
+        android:layout_marginRight="77dp"
+        android:layout_marginTop="92dp"
+        android:fontFamily="sans-serif"
+        android:gravity="center"
+        android:text="Você ainda não possui agendamentos"
+        android:textColor="#33000000"
+        android:textSize="16sp"
+        android:visibility="invisible" />
+
     <android.support.design.widget.FloatingActionButton
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
