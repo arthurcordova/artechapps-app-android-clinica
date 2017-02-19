@@ -11,12 +11,14 @@ import android.support.v7.widget.SearchView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import java.util.ArrayList;
 
 import br.com.artechapps.app.BuildConfig;
 import br.com.artechapps.app.R;
 import br.com.artechapps.app.activity.MainMenuActivity;
+import br.com.artechapps.app.adapter.RVAdapterMessage;
 import br.com.artechapps.app.adapter.RVAdapterProduct;
 import br.com.artechapps.app.database.Persistence;
 import br.com.artechapps.app.database.PersistenceProduct;
@@ -95,7 +97,7 @@ public class ProductFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_product, container, false);
 
         mRvProduct = (RecyclerView) view.findViewById(R.id.rvProducts);
-
+        TextView mTvNullList = (TextView) view.findViewById(R.id.tv_null_list);
         mActivity = (MainMenuActivity)getActivity();
 
         new AsyncTaskProduct("Carregando produtos...",getContext(),true, mRvProduct, mActivity).execute(String.valueOf(BuildConfig.FILIAL));
@@ -104,11 +106,15 @@ public class ProductFragment extends Fragment {
         mList = mPersistence.getProduct();
 
         final RVAdapterProduct mAdapter = new RVAdapterProduct(mList, mActivity);
+        if (mList.size() > 0) {
+            mTvNullList.setVisibility(View.INVISIBLE);
 
-        mRvProduct.setLayoutManager(new LinearLayoutManager(getContext()));
-        mRvProduct.setItemAnimator(new DefaultItemAnimator());
-        mRvProduct.setAdapter(mAdapter);
-
+            mRvProduct.setLayoutManager(new LinearLayoutManager(getContext()));
+            mRvProduct.setItemAnimator(new DefaultItemAnimator());
+            mRvProduct.setAdapter(mAdapter);
+        } else {
+            mTvNullList.setVisibility(View.VISIBLE);
+        }
         mPersistence.close();
 
         mSearchItem.setIconified(true);
