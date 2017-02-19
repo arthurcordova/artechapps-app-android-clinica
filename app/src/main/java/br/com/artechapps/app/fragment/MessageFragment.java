@@ -13,12 +13,14 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import java.util.ArrayList;
 
 import br.com.artechapps.app.R;
 import br.com.artechapps.app.activity.FilterMessageActivity;
 import br.com.artechapps.app.activity.MainMenuActivity;
+import br.com.artechapps.app.adapter.RVAdapterCart;
 import br.com.artechapps.app.adapter.RVAdapterMessage;
 import br.com.artechapps.app.database.PersistenceMessage;
 import br.com.artechapps.app.model.Message;
@@ -98,6 +100,7 @@ public class MessageFragment extends Fragment {
 
         mRvMessages = (RecyclerView) view.findViewById(R.id.rvMessages);
         mFab = (FloatingActionButton) view.findViewById(R.id.fab_filter);
+        TextView mTvNullList = (TextView) view.findViewById(R.id.tv_null_list);
 
         mActivity = (MainMenuActivity)getActivity();
 
@@ -106,11 +109,18 @@ public class MessageFragment extends Fragment {
         mPersistence = new PersistenceMessage(getContext());
         mList = mPersistence.getRecords();
 
-        mAdapter = new RVAdapterMessage(mList, mActivity);
+        if (mList.size() > 0) {
+            mTvNullList.setVisibility(View.INVISIBLE);
+            mAdapter = new RVAdapterMessage(mList, mActivity);
 
-        mRvMessages.setLayoutManager(new LinearLayoutManager(getContext()));
-        mRvMessages.setItemAnimator(new DefaultItemAnimator());
-        mRvMessages.setAdapter(mAdapter);
+            mRvMessages.setLayoutManager(new LinearLayoutManager(getContext()));
+            mRvMessages.setItemAnimator(new DefaultItemAnimator());
+            mRvMessages.setAdapter(mAdapter);
+
+        } else {
+            mTvNullList.setVisibility(View.VISIBLE);
+        }
+
 
         mPersistence.close();
 
