@@ -11,6 +11,8 @@ import android.text.TextWatcher;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.view.Window;
+import android.view.WindowManager;
 import android.view.inputmethod.EditorInfo;
 import android.widget.Button;
 import android.widget.EditText;
@@ -35,18 +37,31 @@ public class LoginActivity extends AppCompatActivity {
     private Button mSignIn;
     private FloatingActionButton mFab;
     private SharedPreferences mSharedPreferences;
+    private View mTvForgot;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+//        requestWindowFeature(Window.FEATURE_NO_TITLE);
+//        requestWindowFeature(Window.BA);
+//        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
         mCPF = (EditText) findViewById(R.id.email);
         mPassword = (EditText) findViewById(R.id.password);
         mFab = (FloatingActionButton) findViewById(R.id.fab);
         mSignIn = (Button) findViewById(R.id.sign_in_button);
+        mTvForgot = findViewById(R.id.tv_forgot_password);
 
         mSharedPreferences = getSharedPreferences(BuildConfig.APPLICATION_ID, MODE_PRIVATE);
         String user = mSharedPreferences.getString(USER_LOGIN, null);
+
+        mTvForgot.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(LoginActivity.this, ResetPasswordActivity.class));
+            }
+        });
 
         mPassword.setOnEditorActionListener(new TextView.OnEditorActionListener() {
             @Override

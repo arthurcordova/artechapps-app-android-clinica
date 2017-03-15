@@ -23,7 +23,7 @@
         </activity>
         <activity
             android:name=".activity.LoginActivity"
-            android:label="@string/title_activity_login"
+            android:label=" "
             android:screenOrientation="portrait" />
         <activity
             android:name=".activity.NewUserActivity"
@@ -84,7 +84,11 @@
         <activity
             android:name=".activity.NewScheduleTimeActivity"
             android:screenOrientation="portrait"
-            android:theme="@style/AppTheme.NoActionBar"/>
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".activity.ResetPasswordActivity"
+            android:label="@string/title_activity_reset_password"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 
 </manifest>

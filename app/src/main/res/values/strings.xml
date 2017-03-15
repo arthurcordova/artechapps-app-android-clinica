@@ -43,6 +43,7 @@
     <string name="action_settings">Settings</string>
     <string name="title_activity_new_schedule_final">NewScheduleFinalActivity</string>
     <string name="title_activity_new_schedule_time">NewScheduleTimeActivity</string>
+    <string name="title_activity_reset_password">Recuperar senha</string>
 
     <!-- nonaka 041 057 404 07-->
 
