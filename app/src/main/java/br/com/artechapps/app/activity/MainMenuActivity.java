@@ -28,6 +28,7 @@ import br.com.artechapps.app.database.PersistenceShop;
 import br.com.artechapps.app.fragment.AboutFragment;
 import br.com.artechapps.app.fragment.BudgetFragment;
 import br.com.artechapps.app.fragment.DashboardFragment;
+import br.com.artechapps.app.fragment.ExecutionFragment;
 import br.com.artechapps.app.fragment.MessageFragment;
 import br.com.artechapps.app.fragment.ProductFragment;
 import br.com.artechapps.app.fragment.ScheduleFragment;
@@ -233,6 +234,11 @@ public class MainMenuActivity extends AppCompatActivity
                 mToolbar.setTitle("Agendamentos");
                 mSearchItem.setVisible(false);
                 replaceFragment(new ScheduleFragment());
+                break;
+            case R.id.nav_exec:
+                mToolbar.setTitle("Execuções");
+                mSearchItem.setVisible(false);
+                replaceFragment(new ExecutionFragment());
                 break;
             case R.id.nav_products:
                 mToolbar.setTitle("Produtos");

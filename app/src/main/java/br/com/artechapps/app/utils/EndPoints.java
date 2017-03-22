@@ -31,5 +31,7 @@ public class EndPoints extends Webservice{
 
     public static final String CONFIRM_CART_PRODUCTS = SERVER.concat("/cadprodorcamento/");
 
+    public static final String EXECUTIONS = SERVER.concat("/execucoes/");
+
 
 }
