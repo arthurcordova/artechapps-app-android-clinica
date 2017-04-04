@@ -5,6 +5,7 @@ import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
+import android.view.View;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -30,15 +31,16 @@ public class AsyncTaskExecutions extends AsyncTaskHttp {
     private RecyclerView mRecyclerView;
     private ArrayList<Message> mList;
     private MainMenuActivity mActivity;
+    private View mTvNullList;
 
 
-    public AsyncTaskExecutions(String msg, Context context, boolean showDialog, RecyclerView recyclerView, MainMenuActivity activity) {
+    public AsyncTaskExecutions(String msg, Context context, boolean showDialog, RecyclerView recyclerView, View tvNullList, MainMenuActivity activity) {
         mMsg = msg;
         mContext = context;
         mShowDialog = showDialog;
         mRecyclerView = recyclerView;
         mActivity = activity;
-
+        mTvNullList = tvNullList;
     }
 
     @Override
@@ -58,6 +60,7 @@ public class AsyncTaskExecutions extends AsyncTaskHttp {
     @Override
     protected void onPostExecute(String s) {
         super.onPostExecute(s);
+        mTvNullList.setVisibility(View.INVISIBLE);
         if (mJson != null && mJson.length() > 0) {
 
             ArrayList<Execution> list = new ArrayList<>();
@@ -82,6 +85,8 @@ public class AsyncTaskExecutions extends AsyncTaskHttp {
             mRecyclerView.setItemAnimator(new DefaultItemAnimator());
             mRecyclerView.setAdapter(adapter);
 
+        } else {
+            mTvNullList.setVisibility(View.VISIBLE);
         }
     }
 }

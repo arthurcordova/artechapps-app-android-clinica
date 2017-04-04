@@ -65,7 +65,7 @@ public class ExecutionFragment extends Fragment {
         MainMenuActivity activity = (MainMenuActivity)getActivity();
 
 //        new AsyncTaskExecutions("Carregando execuções...", getContext(), true, rv, activity).execute(String.valueOf(user.getCode()));
-        new AsyncTaskExecutions("Carregando execuções...", getContext(), true, rv, activity).execute(String.valueOf("3819"));
+        new AsyncTaskExecutions("Carregando execuções...", getContext(), true, rv, tvNullList, activity).execute(String.valueOf(user.getCode()));
 
         return view;
     }
