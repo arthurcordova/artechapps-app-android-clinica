@@ -60,9 +60,10 @@ public class AsyncTaskNewUser extends AsyncTaskHttp {
     @Override
     protected void onPostExecute(String results) {
         super.onPostExecute(results);
-        if (mJson == null){
-            Toast.makeText(mContext,"Erro ao criar novo usuário. Por favor entre em contato conosco.",Toast.LENGTH_LONG).show();
-        }
+        Toast.makeText(mContext,"Usuário criado com sucesso.",Toast.LENGTH_LONG).show();
+//        if (mJson == null){
+//            Toast.makeText(mContext,"Erro ao criar novo usuário. Por favor entre em contato conosco.",Toast.LENGTH_LONG).show();
+//        }
 
     }
 }
