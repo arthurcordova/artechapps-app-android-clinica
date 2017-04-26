@@ -180,6 +180,22 @@ public class MainMenuActivity extends AppCompatActivity
 
         updateShopCart();
 
+
+        try {
+            String origin = getIntent().getExtras().getString("origin");
+            if (origin.equals(BudgetFragment.class.getName())) {
+
+                mToolbar.setTitle("Novo Orçamento");
+                mSearchItem.setVisible(true);
+                ProductFragment frag = new ProductFragment();
+                frag.setSearchView((SearchView) mSearchItem.getActionView());
+                replaceFragment(frag);
+
+            }
+        } catch (Exception e) {
+            Log.e("ERROR", "Replace fragment parameter");
+        }
+
         return super.onCreateOptionsMenu(menu);
 
     }

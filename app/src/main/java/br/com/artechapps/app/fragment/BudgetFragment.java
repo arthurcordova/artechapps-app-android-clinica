@@ -43,6 +43,7 @@ public class BudgetFragment extends Fragment {
     private PersistenceBudget mPersistence;
     private ArrayList<Budget> mList;
     private FloatingActionButton mFab;
+    private FloatingActionButton mFabAdd;
     private RVAdapterBudget mAdapter;
 
 
@@ -79,6 +80,7 @@ public class BudgetFragment extends Fragment {
 
         mRvMessages = (RecyclerView) view.findViewById(R.id.rvBudget);
         mFab = (FloatingActionButton) view.findViewById(R.id.fab_filter);
+        mFabAdd = (FloatingActionButton) view.findViewById(R.id.fab_add);
         TextView mTvNullList = (TextView) view.findViewById(R.id.tv_null_list);
 
         mActivity = (MainMenuActivity) getActivity();
@@ -109,6 +111,14 @@ public class BudgetFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 startActivityForResult(new Intent(mActivity, FilterBudgetActivity.class), 0);
+            }
+        });
+        mFabAdd.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent it = new Intent(mActivity, MainMenuActivity.class);
+                it.putExtra("origin", BudgetFragment.class.getName());
+                startActivityForResult(it, 0);
             }
         });
 
