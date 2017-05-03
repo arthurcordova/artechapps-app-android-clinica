@@ -32,7 +32,7 @@ public class RVAdapterExecution extends RecyclerView.Adapter<RVAdapterExecution.
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View itemLayoutView = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.list_item_message, null);
+                .inflate(R.layout.list_item_execution, null);
         ViewHolder viewHolder = new ViewHolder(itemLayoutView, mActivity);
         return viewHolder;
     }

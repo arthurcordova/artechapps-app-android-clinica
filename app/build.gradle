@@ -8,8 +8,8 @@ android {
         applicationId "br.com.artechapps.app"
         minSdkVersion 16
         targetSdkVersion 23
-        versionCode 14
-        versionName "1.1.4"
+        versionCode 15
+        versionName "1.1.5"
         buildConfigField 'String', 'HOST', '"http://www2.beautyclinic.com.br"'
         buildConfigField 'Long', 'FILIAL', 3 + 'l'
     }

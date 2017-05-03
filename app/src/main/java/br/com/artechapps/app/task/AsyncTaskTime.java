@@ -2,6 +2,7 @@ package br.com.artechapps.app.task;
 
 import android.content.Context;
 import android.support.v7.widget.DefaultItemAnimator;
+import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 
@@ -40,8 +41,23 @@ public class AsyncTaskTime extends AsyncTaskHttp {
             String code = params[0];
             String product = params[1];
             String date = params[2];
+
+            String[] aDate = date.split("-");
+
+            String sDay = aDate[0];
+            if (Integer.valueOf(sDay) < 10) {
+                sDay = "0" + sDay;
+            }
+
+            String sMonth = aDate[1];
+            if (Integer.valueOf(sMonth) < 10) {
+                sMonth = "0" + sMonth;
+            }
+            String sYear = aDate[2];
+            String sDate = sDay + "-" + sMonth + "-" + sYear;
+
             mJson = connectServerA(EndPoints.TIME.concat(code).concat("/")
-                    .concat(product).concat("/").concat(date), null, true);
+                    .concat(product).concat("/").concat(sDate), null, true);
         } catch (JSONException e) {
             e.printStackTrace();
         } catch (IOException e) {
@@ -70,7 +86,7 @@ public class AsyncTaskTime extends AsyncTaskHttp {
 
             RVAdapterTimes rvAdapter = new RVAdapterTimes(list, mProduct);
 
-            mRecyclerView.setLayoutManager(new LinearLayoutManager(mRecyclerView.getContext()));
+            mRecyclerView.setLayoutManager(new GridLayoutManager(mRecyclerView.getContext(), 3));
             mRecyclerView.setItemAnimator(new DefaultItemAnimator());
             mRecyclerView.setAdapter(rvAdapter);
 
