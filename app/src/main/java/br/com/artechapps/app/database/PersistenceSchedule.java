@@ -95,6 +95,30 @@ public class PersistenceSchedule extends RepositorySchedule {
         return list;
     }
 
+    public ArrayList<Schedule> getRecordsOK() {
+        ArrayList<Schedule> list = new ArrayList<>();
+        Cursor cursor = persistence.find(" status = ?",new String[]{"AGENDADO"});
+        if (cursor != null) {
+            if (cursor.moveToFirst()) {
+                do {
+                    Schedule model = new Schedule();
+
+                    model.setCode(cursor.getLong(cursor.getColumnIndex(COLUMNS[0])));
+                    model.getProduct().setId(cursor.getLong(cursor.getColumnIndex(COLUMNS[1])));
+                    model.getProduct().setDescription(cursor.getString(cursor.getColumnIndex(COLUMNS[2])));
+                    model.setTime(cursor.getString(cursor.getColumnIndex(COLUMNS[3])));
+                    model.setRepeat(cursor.getString(cursor.getColumnIndex(COLUMNS[4])));
+                    model.setStatus(cursor.getString(cursor.getColumnIndex(COLUMNS[5])));
+                    model.setDate(cursor.getString(cursor.getColumnIndex(COLUMNS[6])));
+
+                    list.add(model);
+                } while (cursor.moveToNext());
+            }
+            cursor.close();
+        }
+        return list;
+    }
+
     public int count(){
         int count = 0;
         Cursor cursor = persistence.getDataBase().rawQuery("select count(*) c from "+TABLE_NAME, null);

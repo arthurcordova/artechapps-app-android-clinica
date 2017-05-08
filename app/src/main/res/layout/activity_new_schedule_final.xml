@@ -21,6 +21,17 @@
 
     </android.support.design.widget.AppBarLayout>
 
-    <include layout="@layout/content_new_schedule_final" />
+    <include layout="@layout/content_new_schedule_final"
+        android:id="@+id/include" />
+
+    <ImageView
+        android:id="@+id/imageView3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="top|center_horizontal"
+        android:layout_marginBottom="16dp"
+        android:src="@drawable/ic_qrcode"
+        app:layout_anchor="@+id/include"
+        app:layout_anchorGravity="bottom|center_horizontal" />
 
 </android.support.design.widget.CoordinatorLayout>

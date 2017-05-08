@@ -11,9 +11,14 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import org.w3c.dom.Text;
+
+import java.util.ArrayList;
+
 import br.com.artechapps.app.R;
 import br.com.artechapps.app.activity.MainMenuActivity;
 import br.com.artechapps.app.database.PersistenceSchedule;
+import br.com.artechapps.app.model.Schedule;
 import br.com.artechapps.app.model.User;
 import br.com.artechapps.app.utils.SessionManager;
 
@@ -28,13 +33,13 @@ public class DashboardFragment extends Fragment {
 
     private OnFragmentInteractionListener mListener;
     private MainMenuActivity mActivity;
-    private TextView tvNumScore;
-    private TextView tvNumDiscount;
+    private TextView mTvProcedureName;
+    private TextView mTvProcedureDate;
+    private View mCardNextScheduling;
     private TextView tvNumMessage;
     private TextView tvNumSchedule;
     private View mLineMessages;
     private View mLineSchedule;
-
 
 
     public DashboardFragment() {
@@ -74,22 +79,36 @@ public class DashboardFragment extends Fragment {
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_dashboard, container, false);
 
-//        tvNumScore = (TextView) view.findViewById(R.id.num_score);
-//        tvNumDiscount = (TextView) view.findViewById(R.id.num_discount);
         tvNumMessage = (TextView) view.findViewById(R.id.num_message);
         tvNumSchedule = (TextView) view.findViewById(R.id.num_schedule);
         mLineMessages = view.findViewById(R.id.line_messages);
         mLineSchedule = view.findViewById(R.id.line_schedule);
+        mCardNextScheduling = view.findViewById(R.id.cvNextSchedule);
+        mTvProcedureName = (TextView) view.findViewById(R.id.tv_procedure_name);
+        mTvProcedureDate = (TextView) view.findViewById(R.id.tv_procedure_date);
+
+        mCardNextScheduling.setVisibility(View.GONE);
+        PersistenceSchedule persistence = new PersistenceSchedule(getContext());
+        ArrayList<Schedule> list = persistence.getRecordsOK();
+
+        if (list.size() > 0) {
+            mCardNextScheduling.setVisibility(View.VISIBLE);
+            mTvProcedureName.setText(list.get(0).getProduct().getDescription());
+            mTvProcedureDate.setText("Data: " + list.get(0).getDate()+  " Horário: " + list.get(0).getTime());
+
+        } else {
+            mCardNextScheduling.setVisibility(View.GONE);
+        }
+
+
+
 
         SessionManager sm = new SessionManager(getActivity());
         User user = sm.getSessionUser();
 
-//        setAnimationCounter(user.getScore(), TIME_ANIMATION, tvNumScore);
-//        setAnimationCounter(user.getDiscount(), TIME_ANIMATION, tvNumDiscount);
         setAnimationCounter(user.getMessages(), TIME_ANIMATION, tvNumMessage);
-//        setAnimationCounter(user.getScore(), TIME_ANIMATION, tvNumScore);
 
-        int counter=0;
+        int counter = 0;
         PersistenceSchedule per = null;
         try {
             per = new PersistenceSchedule(getContext());
@@ -111,14 +130,6 @@ public class DashboardFragment extends Fragment {
                 getFragmentManager().beginTransaction().replace(R.id.container, new ScheduleFragment()).commit();
             }
         });
-
-
-
-
-//        setAnimationCounter(10, TIME_ANIMATION, tvNumScore);
-//        setAnimationCounter(55, TIME_ANIMATION, tvNumDiscount);
-//        setAnimationCounter(12, TIME_ANIMATION, tvNumMessage);
-//        setAnimationCounter(33, TIME_ANIMATION, tvNumSchedule);
 
         return view;
     }
