@@ -26,6 +26,7 @@ public class NewScheduleTimeActivity extends AppCompatActivity {
     private Product mProduct;
     private RecyclerView mRecyclerView;
     private ImageView mImgCalendar;
+    private TextView mTvNullList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,6 +36,8 @@ public class NewScheduleTimeActivity extends AppCompatActivity {
         mProduct = (Product) getIntent().getSerializableExtra("model");
         mRecyclerView = (RecyclerView) findViewById(R.id.rvTimes);
         mImgCalendar = (ImageView) findViewById(R.id.action_calendar);
+        mTvNullList = (TextView) findViewById(R.id.tv_null_list);
+        mTvNullList.setVisibility(View.INVISIBLE);
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -92,10 +95,12 @@ public class NewScheduleTimeActivity extends AppCompatActivity {
 
         public void onDateSet(DatePicker view, int year, int month, int day) {
             TextView date = (TextView) getActivity().findViewById(R.id.label_date);
+            TextView tvNullList = (TextView) getActivity().findViewById(R.id.tv_null_list);
+            tvNullList.setVisibility(View.INVISIBLE);
             RecyclerView recyclerView = (RecyclerView) getActivity().findViewById(R.id.rvTimes);
             date.setText(String.valueOf(day).concat("/") + String.valueOf(month+1).concat("/") + String.valueOf(year));
             model.setDate(String.valueOf(day).concat("-") + String.valueOf(month+1).concat("-") + String.valueOf(year));
-            AsyncTaskTime async = new AsyncTaskTime(getActivity(), recyclerView, model);
+            AsyncTaskTime async = new AsyncTaskTime(getActivity(), recyclerView, tvNullList, model);
             async.execute(String.valueOf(BuildConfig.FILIAL), String.valueOf(model.getId()),model.getDate());
         }
     }

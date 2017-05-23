@@ -5,6 +5,8 @@ import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.View;
+import android.widget.TextView;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -26,13 +28,21 @@ public class AsyncTaskTime extends AsyncTaskHttp {
     private JSONArray mJson;
     private RecyclerView mRecyclerView;
     private Product mProduct;
+    private TextView mTvNullList;
 
-    public AsyncTaskTime(Context context, RecyclerView recyclerView, Product product) {
+    public AsyncTaskTime(Context context, RecyclerView recyclerView, TextView tvNullList, Product product) {
         mContext = context;
         mMsg = "Atualizando horários...";
         mShowDialog = true;
         mRecyclerView = recyclerView;
         mProduct = product;
+        mTvNullList = tvNullList;
+    }
+
+    @Override
+    protected void onPreExecute() {
+        super.onPreExecute();
+        mTvNullList.setVisibility(View.INVISIBLE);
     }
 
     @Override
@@ -90,6 +100,8 @@ public class AsyncTaskTime extends AsyncTaskHttp {
             mRecyclerView.setItemAnimator(new DefaultItemAnimator());
             mRecyclerView.setAdapter(rvAdapter);
 
+        } else {
+            mTvNullList.setVisibility(View.VISIBLE);
         }
     }
 }

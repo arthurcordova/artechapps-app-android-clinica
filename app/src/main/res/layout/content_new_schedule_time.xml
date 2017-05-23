@@ -11,6 +11,18 @@
     <android.support.v7.widget.RecyclerView
         android:id="@+id/rvTimes"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"/>
+        android:layout_height="match_parent" />
+
+    <TextView
+        android:id="@+id/tv_null_list"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:fontFamily="sans-serif-medium"
+        android:padding="16pt"
+        android:text="Nenhum horário disponível para o dia selecionado."
+        android:textAlignment="center"
+        android:textSize="16sp" />
+
 
 </RelativeLayout>
