@@ -43,8 +43,7 @@
                         android:layout_marginLeft="16dp"
                         android:layout_marginRight="8dp"
                         android:layout_marginTop="16dp"
-                        android:alpha="0.6"
-                        android:src="@drawable/ic_chat_black_24dp" />
+                        android:src="@drawable/ic_chat_yellow" />
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -52,7 +51,9 @@
                         android:layout_marginTop="16dp"
                         android:layout_toEndOf="@+id/imageView8"
                         android:layout_toRightOf="@+id/imageView8"
+                        android:fontFamily="sans-serif-medium"
                         android:text="Mensagens"
+                        android:textColor="@color/yellow"
                         android:textSize="18sp" />
 
                     <LinearLayout
@@ -79,7 +80,7 @@
                         android:layout_marginRight="16dp"
                         android:alpha="0.7"
                         android:gravity="right"
-                        android:textColor="@color/colorPrimary"
+                        android:textColor="@color/black"
                         android:textSize="30dp"
                         android:textStyle="bold" />
 
@@ -131,6 +132,7 @@
                         android:layout_marginTop="16dp"
                         android:layout_toEndOf="@+id/imageView7"
                         android:layout_toRightOf="@+id/imageView7"
+                        android:fontFamily="sans-serif-medium"
                         android:text="Agendamentos"
                         android:textSize="18sp" />
 
@@ -159,7 +161,7 @@
                         android:layout_weight="1"
                         android:alpha="0.7"
                         android:gravity="right"
-                        android:textColor="@color/colorPrimary"
+                        android:textColor="@color/black"
                         android:textSize="30dp"
                         android:textStyle="bold" />
 
@@ -200,8 +202,7 @@
                         android:layout_marginLeft="16dp"
                         android:layout_marginRight="8dp"
                         android:layout_marginTop="16dp"
-                        android:alpha="0.6"
-                        android:src="@drawable/ic_event_black" />
+                        android:src="@drawable/ic_event_red" />
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -209,7 +210,9 @@
                         android:layout_marginTop="16dp"
                         android:layout_toEndOf="@+id/imageView9"
                         android:layout_toRightOf="@+id/imageView9"
+                        android:fontFamily="sans-serif-medium"
                         android:text="Próximo agendamento"
+                        android:textColor="@color/red"
                         android:textSize="18sp" />
 
                     <LinearLayout
@@ -229,9 +232,11 @@
                     android:layout_marginEnd="16dp"
                     android:layout_marginStart="16dp"
                     android:layout_marginTop="6dp"
+                    android:alpha="0.80"
                     android:fontFamily="sans-serif-medium"
                     android:lines="1"
-                    android:text="BOTOX"
+                    android:text=""
+                    android:textColor="@color/black"
                     android:textSize="18sp" />
 
                 <TextView
@@ -244,7 +249,7 @@
                     android:layout_marginTop="6dp"
                     android:fontFamily="sans-serif"
                     android:lines="1"
-                    android:text="Próximo agendamento"
+                    android:text=""
                     android:textSize="14sp" />
 
 

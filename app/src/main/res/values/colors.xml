@@ -9,8 +9,8 @@
     <color name="black">#000000</color>
     <color name="blue">#1e88e5</color>
     <color name="green">#1e88e5</color>
-
-
+    <color name="red">#D23F31</color>
+    <color name="yellow">#F6BF26</color>
 </resources>
 
 
