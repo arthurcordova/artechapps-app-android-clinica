@@ -73,7 +73,8 @@ public class PersistenceSchedule extends RepositorySchedule {
 
     public ArrayList<Schedule> getRecords() {
         ArrayList<Schedule> list = new ArrayList<>();
-        Cursor cursor = persistence.find();
+//        Cursor cursor = persistence.find();
+        Cursor cursor = persistence.getDataBase().rawQuery("select * from tbschedule order by date, time desc", new String[]{});
         if (cursor != null) {
             if (cursor.moveToFirst()) {
                 do {
@@ -97,7 +98,7 @@ public class PersistenceSchedule extends RepositorySchedule {
 
     public ArrayList<Schedule> getRecordsOK() {
         ArrayList<Schedule> list = new ArrayList<>();
-        Cursor cursor = persistence.find(" status = ?",new String[]{"AGENDADO"});
+        Cursor cursor = persistence.find(" status = ?", new String[]{"AGENDADO"});
         if (cursor != null) {
             if (cursor.moveToFirst()) {
                 do {
@@ -119,11 +120,11 @@ public class PersistenceSchedule extends RepositorySchedule {
         return list;
     }
 
-    public int count(){
+    public int count() {
         int count = 0;
-        Cursor cursor = persistence.getDataBase().rawQuery("select count(*) c from "+TABLE_NAME, null);
+        Cursor cursor = persistence.getDataBase().rawQuery("select count(*) c from " + TABLE_NAME, null);
         if (cursor != null) {
-            if (cursor.moveToFirst()){
+            if (cursor.moveToFirst()) {
                 count = cursor.getInt(cursor.getColumnIndex("c"));
             }
         }
@@ -143,7 +144,7 @@ public class PersistenceSchedule extends RepositorySchedule {
         return contentValues;
     }
 
-    public void updateStatusCancel(String id){
+    public void updateStatusCancel(String id) {
         String sql = "update " + TABLE_NAME + " set " + COLUMNS[5] + " = \"CANCELADO\" where " + COLUMNS[0] + " = " + id;
         persistence.getDataBase().execSQL(sql);
     }
