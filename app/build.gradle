@@ -2,14 +2,14 @@ apply plugin: 'com.android.application'
 
 android {
     compileSdkVersion 25
-    buildToolsVersion '25.0.0'
+    buildToolsVersion '25.0.3'
 
     defaultConfig {
         applicationId "br.com.artechapps.app"
         minSdkVersion 16
         targetSdkVersion 25
-        versionCode 18
-        versionName "1.1.8"
+        versionCode 19
+        versionName "1.1.9"
         buildConfigField 'String', 'HOST', '"http://www2.beautyclinic.com.br"'
         buildConfigField 'Long', 'FILIAL', 3 + 'l'
     }
