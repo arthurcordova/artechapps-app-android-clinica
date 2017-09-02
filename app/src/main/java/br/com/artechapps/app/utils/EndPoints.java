@@ -33,5 +33,6 @@ public class EndPoints extends Webservice{
 
     public static final String EXECUTIONS = SERVER.concat("/execucoes/");
 
+    public static final String QRCODE = SERVER.concat("/getqrcode/");
 
 }

@@ -25,7 +25,16 @@
         android:id="@+id/include" />
 
     <ImageView
-        android:id="@+id/imageView3"
+        android:id="@+id/image_qrcode"
+        android:layout_width="200dp"
+        android:layout_height="200dp"
+        android:layout_gravity="top|center_horizontal"
+        android:layout_marginBottom="16dp"
+        app:layout_anchor="@+id/include"
+        app:layout_anchorGravity="bottom|center_horizontal" />
+
+    <ImageView
+        android:id="@+id/button_qrcode"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="top|center_horizontal"
