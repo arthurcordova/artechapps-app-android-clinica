@@ -1,6 +1,5 @@
 package br.com.artechapps.app.activity;
 
-import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
@@ -34,6 +33,7 @@ import br.com.artechapps.app.model.Schedule;
 import br.com.artechapps.app.model.User;
 import br.com.artechapps.app.task.AsyncTaskCancelAppointment;
 import br.com.artechapps.app.task.AsyncTaskNewAppointment;
+import br.com.artechapps.app.utils.DialogQRCode;
 import br.com.artechapps.app.utils.EndPoints;
 import br.com.artechapps.app.utils.InputStreamVolleyRequest;
 import br.com.artechapps.app.utils.SessionManager;
@@ -158,7 +158,10 @@ public class NewScheduleFinalActivity extends AppCompatActivity {
 
                                         fOut.close();
 
-                                        mImageQrcode.setImageBitmap(image);
+//                                        mImageQrcode.setImageBitmap(image);
+
+                                        DialogQRCode dialog =new DialogQRCode(NewScheduleFinalActivity.this, image);
+                                        dialog.show();
 
                                         Toast.makeText(NewScheduleFinalActivity.this, "Download complete.", Toast.LENGTH_LONG).show();
                                     }
