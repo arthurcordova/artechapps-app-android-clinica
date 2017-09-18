@@ -6,6 +6,8 @@
     android:background="@color/colorDivider"
     tools:context=".fragment.BudgetFragment">
 
+
+
     <android.support.v7.widget.RecyclerView
         android:id="@+id/rvBudget"
         android:layout_width="match_parent"

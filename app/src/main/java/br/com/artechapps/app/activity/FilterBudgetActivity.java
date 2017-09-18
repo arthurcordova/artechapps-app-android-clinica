@@ -5,9 +5,11 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.CompoundButton;
 import android.widget.Switch;
 
 import br.com.artechapps.app.R;
+import br.com.artechapps.app.utils.Constants;
 
 public class FilterBudgetActivity extends AppCompatActivity {
 
@@ -26,6 +28,12 @@ public class FilterBudgetActivity extends AppCompatActivity {
         mSwAll = (Switch) findViewById(R.id.sw_all);
         mSwConfirmed = (Switch) findViewById(R.id.sw_confirmed);
         mSwCancelled = (Switch) findViewById(R.id.sw_cancelled);
+
+        mSwAll.setChecked(Constants.ALL);
+        mSwConfirmed.setChecked(Constants.CONFIRMED);
+        mSwCancelled.setChecked(Constants.CANCELED);
+
+
     }
 
     @Override
@@ -41,6 +49,10 @@ public class FilterBudgetActivity extends AppCompatActivity {
                 finish();
                 return true;
             case R.id.action_ok:
+
+                Constants.ALL = mSwAll.isChecked();
+                Constants.CONFIRMED = mSwConfirmed.isChecked();
+                Constants.CANCELED = mSwCancelled.isChecked();
 
                 Intent result = new Intent();
                 result.putExtra("sw_all", mSwAll.isChecked());
