@@ -2,6 +2,7 @@ package br.com.artechapps.app.activity;
 
 import android.app.DatePickerDialog;
 import android.app.Dialog;
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
 import android.support.v7.app.AppCompatActivity;
@@ -14,7 +15,9 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import java.io.Serializable;
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Date;
 
 import br.com.artechapps.app.BuildConfig;
 import br.com.artechapps.app.R;
@@ -91,6 +94,24 @@ public class NewScheduleTimeActivity extends AppCompatActivity {
 
             // Create a new instance of DatePickerDialog and return it
             return new DatePickerDialog(getActivity(), this, year, month, day);
+        }
+
+        @Override
+        public void onCancel(DialogInterface dialog) {
+            super.onCancel(dialog);
+            TextView date = (TextView) getActivity().findViewById(R.id.label_date);
+            TextView tvNullList = (TextView) getActivity().findViewById(R.id.tv_null_list);
+            tvNullList.setVisibility(View.INVISIBLE);
+            RecyclerView recyclerView = (RecyclerView) getActivity().findViewById(R.id.rvTimes);
+
+            Date now = new Date();
+            SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+            String dateStr = sdf.format(now);
+
+            date.setText(dateStr);
+            model.setDate(dateStr.replaceAll("/", "-"));
+            AsyncTaskTime async = new AsyncTaskTime(getActivity(), recyclerView, tvNullList, model);
+            async.execute(String.valueOf(BuildConfig.FILIAL), String.valueOf(model.getId()),model.getDate());
         }
 
         public void onDateSet(DatePicker view, int year, int month, int day) {
