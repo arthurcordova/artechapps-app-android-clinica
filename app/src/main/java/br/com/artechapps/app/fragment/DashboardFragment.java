@@ -5,6 +5,7 @@ import android.animation.ValueAnimator;
 import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
+import android.support.design.widget.NavigationView;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -40,10 +41,15 @@ public class DashboardFragment extends Fragment {
     private TextView tvNumSchedule;
     private View mLineMessages;
     private View mLineSchedule;
+    private NavigationView mNavigation;
 
 
     public DashboardFragment() {
         // Required empty public constructor
+    }
+
+    public DashboardFragment(NavigationView navigationView) {
+        mNavigation = navigationView;
     }
 
     /**
@@ -121,12 +127,16 @@ public class DashboardFragment extends Fragment {
         mLineMessages.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                mNavigation.getMenu().findItem(R.id.nav_message).setCheckable(true);
+                mNavigation.getMenu().findItem(R.id.nav_message).setChecked(true);
                 getFragmentManager().beginTransaction().replace(R.id.container, new MessageFragment()).commit();
             }
         });
         mLineSchedule.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                mNavigation.getMenu().findItem(R.id.nav_event).setCheckable(true);
+                mNavigation.getMenu().findItem(R.id.nav_event).setChecked(true);
                 getFragmentManager().beginTransaction().replace(R.id.container, new ScheduleFragment()).commit();
             }
         });

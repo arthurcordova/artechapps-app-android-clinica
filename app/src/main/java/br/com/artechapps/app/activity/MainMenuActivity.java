@@ -45,6 +45,7 @@ public class MainMenuActivity extends AppCompatActivity
     private DrawerLayout mDrawer;
     private Toolbar mToolbar;
     private MenuItem mSearchItem;
+    private NavigationView navigationView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -61,12 +62,15 @@ public class MainMenuActivity extends AppCompatActivity
 
 //        mDrawer.openDrawer(Gravity.LEFT);
 
-        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
+        navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
 
         View header =
                 navigationView.getHeaderView(0);
+
+
+
         mTvHeaderUserName = (TextView) header.findViewById(R.id.header_user_name);
         mTvHeaderUserEmail = (TextView) header.findViewById(R.id.header_user_email);
 
@@ -79,7 +83,7 @@ public class MainMenuActivity extends AppCompatActivity
         counter = pers.count();
         pers.close();
 
-        replaceFragment(new DashboardFragment());
+        replaceFragment(new DashboardFragment(navigationView));
 
 
         try {
@@ -235,11 +239,13 @@ public class MainMenuActivity extends AppCompatActivity
     @SuppressWarnings("StatementWithEmptyBody")
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
+
+
         switch (item.getItemId()) {
             case R.id.nav_dashboard:
                 mToolbar.setTitle("Beauty Clinic");
                 mSearchItem.setVisible(false);
-                replaceFragment(new DashboardFragment());
+                replaceFragment(new DashboardFragment(navigationView));
                 break;
             case R.id.nav_message:
                 mToolbar.setTitle("Mensagens");
