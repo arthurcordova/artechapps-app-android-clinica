@@ -106,9 +106,6 @@ public class DashboardFragment extends Fragment {
             mCardNextScheduling.setVisibility(View.GONE);
         }
 
-
-
-
         SessionManager sm = new SessionManager(getActivity());
         User user = sm.getSessionUser();
 

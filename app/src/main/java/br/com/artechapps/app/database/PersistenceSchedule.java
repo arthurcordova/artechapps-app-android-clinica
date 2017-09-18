@@ -9,7 +9,10 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 
 import br.com.artechapps.app.model.Product;
 import br.com.artechapps.app.model.Schedule;
@@ -98,7 +101,22 @@ public class PersistenceSchedule extends RepositorySchedule {
 
     public ArrayList<Schedule> getRecordsOK() {
         ArrayList<Schedule> list = new ArrayList<>();
-        Cursor cursor = persistence.find(" status = ?", new String[]{"AGENDADO"});
+
+        SimpleDateFormat sdfDate = new SimpleDateFormat("dd/MM/yyyy");
+        SimpleDateFormat sdfHour = new SimpleDateFormat("H:mm:ss");
+        Date now = new Date();
+        String dateStr = sdfDate.format(now);
+        String hourStr = sdfHour.format(now);
+
+
+//        Cursor cursor = persistence.find(" status = ?", new String[]{"AGENDADO"}, "");
+        Cursor cursor = persistence.getDataBase().rawQuery("select * from " +
+                "                                           tbschedule " +
+                "                                           where status = 'AGENDADO' " +
+                "                                             and ((date > '"+dateStr+"') or ((date = '"+dateStr+"') and (time > '"+hourStr+"'))) " +
+                "                                            order by date, time", new String[]{});
+
+
         if (cursor != null) {
             if (cursor.moveToFirst()) {
                 do {
