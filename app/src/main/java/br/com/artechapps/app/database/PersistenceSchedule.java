@@ -77,7 +77,22 @@ public class PersistenceSchedule extends RepositorySchedule {
     public ArrayList<Schedule> getRecords() {
         ArrayList<Schedule> list = new ArrayList<>();
 //        Cursor cursor = persistence.find();
-        Cursor cursor = persistence.getDataBase().rawQuery("select * from tbschedule order by date, time desc", new String[]{});
+//        Cursor cursor = persistence.getDataBase().rawQuery("select * from tbschedule order by date, time", new String[]{});
+        SimpleDateFormat sdfDate = new SimpleDateFormat("dd/MM/yyyy");
+        SimpleDateFormat sdfHour = new SimpleDateFormat("H:mm:ss");
+        Date now = new Date();
+        String dateStr = sdfDate.format(now);
+        String hourStr = sdfHour.format(now);
+
+
+//        Cursor cursor = persistence.find(" status = ?", new String[]{"AGENDADO"}, "");
+        Cursor cursor = persistence.getDataBase().rawQuery("select * from " +
+                "                                           tbschedule " +
+                "                                           where status = 'AGENDADO' " +
+                "                                             and ((date > '"+dateStr+"') or ((date = '"+dateStr+"') and (time > '"+hourStr+"'))) " +
+                "                                            order by date, time", new String[]{});
+
+
         if (cursor != null) {
             if (cursor.moveToFirst()) {
                 do {
