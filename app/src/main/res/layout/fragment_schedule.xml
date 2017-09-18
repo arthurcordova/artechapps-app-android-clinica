@@ -4,12 +4,19 @@
     android:layout_height="match_parent"
     tools:context=".fragment.ScheduleFragment">
 
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/rvSchedules"
+    <android.support.v4.widget.SwipeRefreshLayout
+        android:id="@+id/srl"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-    </android.support.v7.widget.RecyclerView>
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/rvSchedules"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+        </android.support.v7.widget.RecyclerView>
+
+    </android.support.v4.widget.SwipeRefreshLayout>
 
     <TextView
         android:id="@+id/tv_null_list"
@@ -26,14 +33,14 @@
         android:visibility="invisible" />
 
     <android.support.design.widget.FloatingActionButton
+        android:id="@+id/fab_new_schedule"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom|right"
-        android:src="@drawable/ic_add"
-        android:id="@+id/fab_new_schedule"
-        android:clickable="true"
+        android:layout_margin="16dp"
         android:background="?attr/selectableItemBackgroundBorderless"
-        android:layout_margin="16dp"/>
+        android:clickable="true"
+        android:src="@drawable/ic_add" />
 
 
 </FrameLayout>

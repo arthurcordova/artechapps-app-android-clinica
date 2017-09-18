@@ -6,6 +6,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -13,6 +14,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -44,6 +46,7 @@ public class ScheduleFragment extends Fragment {
     private MainMenuActivity mActivity;
     private RecyclerView mRvSchedules;
     private FloatingActionButton mFab;
+    private SwipeRefreshLayout mSrl;
 
     public ScheduleFragment() {
         // Required empty public constructor
@@ -82,7 +85,7 @@ public class ScheduleFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_schedule, container, false);
 
         SessionManager sm = new SessionManager(getContext());
-        User user = sm.getSessionUser();
+        final User user = sm.getSessionUser();
 
         mRvSchedules = (RecyclerView) view.findViewById(R.id.rvSchedules);
         mFab = (FloatingActionButton) view.findViewById(R.id.fab_new_schedule);
@@ -97,7 +100,16 @@ public class ScheduleFragment extends Fragment {
             }
         });
 
-        new AsyncTaskAppointment("Carregando agendamentos...", getContext(), true, mRvSchedules, mActivity).execute(String.valueOf(user.getCode()));
+        mSrl = (SwipeRefreshLayout) view.findViewById(R.id.srl);
+        mSrl.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                new AsyncTaskAppointment("Carregando agendamentos...", getContext(), true, mRvSchedules, mActivity, mSrl).execute(String.valueOf(user.getCode()));
+            }
+        });
+
+
+        new AsyncTaskAppointment("Carregando agendamentos...", getContext(), true, mRvSchedules, mActivity, mSrl).execute(String.valueOf(user.getCode()));
 
         mPersistence = new PersistenceSchedule(getContext());
         mList = mPersistence.getRecords();

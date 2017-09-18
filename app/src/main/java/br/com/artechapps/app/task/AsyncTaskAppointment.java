@@ -1,6 +1,7 @@
 package br.com.artechapps.app.task;
 
 import android.content.Context;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -27,13 +28,15 @@ public class AsyncTaskAppointment extends AsyncTaskHttp {
     private RecyclerView mRecyclerView;
     private ArrayList<Schedule> mList;
     private MainMenuActivity mActivity;
+    private SwipeRefreshLayout mSrl;
 
-    public AsyncTaskAppointment(String msg, Context context, boolean showDialog, RecyclerView recyclerView, MainMenuActivity activity) {
+    public AsyncTaskAppointment(String msg, Context context, boolean showDialog, RecyclerView recyclerView, MainMenuActivity activity, SwipeRefreshLayout srl) {
         mMsg = msg;
         mContext = context;
         mShowDialog = showDialog;
         mRecyclerView = recyclerView;
         mActivity = activity;
+        mSrl = srl;
     }
 
     @Override
@@ -72,5 +75,6 @@ public class AsyncTaskAppointment extends AsyncTaskHttp {
 
             mPersistence.close();
         }
+        mSrl.setRefreshing(false);
     }
 }
