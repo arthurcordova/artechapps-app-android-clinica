@@ -83,7 +83,9 @@ public class MainMenuActivity extends AppCompatActivity
         counter = pers.count();
         pers.close();
 
-        replaceFragment(new DashboardFragment(navigationView));
+        DashboardFragment dashboardFragment = new DashboardFragment();
+        dashboardFragment.mNavigation = navigationView;
+        replaceFragment(dashboardFragment);
 
 
         try {
@@ -245,7 +247,9 @@ public class MainMenuActivity extends AppCompatActivity
             case R.id.nav_dashboard:
                 mToolbar.setTitle("Beauty Clinic");
                 mSearchItem.setVisible(false);
-                replaceFragment(new DashboardFragment(navigationView));
+                DashboardFragment dashboardFragment = new DashboardFragment();
+                dashboardFragment.mNavigation = navigationView;
+                replaceFragment(dashboardFragment);
                 break;
             case R.id.nav_message:
                 mToolbar.setTitle("Mensagens");

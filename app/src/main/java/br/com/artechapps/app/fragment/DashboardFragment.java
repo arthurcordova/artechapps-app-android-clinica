@@ -41,16 +41,13 @@ public class DashboardFragment extends Fragment {
     private TextView tvNumSchedule;
     private View mLineMessages;
     private View mLineSchedule;
-    private NavigationView mNavigation;
+    public NavigationView mNavigation;
 
 
     public DashboardFragment() {
         // Required empty public constructor
     }
 
-    public DashboardFragment(NavigationView navigationView) {
-        mNavigation = navigationView;
-    }
 
     /**
      * Use this factory method to create a new instance of
