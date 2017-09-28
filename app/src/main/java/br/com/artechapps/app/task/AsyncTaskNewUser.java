@@ -22,10 +22,12 @@ import br.com.artechapps.app.utils.EndPoints;
 public class AsyncTaskNewUser extends AsyncTaskHttp {
 
     private JSONObject mJson;
+    private NewUserActivity mActivity;
 
-    public AsyncTaskNewUser(String msg, Context context, boolean showDialog) {
+    public AsyncTaskNewUser(String msg, NewUserActivity activity, boolean showDialog) {
         mMsg = msg;
-        mContext = context;
+        mActivity = activity;
+        mContext = activity;
         mShowDialog = showDialog;
     }
 
@@ -61,6 +63,7 @@ public class AsyncTaskNewUser extends AsyncTaskHttp {
     protected void onPostExecute(String results) {
         super.onPostExecute(results);
         Toast.makeText(mContext,"Usuário criado com sucesso.",Toast.LENGTH_LONG).show();
+        mActivity.finish();
 //        if (mJson == null){
 //            Toast.makeText(mContext,"Erro ao criar novo usuário. Por favor entre em contato conosco.",Toast.LENGTH_LONG).show();
 //        }
