@@ -127,7 +127,7 @@ public class ProductFragment extends Fragment {
 
             @Override
             public boolean onQueryTextChange(String query) {
-                if (query.length() > 2) {
+                if (query.length() > 1) {
                     ArrayList<Product> list = filter(mList, query);
                     if (list != null && list.size() > 0) {
 
