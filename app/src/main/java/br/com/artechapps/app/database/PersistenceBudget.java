@@ -64,7 +64,13 @@ public class PersistenceBudget extends RepositoryBudget {
 
     public ArrayList<Budget> getRecords(){
         ArrayList<Budget> list = new ArrayList<>();
-        Cursor cursor = persistence.find();
+//        Cursor cursor = persistence.find();
+
+        Cursor cursor = persistence.getDataBase().rawQuery("select * from " +
+                "                                         tbbudget " +
+                "                                            order by date_budget desc", new String[]{});
+
+
         if (cursor != null) {
             if (cursor.moveToFirst()) {
                 do {
