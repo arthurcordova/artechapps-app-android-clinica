@@ -116,6 +116,7 @@ public class BudgetFragment extends Fragment {
         mFabAdd.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                mActivity.finish();
                 Intent it = new Intent(mActivity, MainMenuActivity.class);
                 it.putExtra("origin", BudgetFragment.class.getName());
                 startActivityForResult(it, 0);

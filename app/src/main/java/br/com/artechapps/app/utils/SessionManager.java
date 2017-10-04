@@ -73,6 +73,8 @@ public final class SessionManager {
         i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         // Add new Flag to start new Activity
         i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        i.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+
         context.startActivity(i);
         ((AppCompatActivity) context).finish();
     }
