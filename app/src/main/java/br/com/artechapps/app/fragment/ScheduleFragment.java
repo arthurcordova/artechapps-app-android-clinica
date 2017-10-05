@@ -52,15 +52,7 @@ public class ScheduleFragment extends Fragment {
         // Required empty public constructor
     }
 
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment ScheduleFragment.
-     */
-    // TODO: Rename and change types and number of parameters
+
     public static ScheduleFragment newInstance(String param1, String param2) {
         ScheduleFragment fragment = new ScheduleFragment();
         Bundle args = new Bundle();
@@ -89,7 +81,7 @@ public class ScheduleFragment extends Fragment {
 
         mRvSchedules = (RecyclerView) view.findViewById(R.id.rvSchedules);
         mFab = (FloatingActionButton) view.findViewById(R.id.fab_new_schedule);
-        TextView mTvNullList = (TextView) view.findViewById(R.id.tv_null_list);
+        final TextView mTvNullList = (TextView) view.findViewById(R.id.tv_null_list);
 
         mActivity = (MainMenuActivity)getActivity();
 
@@ -104,21 +96,15 @@ public class ScheduleFragment extends Fragment {
         mSrl.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
-                new AsyncTaskAppointment("Carregando agendamentos...", getContext(), true, mRvSchedules, mActivity, mSrl).execute(String.valueOf(user.getCode()));
+                new AsyncTaskAppointment("Carregando agendamentos...", getContext(), true, mRvSchedules, mActivity, mSrl, mTvNullList).execute(String.valueOf(user.getCode()));
             }
         });
 
 
-        new AsyncTaskAppointment("Carregando agendamentos...", getContext(), true, mRvSchedules, mActivity, mSrl).execute(String.valueOf(user.getCode()));
+        new AsyncTaskAppointment("Carregando agendamentos...", getContext(), true, mRvSchedules, mActivity, mSrl, mTvNullList).execute(String.valueOf(user.getCode()));
 
         mPersistence = new PersistenceSchedule(getContext());
         mList = mPersistence.getRecords();
-
-        if (mList.size() > 0) {
-            mTvNullList.setVisibility(View.INVISIBLE);
-        } else {
-            mTvNullList.setVisibility(View.VISIBLE);
-        }
 
         RVAdapterSchedule adapter = new RVAdapterSchedule(mList, mActivity);
 

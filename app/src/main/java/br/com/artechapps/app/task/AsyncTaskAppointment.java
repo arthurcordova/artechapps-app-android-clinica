@@ -5,6 +5,8 @@ import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.View;
+import android.widget.TextView;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -29,14 +31,16 @@ public class AsyncTaskAppointment extends AsyncTaskHttp {
     private ArrayList<Schedule> mList;
     private MainMenuActivity mActivity;
     private SwipeRefreshLayout mSrl;
+    private TextView mNullText;
 
-    public AsyncTaskAppointment(String msg, Context context, boolean showDialog, RecyclerView recyclerView, MainMenuActivity activity, SwipeRefreshLayout srl) {
+    public AsyncTaskAppointment(String msg, Context context, boolean showDialog, RecyclerView recyclerView, MainMenuActivity activity, SwipeRefreshLayout srl, TextView nullText) {
         mMsg = msg;
         mContext = context;
         mShowDialog = showDialog;
         mRecyclerView = recyclerView;
         mActivity = activity;
         mSrl = srl;
+        mNullText = nullText;
     }
 
     @Override
@@ -59,6 +63,7 @@ public class AsyncTaskAppointment extends AsyncTaskHttp {
         if (mJson != null && mJson.length() > 0){
             try {
                 mPersistence = new PersistenceSchedule(mContext);
+                mPersistence.remove();
                 mPersistence.save(mJson);
             } finally {
                 mPersistence.close();
@@ -74,7 +79,11 @@ public class AsyncTaskAppointment extends AsyncTaskHttp {
             mRecyclerView.setAdapter(adapter);
 
             mPersistence.close();
+            mNullText.setVisibility(View.INVISIBLE);
+        } else {
+            mNullText.setVisibility(View.VISIBLE);
         }
+
         mSrl.setRefreshing(false);
     }
 }
