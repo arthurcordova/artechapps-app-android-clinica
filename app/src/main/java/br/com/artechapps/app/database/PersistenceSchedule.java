@@ -155,10 +155,29 @@ public class PersistenceSchedule extends RepositorySchedule {
 
     public int count() {
         int count = 0;
-        Cursor cursor = persistence.getDataBase().rawQuery("select count(*) c from " + TABLE_NAME, null);
+//        Cursor cursor = persistence.getDataBase().rawQuery("select count(*) c from " + TABLE_NAME, null);
+
+        SimpleDateFormat sdfDate = new SimpleDateFormat("dd/MM/yyyy");
+        SimpleDateFormat sdfHour = new SimpleDateFormat("H:mm:ss");
+        Date now = new Date();
+        String dateStr = sdfDate.format(now);
+        String hourStr = sdfHour.format(now);
+
+
+//        Cursor cursor = persistence.find(" status = ?", new String[]{"AGENDADO"}, "");
+        Cursor cursor = persistence.getDataBase().rawQuery("select count(*) c from " +
+                "                                           tbschedule " +
+                "                                           where status = 'AGENDADO' " +
+                "                                             and ((date > '"+dateStr+"') or ((date = '"+dateStr+"') and (time > '"+hourStr+"'))) " +
+                "                                            order by date, time", new String[]{});
+
+
+
+
         if (cursor != null) {
             if (cursor.moveToFirst()) {
                 count = cursor.getInt(cursor.getColumnIndex("c"));
+                cursor.close();
             }
         }
         return count;
