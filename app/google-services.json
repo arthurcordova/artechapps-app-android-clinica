@@ -1,35 +1,27 @@
 {
   "project_info": {
-    "project_number": "467806176859",
-    "firebase_url": "https://beauty-clinic-project.firebaseio.com",
-    "project_id": "beauty-clinic-project",
-    "storage_bucket": "beauty-clinic-project.appspot.com"
+    "project_number": "68398611354",
+    "firebase_url": "https://beauty-clinic-cliente.firebaseio.com",
+    "project_id": "beauty-clinic-cliente",
+    "storage_bucket": "beauty-clinic-cliente.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:467806176859:android:32d27398df4cd75d",
+        "mobilesdk_app_id": "1:68398611354:android:32d27398df4cd75d",
         "android_client_info": {
           "package_name": "br.com.artechapps.app"
         }
       },
       "oauth_client": [
         {
-          "client_id": "467806176859-u8fn13r4mm612rnqqpht6aop87dfco2p.apps.googleusercontent.com",
-          "client_type": 1,
-          "android_info": {
-            "package_name": "br.com.artechapps.app",
-            "certificate_hash": "702837a898af5731034587d97dee581ea0da479f"
-          }
-        },
-        {
-          "client_id": "467806176859-jhluo7c5q7u2tg9o91heavu832o27kci.apps.googleusercontent.com",
+          "client_id": "68398611354-77ssta09m1s7nbg0503rnqfpem9m094k.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyA27cfTQTJmhLYTbKcldNoO3J0z5Kof3o0"
+          "current_key": "AIzaSyC9BXIrchOSOhLv-BjLC94ppmVoBOAY8kE"
         }
       ],
       "services": {
@@ -37,13 +29,8 @@
           "status": 1
         },
         "appinvite_service": {
-          "status": 2,
-          "other_platform_oauth_client": [
-            {
-              "client_id": "467806176859-jhluo7c5q7u2tg9o91heavu832o27kci.apps.googleusercontent.com",
-              "client_type": 3
-            }
-          ]
+          "status": 1,
+          "other_platform_oauth_client": []
         },
         "ads_service": {
           "status": 2
