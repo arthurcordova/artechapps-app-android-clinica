@@ -35,4 +35,6 @@ public class EndPoints extends Webservice{
 
     public static final String QRCODE = SERVER.concat("/getqrcode/");
 
+    public static final String RECOVER_PWD = SERVER.concat("/cliente/passrecover/");
+
 }

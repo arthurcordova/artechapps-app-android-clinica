@@ -7,8 +7,11 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
 
 import br.com.artechapps.app.R;
+import br.com.artechapps.app.task.AsyncTaskRecoverPwd;
 
 public class ResetPasswordActivity extends AppCompatActivity {
 
@@ -21,12 +24,13 @@ public class ResetPasswordActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setTitle(getString(R.string.title_activity_reset_password));
 
+        final EditText etEmail = (EditText) findViewById(R.id.et_email);
 
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
+        Button btnSend = (Button) findViewById(R.id.btn_send);
+        btnSend.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                new AsyncTaskRecoverPwd(null, ResetPasswordActivity.this, true).execute(etEmail.getText().toString());
             }
         });
     }
