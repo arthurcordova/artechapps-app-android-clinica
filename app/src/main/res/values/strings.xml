@@ -15,6 +15,7 @@
 
     <string name="action_sign_in">Entrar</string>
     <string name="action_sign_in_short">Entrar</string>
+    <string name="action_register">Cadastre-se</string>
     <string name="action_add_cart">ADICIONAR</string>
 
     <string name="error_invalid_cpf">C.P.F. inválido</string>

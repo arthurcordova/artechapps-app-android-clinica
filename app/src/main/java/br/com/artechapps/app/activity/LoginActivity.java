@@ -35,21 +35,17 @@ public class LoginActivity extends AppCompatActivity {
     private EditText mCPF;
     private EditText mPassword;
     private Button mSignIn;
-    private FloatingActionButton mFab;
+    private Button mFab;
     private SharedPreferences mSharedPreferences;
     private View mTvForgot;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-//        requestWindowFeature(Window.FEATURE_NO_TITLE);
-//        requestWindowFeature(Window.BA);
-//        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
-
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
         mCPF = (EditText) findViewById(R.id.email);
         mPassword = (EditText) findViewById(R.id.password);
-        mFab = (FloatingActionButton) findViewById(R.id.fab);
+        mFab = (Button) findViewById(R.id.fab);
         mSignIn = (Button) findViewById(R.id.sign_in_button);
         mTvForgot = findViewById(R.id.tv_forgot_password);
 
