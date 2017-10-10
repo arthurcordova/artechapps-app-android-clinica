@@ -1,11 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.v4.widget.NestedScrollView
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.v4.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:card_view="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/colorPrimaryLight"
     android:gravity="center_horizontal"
     android:orientation="vertical"
     tools:context="br.com.artechapps.app.activity.NewUserActivity">
@@ -13,14 +11,17 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:paddingTop="32dp"
+        android:paddingBottom="32dp"
         android:orientation="vertical">
 
         <android.support.v7.widget.CardView
             android:id="@+id/cv"
             android:layout_width="match_parent"
-            android:layout_height="221dp"
-            android:layout_margin="@dimen/activity_vertical_margin"
-            card_view:cardCornerRadius="5dp"
+            android:layout_height="wrap_content"
+            android:paddingBottom="32dp"
+            android:paddingTop="32dp"
+            card_view:cardCornerRadius="0dp"
             card_view:cardElevation="2dp">
 
             <LinearLayout
@@ -28,133 +29,116 @@
                 android:layout_height="match_parent"
                 android:orientation="vertical">
 
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal">
 
-                    <ImageView
-                        android:layout_width="36dp"
-                        android:layout_height="36dp"
-                        android:layout_margin="8dp"
-                        android:alpha="0.8"
-                        android:src="@drawable/ic_account_circle_black_24dp" />
+                <android.support.design.widget.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="32dp"
+                    android:layout_marginLeft="32dp"
+                    android:layout_marginRight="32dp"
+                    android:layout_marginStart="32dp"
+                    android:hint="Nome">
 
                     <EditText
                         android:id="@+id/new_name"
-                        style="?android:textAppearanceMedium"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:background="@android:color/transparent"
-                        android:hint="@string/hint_name"
-                        android:inputType="text"
+                        android:imeActionId="@+id/login"
+                        android:imeOptions="actionUnspecified"
+                        android:inputType="textPassword"
                         android:maxLines="1"
-                        android:padding="14dp"
-                        android:singleLine="true" />
+                        android:textSize="14sp" />
 
-                </LinearLayout>
+                </android.support.design.widget.TextInputLayout>
 
-                <LinearLayout
+
+                <android.support.design.widget.TextInputLayout
                     android:layout_width="match_parent"
-                    android:layout_height="1dip"
-                    android:layout_below="@+id/labelTitle"
-                    android:alpha="0.12"
-                    android:background="#000000"
-                    android:orientation="horizontal"></LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal">
+                    android:layout_marginEnd="32dp"
+                    android:layout_marginLeft="32dp"
+                    android:layout_marginRight="32dp"
+                    android:layout_marginStart="32dp"
+                    android:hint="E-mail">
 
-                    <ImageView
-                        android:layout_width="36dp"
-                        android:layout_height="36dp"
-                        android:layout_margin="8dp"
-                        android:alpha="0.8"
-                        android:src="@drawable/ic_credit_card_black_24dp" />
+                    <EditText
+                        android:id="@+id/new_email"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:imeActionId="@+id/login"
+                        android:imeOptions="actionUnspecified"
+                        android:inputType="textEmailAddress"
+                        android:maxLines="1"
+                        android:textSize="14sp" />
+
+                </android.support.design.widget.TextInputLayout>
+
+                <android.support.design.widget.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="32dp"
+                    android:layout_marginLeft="32dp"
+                    android:layout_marginRight="32dp"
+                    android:layout_marginStart="32dp"
+                    android:hint="C.P.F">
 
                     <EditText
                         android:id="@+id/new_cpf"
                         style="?android:textAppearanceMedium"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:background="@android:color/transparent"
-                        android:hint="@string/hint_cpf"
+                        android:imeActionId="@+id/login"
+                        android:imeOptions="actionUnspecified"
                         android:inputType="number"
                         android:maxLength="14"
                         android:maxLines="1"
-                        android:padding="14dp"
-                        android:singleLine="true" />
+                        android:textSize="14sp" />
 
-                </LinearLayout>
+                </android.support.design.widget.TextInputLayout>
 
-                <LinearLayout
+                <android.support.design.widget.TextInputLayout
                     android:layout_width="match_parent"
-                    android:layout_height="1dip"
-                    android:layout_below="@+id/labelTitle"
-                    android:alpha="0.12"
-                    android:background="#000000"
-                    android:orientation="horizontal"></LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal">
-
-                    <ImageView
-                        android:layout_width="36dp"
-                        android:layout_height="36dp"
-                        android:layout_margin="8dp"
-                        android:alpha="0.8"
-                        android:src="@drawable/ic_vpn_key_black_24dp" />
+                    android:layout_marginEnd="32dp"
+                    android:layout_marginLeft="32dp"
+                    android:layout_marginRight="32dp"
+                    android:layout_marginStart="32dp"
+                    android:hint="Senha">
 
                     <EditText
                         android:id="@+id/new_password"
                         style="?android:textAppearanceMedium"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:background="@android:color/transparent"
-                        android:hint="@string/hint_password"
+                        android:imeActionId="@+id/login"
+                        android:imeOptions="actionUnspecified"
                         android:inputType="textPassword"
                         android:maxLines="1"
-                        android:padding="16dp"
-                        android:singleLine="true" />
-                </LinearLayout>
+                        android:textSize="14sp" />
 
+                </android.support.design.widget.TextInputLayout>
 
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="1dip"
-                    android:layout_below="@+id/labelTitle"
-                    android:alpha="0.12"
-                    android:background="#000000"
-                    android:orientation="horizontal"/>
-
-                <LinearLayout
+                <android.support.design.widget.TextInputLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal">
-
-                    <ImageView
-                        android:layout_width="36dp"
-                        android:layout_height="36dp"
-                        android:layout_margin="8dp"
-                        android:alpha="0.8"/>
+                    android:layout_marginEnd="32dp"
+                    android:layout_marginLeft="32dp"
+                    android:layout_marginRight="32dp"
+                    android:layout_marginStart="32dp"
+                    android:hint="Senha">
 
                     <EditText
                         android:id="@+id/new_password_confirm"
                         style="?android:textAppearanceMedium"
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:background="@android:color/transparent"
-                        android:hint="@string/hint_password_confirm"
+                        android:layout_height="wrap_content"
+                        android:imeActionId="@+id/login"
+                        android:imeOptions="actionUnspecified"
                         android:inputType="textPassword"
                         android:maxLines="1"
-                        android:paddingStart="16dp"
-                        android:paddingEnd="16dp"/>
+                        android:textSize="14sp" />
 
-                </LinearLayout>
+                </android.support.design.widget.TextInputLayout>
 
 
             </LinearLayout>
@@ -166,13 +150,16 @@
             style="?android:textAppearanceSmall"
             android:layout_width="match_parent"
             android:layout_height="55dp"
+            android:layout_marginEnd="32dp"
+            android:layout_marginLeft="32dp"
+            android:layout_marginRight="32dp"
+            android:layout_marginStart="32dp"
             android:layout_marginTop="32dp"
-            android:layout_marginLeft="@dimen/activity_horizontal_margin"
-            android:layout_marginRight="@dimen/activity_horizontal_margin"
             android:background="@drawable/button_selector"
             android:clickable="false"
             android:text="Criar"
             android:textColor="#ffffff"
+            android:textSize="14sp"
             android:textStyle="bold" />
 
     </LinearLayout>
