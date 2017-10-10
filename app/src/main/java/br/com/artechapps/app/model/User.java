@@ -28,6 +28,7 @@ public class User implements Serializable{
     private int messages;
     private int score;
     private int discount;
+    private String email;
 
 
     public String getCpfcnpj() {
@@ -140,5 +141,13 @@ public class User implements Serializable{
 
     public void setDiscount(int discount) {
         this.discount = discount;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
     }
 }

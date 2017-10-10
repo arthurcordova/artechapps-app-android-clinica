@@ -37,6 +37,7 @@ public class AsyncTaskNewUser extends AsyncTaskHttp {
             String name = params[0];
             String cpf = params[1].replace(".","").replace("-","");;
             String pwd = params[2];
+            String email = params[3];
 
             User user = new User();
             user.setCodFilial(BuildConfig.FILIAL);
@@ -45,6 +46,7 @@ public class AsyncTaskNewUser extends AsyncTaskHttp {
             user.setName(name);
             user.setOpcad(1L);
             user.setTipopessoa("F");
+            user.setEmail(email);
 
             Gson gson = new GsonBuilder().excludeFieldsWithoutExposeAnnotation().create();
             String userJson = gson.toJson(user);

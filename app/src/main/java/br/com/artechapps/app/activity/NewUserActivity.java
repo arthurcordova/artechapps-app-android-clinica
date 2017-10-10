@@ -10,6 +10,9 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 import br.com.artechapps.app.R;
 import br.com.artechapps.app.task.AsyncTaskNewUser;
 import br.com.artechapps.app.utils.UtilsCPF;
@@ -21,6 +24,7 @@ public class NewUserActivity extends AppCompatActivity {
     private EditText mEtCpf;
     private EditText mEtPassword;
     private EditText mEtPasswordConfirm;
+    private EditText mEtEmail;
 
     private String a;
     private int mKeyDel;
@@ -35,6 +39,7 @@ public class NewUserActivity extends AppCompatActivity {
 
         mButton = (Button) findViewById(R.id.new_user_button);
         mEtName = (EditText) findViewById(R.id.new_name);
+        mEtEmail = (EditText) findViewById(R.id.new_email);
         mEtCpf = (EditText) findViewById(R.id.new_cpf);
         mEtPassword = (EditText) findViewById(R.id.new_password);
         mEtPasswordConfirm = (EditText) findViewById(R.id.new_password_confirm);
@@ -46,7 +51,8 @@ public class NewUserActivity extends AppCompatActivity {
                     new AsyncTaskNewUser("Criando novo usuário...", NewUserActivity.this, true).execute(
                             mEtName.getText().toString(),
                             mEtCpf.getText().toString(),
-                            mEtPassword.getText().toString()
+                            mEtPassword.getText().toString(),
+                            mEtEmail.getText().toString()
                     );
                 }
             }
@@ -118,12 +124,14 @@ public class NewUserActivity extends AppCompatActivity {
         mEtPassword.setError(null);
         mEtPasswordConfirm.setError(null);
         mEtName.setError(null);
+        mEtEmail.setError(null);
 
         // Store values at the time of the login attempt.
         String cpf = mEtCpf.getText().toString();
         String password = mEtPassword.getText().toString();
         String passwordConfirmed = mEtPasswordConfirm.getText().toString();
         String name = mEtName.getText().toString();
+        String email = mEtEmail.getText().toString();
 
         boolean forward = false;
         View focusView = null;
@@ -145,6 +153,14 @@ public class NewUserActivity extends AppCompatActivity {
             mEtCpf.setError(getString(R.string.error_invalid_cpf));
             focusView = mEtCpf;
 
+        } else if (TextUtils.isEmpty(email)) {
+            mEtCpf.setError(getString(R.string.error_field_required));
+            focusView = mEtCpf;
+
+        } else if (!isEmailValid(email)) {
+            mEtEmail.setError(getString(R.string.error_invalid_email));
+            focusView = mEtEmail;
+
         } else if (TextUtils.isEmpty(password)) {
             mEtPassword.setError(getString(R.string.error_invalid_password));
             focusView = mEtPassword;
@@ -152,7 +168,6 @@ public class NewUserActivity extends AppCompatActivity {
         } else if (!isPasswordValid(password)) {
             mEtPassword.setError(getString(R.string.error_invalid_password));
             focusView = mEtPassword;
-
 
         } else if (TextUtils.isEmpty(passwordConfirmed)) {
             mEtPasswordConfirm.setError(getString(R.string.error_field_required));
@@ -186,6 +201,12 @@ public class NewUserActivity extends AppCompatActivity {
 
     private boolean isNameValid(String name) {
         return name.length() > 3;
+    }
+
+    private boolean isEmailValid(String email) {
+        Pattern p = Pattern.compile("\\b[\\w.%-]+@[-.\\w]+\\.[A-Za-z]{2,4}\\b");
+        Matcher m = p.matcher(email);
+        return m.find();
     }
 
 
