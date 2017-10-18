@@ -37,7 +37,7 @@ public class AsyncTaskRefreshToken extends AsyncTaskHttp {
             String user = params[0];
             String token = params[1];
             String establishment = String.valueOf(BuildConfig.FILIAL);
-            String type = "android";
+            String type = "a";
 
             String url = EndPoints.REFRESH_TOKEN + user + "/" + token + "/" + establishment + "/" + type;
 
