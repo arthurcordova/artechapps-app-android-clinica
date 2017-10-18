@@ -3,7 +3,7 @@ package br.com.artechapps.app.utils;
 /**
  * Created by arthurcordova on 7/8/16.
  */
-public class EndPoints extends Webservice{
+public class EndPoints extends Webservice {
 
     public static final String LOGIN = SERVER.concat("/login");
 
@@ -36,5 +36,8 @@ public class EndPoints extends Webservice{
     public static final String QRCODE = SERVER.concat("/getqrcode/");
 
     public static final String RECOVER_PWD = SERVER.concat("/cliente/passrecover/");
+
+    ///mensagens/updatetoken/{codCliente}/{token}/{codFilial}/{tipo}
+    public static final String UPDATE_TOKEN = SERVER.concat("/mensagens/updatetoken/");
 
 }
