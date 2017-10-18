@@ -13,7 +13,9 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.IOException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 
 import br.com.artechapps.app.adapter.RVAdapterDoctor;
 import br.com.artechapps.app.adapter.RVAdapterTimes;
@@ -80,6 +82,13 @@ public class AsyncTaskTime extends AsyncTaskHttp {
     @Override
     protected void onPostExecute(String s) {
         super.onPostExecute(s);
+        SimpleDateFormat sdfHour = new SimpleDateFormat("H:mm");
+        Date now = new Date();
+        String currentHour = sdfHour.format(now);
+
+        int hourC = Integer.parseInt(currentHour.split(":")[0]);
+        int minC = Integer.parseInt(currentHour.split(":")[1]);
+
         if (mJson != null && mJson.length() > 0){
 
             ArrayList<String> list = new ArrayList<>();
@@ -87,11 +96,23 @@ public class AsyncTaskTime extends AsyncTaskHttp {
                 try {
                     JSONObject json = mJson.getJSONObject(i);
                     String [] d = json.getString("horarioInicial").split(":");
-                    list.add(d[0].concat(":").concat(d[1]));
+
+                    int hourS = Integer.parseInt(d[0]);
+                    int minS = Integer.parseInt(d[1]);
+
+                    if (hourS == hourC) {
+                        if (minS >= minC) {
+                            String hour = d[0].concat(":").concat(d[1]);
+                            list.add(hour);
+                        }
+                    } else if (hourS >= hourC) {
+                        String hour = d[0].concat(":").concat(d[1]);
+                        list.add(hour);
+                    }
+
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
-
             }
 
             RVAdapterTimes rvAdapter = new RVAdapterTimes(list, mProduct);
