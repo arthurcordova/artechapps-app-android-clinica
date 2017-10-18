@@ -89,7 +89,7 @@ public class PersistenceSchedule extends RepositorySchedule {
         Cursor cursor = persistence.getDataBase().rawQuery("select * from " +
                 "                                           tbschedule " +
                 "                                           where status = 'AGENDADO' " +
-                "                                             and ((date > '"+dateStr+"') or ((date = '"+dateStr+"') and (time > '"+hourStr+"'))) " +
+                "                                             and ((date >= '"+dateStr+"') or ((date = '"+dateStr+"') and (time >= '"+hourStr+"'))) " +
                 "                                            order by date, time", new String[]{});
 
 
@@ -128,7 +128,7 @@ public class PersistenceSchedule extends RepositorySchedule {
         Cursor cursor = persistence.getDataBase().rawQuery("select * from " +
                 "                                           tbschedule " +
                 "                                           where status = 'AGENDADO' " +
-                "                                             and ((date > '"+dateStr+"') or ((date = '"+dateStr+"') and (time > '"+hourStr+"'))) " +
+                "                                             and ((date >= '"+dateStr+"') or ((date = '"+dateStr+"') and (time >= '"+hourStr+"'))) " +
                 "                                            order by date, time", new String[]{});
 
 
