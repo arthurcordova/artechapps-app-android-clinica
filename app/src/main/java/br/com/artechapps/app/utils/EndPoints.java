@@ -38,6 +38,6 @@ public class EndPoints extends Webservice {
     public static final String RECOVER_PWD = SERVER.concat("/cliente/passrecover/");
 
     ///mensagens/updatetoken/{codCliente}/{token}/{codFilial}/{tipo}
-    public static final String UPDATE_TOKEN = SERVER.concat("/mensagens/updatetoken/");
+    public static final String REFRESH_TOKEN = SERVER.concat("/mensagens/updatetoken/");
 
 }

@@ -23,6 +23,9 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.firebase.iid.FirebaseInstanceId;
+
+import br.com.artechapps.app.BuildConfig;
 import br.com.artechapps.app.R;
 import br.com.artechapps.app.database.PersistenceShop;
 import br.com.artechapps.app.fragment.AboutFragment;
@@ -34,6 +37,7 @@ import br.com.artechapps.app.fragment.ProductFragment;
 import br.com.artechapps.app.fragment.ScheduleFragment;
 import br.com.artechapps.app.model.User;
 import br.com.artechapps.app.task.AsyncTaskConfirmCartProducts;
+import br.com.artechapps.app.task.AsyncTaskRefreshToken;
 import br.com.artechapps.app.utils.SessionManager;
 
 public class MainMenuActivity extends AppCompatActivity
@@ -99,6 +103,12 @@ public class MainMenuActivity extends AppCompatActivity
             Log.e("ERROR", "Replace fragment parameter");
         }
 
+        if (FirebaseInstanceId.getInstance() != null) {
+            String token = FirebaseInstanceId.getInstance().getToken();
+            Log.d("FCM-TOKEN", token);
+            new AsyncTaskRefreshToken("", this, false)
+                    .execute(String.valueOf(user.getCode()), token);
+        }
 
 //        runThread();
 
