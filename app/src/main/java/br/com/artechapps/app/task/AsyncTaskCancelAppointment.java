@@ -54,6 +54,7 @@ public class AsyncTaskCancelAppointment extends AsyncTaskHttp {
         pers.updateStatusCancel(idSchedule);
         Intent intent = new Intent(mActivity, MainMenuActivity.class);
         intent.putExtra("origin", NewScheduleFinalActivity.class.getName());
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         mActivity.startActivity(intent);
         mActivity.finish();
     }

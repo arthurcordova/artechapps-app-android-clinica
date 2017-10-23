@@ -61,6 +61,7 @@ public class AsyncTaskNewAppointment extends AsyncTaskHttp {
         Toast.makeText(mContext,"Procedimento agendando com sucesso..", Toast.LENGTH_LONG).show();
         Intent intent = new Intent(mActivity, MainMenuActivity.class);
         intent.putExtra("origin", NewScheduleFinalActivity.class.getName());
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         mActivity.startActivity(intent);
         mActivity.finish();
 
