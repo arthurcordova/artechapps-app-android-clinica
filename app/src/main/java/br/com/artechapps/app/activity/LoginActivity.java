@@ -21,6 +21,7 @@ import android.widget.TextView;
 import br.com.artechapps.app.BuildConfig;
 import br.com.artechapps.app.R;
 import br.com.artechapps.app.task.AsyncTaskLogin;
+import br.com.artechapps.app.utils.CPFMask;
 import br.com.artechapps.app.utils.UtilsCPF;
 
 /**
@@ -93,65 +94,68 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
 
-        mCPF.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
 
-            }
+        mCPF.addTextChangedListener(CPFMask.insert(mCPF));
 
-            @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
-
-                boolean flag = true;
-                String eachBlock[] = mCPF.getText().toString().split(".");
-                for (int i = 0; i < eachBlock.length; i++) {
-                    if (eachBlock[i].length() > 3) {
-                        flag = false;
-                    }
-                }
-                if (flag) {
-
-                    mCPF.setOnKeyListener(new View.OnKeyListener() {
-
-                        @Override
-                        public boolean onKey(View v, int keyCode, KeyEvent event) {
-
-                            if (keyCode == KeyEvent.KEYCODE_DEL)
-                                mKeyDel = 1;
-                            return false;
-                        }
-                    });
-
-                    if (mKeyDel == 0) {
-
-                        if (((mCPF.getText().length() + 1) % 4) == 0) {
-
-                            if (mCPF.getText().toString().split(".").length < 3) {
-                                if(mCPF.getText().length() == 11){
-                                    mCPF.setText(mCPF.getText() + "-");
-                                } else {
-                                    mCPF.setText(mCPF.getText() + ".");
-                                }
-                                mCPF.setSelection(mCPF.getText().length());
-                            }
-                        }
-                        a = mCPF.getText().toString();
-                    } else {
-                        a = mCPF.getText().toString();
-                        mKeyDel = 0;
-                    }
-
-                } else {
-                    mCPF.setText(a);
-                }
-
-            }
-
-            @Override
-            public void afterTextChanged(Editable s) {
-
-            }
-        });
+//        mCPF.addTextChangedListener(new TextWatcher() {
+//            @Override
+//            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+//
+//            }
+//
+//            @Override
+//            public void onTextChanged(CharSequence s, int start, int before, int count) {
+//
+//                boolean flag = true;
+//                String eachBlock[] = mCPF.getText().toString().split(".");
+//                for (int i = 0; i < eachBlock.length; i++) {
+//                    if (eachBlock[i].length() > 3) {
+//                        flag = false;
+//                    }
+//                }
+//                if (flag) {
+//
+//                    mCPF.setOnKeyListener(new View.OnKeyListener() {
+//
+//                        @Override
+//                        public boolean onKey(View v, int keyCode, KeyEvent event) {
+//
+//                            if (keyCode == KeyEvent.KEYCODE_DEL)
+//                                mKeyDel = 1;
+//                            return false;
+//                        }
+//                    });
+//
+//                    if (mKeyDel == 0) {
+//
+//                        if (((mCPF.getText().length() + 1) % 4) == 0) {
+//
+//                            if (mCPF.getText().toString().split(".").length < 3) {
+//                                if(mCPF.getText().length() == 11){
+//                                    mCPF.setText(mCPF.getText() + "-");
+//                                } else {
+//                                    mCPF.setText(mCPF.getText() + ".");
+//                                }
+//                                mCPF.setSelection(mCPF.getText().length());
+//                            }
+//                        }
+//                        a = mCPF.getText().toString();
+//                    } else {
+//                        a = mCPF.getText().toString();
+//                        mKeyDel = 0;
+//                    }
+//
+//                } else {
+//                    mCPF.setText(a);
+//                }
+//
+//            }
+//
+//            @Override
+//            public void afterTextChanged(Editable s) {
+//
+//            }
+//        });
 
         mSignIn.setOnClickListener(new OnClickListener() {
             @Override
