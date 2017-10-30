@@ -73,8 +73,6 @@ public class MainMenuActivity extends AppCompatActivity
         View header =
                 navigationView.getHeaderView(0);
 
-
-
         mTvHeaderUserName = (TextView) header.findViewById(R.id.header_user_name);
         mTvHeaderUserEmail = (TextView) header.findViewById(R.id.header_user_email);
 

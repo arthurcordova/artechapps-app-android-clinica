@@ -33,6 +33,7 @@ import br.com.artechapps.app.model.Schedule;
 import br.com.artechapps.app.model.User;
 import br.com.artechapps.app.task.AsyncTaskCancelAppointment;
 import br.com.artechapps.app.task.AsyncTaskNewAppointment;
+import br.com.artechapps.app.utils.Constants;
 import br.com.artechapps.app.utils.DialogQRCode;
 import br.com.artechapps.app.utils.EndPoints;
 import br.com.artechapps.app.utils.InputStreamVolleyRequest;
@@ -116,6 +117,7 @@ public class NewScheduleFinalActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
+                Constants.IS_DASHBOARD = false;
                 if (mModel.getDateTimeFormatted() != null) { //CANCEL
 //                    http://www2.beautyclinic.com.br/clinwebservice2/servidor/cancelaragendamento/
                     String json = "{\"codAgenda\":"+ mModel.getCodeSchedule() +"}";

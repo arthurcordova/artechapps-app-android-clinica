@@ -15,8 +15,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import org.w3c.dom.Text;
-
 import java.util.ArrayList;
 
 import br.com.artechapps.app.R;
@@ -27,6 +25,7 @@ import br.com.artechapps.app.livedata.SchedulingLiveData;
 import br.com.artechapps.app.model.Schedule;
 import br.com.artechapps.app.model.User;
 import br.com.artechapps.app.task.AsyncTaskAppointment;
+import br.com.artechapps.app.utils.Constants;
 import br.com.artechapps.app.utils.SessionManager;
 
 public class DashboardFragment extends Fragment {
@@ -126,7 +125,9 @@ public class DashboardFragment extends Fragment {
         mSchedulingLiveData.getCurrentName().observeForever(nameObserver);
 
         AsyncTaskAppointment task1 = new AsyncTaskAppointment("Carregando agendamentos...", getContext(), true, null, mActivity, null, null);
-        task1.mLiveData = mSchedulingLiveData;
+        if (Constants.IS_DASHBOARD) {
+            task1.mLiveData = mSchedulingLiveData;
+        }
         task1.execute(String.valueOf(mUser.getCode()));
 
         int counterM = 0;
@@ -139,6 +140,21 @@ public class DashboardFragment extends Fragment {
             setAnimationCounter(counterM, TIME_ANIMATION, tvNumMessage);
         }
 
+        PersistenceSchedule persistence = new PersistenceSchedule(getContext());
+        ArrayList<Schedule> list = persistence.getRecordsOK();
+
+        int counter =  persistence.count();
+        tvNumSchedule.setText(String.valueOf(counter));
+
+        persistence.close();
+        if (list.size() > 0) {
+            mCardNextScheduling.setVisibility(View.VISIBLE);
+            mTvProcedureName.setText(list.get(0).getProduct().getDescription());
+            mTvProcedureDate.setText("Data: " + list.get(0).getDate()+  " Horário: " + list.get(0).getTime());
+
+        } else {
+            mCardNextScheduling.setVisibility(View.GONE);
+        }
 
         mLineMessages.setOnClickListener(new View.OnClickListener() {
             @Override

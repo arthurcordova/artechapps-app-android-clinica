@@ -22,6 +22,7 @@ import br.com.artechapps.app.BuildConfig;
 import br.com.artechapps.app.R;
 import br.com.artechapps.app.task.AsyncTaskLogin;
 import br.com.artechapps.app.utils.CPFMask;
+import br.com.artechapps.app.utils.Constants;
 import br.com.artechapps.app.utils.UtilsCPF;
 
 /**
@@ -161,6 +162,7 @@ public class LoginActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 if (attemptLogin())
+                    Constants.IS_DASHBOARD = true;
                     new AsyncTaskLogin(getString(R.string.hint_execute_login),LoginActivity.this, true).execute(mCPF.getText().toString(), mPassword.getText().toString());
             }
         });

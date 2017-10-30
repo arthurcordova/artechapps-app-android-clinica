@@ -10,4 +10,6 @@ public class Constants {
     public static boolean CONFIRMED = true;
     public static boolean CANCELED = true;
 
+    public static boolean IS_DASHBOARD = true;
+
 }
