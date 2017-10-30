@@ -1,5 +1,7 @@
 package br.com.artechapps.app.task;
 
+import android.animation.TypeEvaluator;
+import android.animation.ValueAnimator;
 import android.content.Context;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.DefaultItemAnimator;
@@ -17,6 +19,7 @@ import java.util.ArrayList;
 import br.com.artechapps.app.activity.MainMenuActivity;
 import br.com.artechapps.app.adapter.RVAdapterSchedule;
 import br.com.artechapps.app.database.PersistenceSchedule;
+import br.com.artechapps.app.livedata.SchedulingLiveData;
 import br.com.artechapps.app.model.Schedule;
 import br.com.artechapps.app.utils.EndPoints;
 
@@ -32,6 +35,8 @@ public class AsyncTaskAppointment extends AsyncTaskHttp {
     private MainMenuActivity mActivity;
     private SwipeRefreshLayout mSrl;
     private TextView mNullText;
+    private static final int TIME_ANIMATION = 1000;
+    public SchedulingLiveData mLiveData;
 
     public AsyncTaskAppointment(String msg, Context context, boolean showDialog, RecyclerView recyclerView, MainMenuActivity activity, SwipeRefreshLayout srl, TextView nullText) {
         mMsg = msg;
@@ -72,18 +77,47 @@ public class AsyncTaskAppointment extends AsyncTaskHttp {
             mPersistence = new PersistenceSchedule(mContext);
             mList = mPersistence.getRecords();
 
-            RVAdapterSchedule adapter = new RVAdapterSchedule(mList, mActivity);
+            if (mRecyclerView != null) {
+                RVAdapterSchedule adapter = new RVAdapterSchedule(mList, mActivity);
 
-            mRecyclerView.setLayoutManager(new LinearLayoutManager(mContext));
-            mRecyclerView.setItemAnimator(new DefaultItemAnimator());
-            mRecyclerView.setAdapter(adapter);
+                mRecyclerView.setLayoutManager(new LinearLayoutManager(mContext));
+                mRecyclerView.setItemAnimator(new DefaultItemAnimator());
+                mRecyclerView.setAdapter(adapter);
 
+                mNullText.setVisibility(View.INVISIBLE);
+            } else {
+                int counter =  mPersistence.count();
+                if (mLiveData != null){
+                    mLiveData.getCurrentName().setValue(String.valueOf(counter));
+                }
+            }
             mPersistence.close();
-            mNullText.setVisibility(View.INVISIBLE);
-        } else {
-            mNullText.setVisibility(View.VISIBLE);
-        }
 
-        mSrl.setRefreshing(false);
+        } else {
+            if (mNullText != null) {
+                mNullText.setVisibility(View.VISIBLE);
+            }
+        }
+        if (mSrl != null) {
+            mSrl.setRefreshing(false);
+        }
+    }
+
+    private void setAnimationCounter(int value, int duration, final TextView textView) {
+        ValueAnimator animator = new ValueAnimator();
+        animator.setObjectValues(0, value);
+        animator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
+            public void onAnimationUpdate(ValueAnimator animation) {
+                textView.setText(String.valueOf(animation.getAnimatedValue()));
+            }
+        });
+        animator.setEvaluator(new TypeEvaluator<Integer>() {
+            public Integer evaluate(float fraction, Integer startValue, Integer endValue) {
+                return Math.round(startValue + (endValue - startValue) * fraction);
+            }
+        });
+        animator.setDuration(duration);
+        animator.start();
+
     }
 }

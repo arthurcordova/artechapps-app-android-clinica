@@ -6,6 +6,10 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
 
+import br.com.artechapps.app.database.PersistenceBudget;
+import br.com.artechapps.app.database.PersistenceMessage;
+import br.com.artechapps.app.database.PersistenceSchedule;
+import br.com.artechapps.app.database.PersistenceShop;
 import br.com.artechapps.app.model.User;
 
 /**
@@ -52,6 +56,11 @@ public final class SessionManager {
     public void destroySessionLogin(Class redirect) {
         editor.clear();
         editor.commit();
+
+        new PersistenceBudget(context).remove();
+        new PersistenceMessage(context).remove();
+        new PersistenceSchedule(context).remove();
+        new PersistenceShop(context).remove();
 
         redirectToTarget(redirect);
     }

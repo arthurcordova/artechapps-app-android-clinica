@@ -9,7 +9,9 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 
 import br.com.artechapps.app.model.Message;
 
@@ -67,6 +69,19 @@ public class PersistenceMessage extends RepositoryMessage {
 
     public boolean remove(){
         return persistence.delete();
+    }
+
+    public int count() {
+        int count = 0;
+        Cursor cursor = persistence.getDataBase().rawQuery("select count(*) c from " +
+                "                                           tbmessage", new String[]{});
+        if (cursor != null) {
+            if (cursor.moveToFirst()) {
+                count = cursor.getInt(cursor.getColumnIndex("c"));
+                cursor.close();
+            }
+        }
+        return count;
     }
 
     public ArrayList<Message> getRecords(){

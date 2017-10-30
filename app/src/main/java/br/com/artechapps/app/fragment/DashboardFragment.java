@@ -2,9 +2,12 @@ package br.com.artechapps.app.fragment;
 
 import android.animation.TypeEvaluator;
 import android.animation.ValueAnimator;
+import android.arch.lifecycle.Observer;
+import android.arch.lifecycle.ViewModelProviders;
 import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -18,9 +21,12 @@ import java.util.ArrayList;
 
 import br.com.artechapps.app.R;
 import br.com.artechapps.app.activity.MainMenuActivity;
+import br.com.artechapps.app.database.PersistenceMessage;
 import br.com.artechapps.app.database.PersistenceSchedule;
+import br.com.artechapps.app.livedata.SchedulingLiveData;
 import br.com.artechapps.app.model.Schedule;
 import br.com.artechapps.app.model.User;
+import br.com.artechapps.app.task.AsyncTaskAppointment;
 import br.com.artechapps.app.utils.SessionManager;
 
 public class DashboardFragment extends Fragment {
@@ -43,11 +49,13 @@ public class DashboardFragment extends Fragment {
     private View mLineSchedule;
     public NavigationView mNavigation;
 
+    private SchedulingLiveData mSchedulingLiveData;
+    private User mUser;
+
 
     public DashboardFragment() {
         // Required empty public constructor
     }
-
 
     /**
      * Use this factory method to create a new instance of
@@ -71,6 +79,8 @@ public class DashboardFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        mSchedulingLiveData = ViewModelProviders.of(this).get(SchedulingLiveData.class);
+
         if (getArguments() != null) {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
@@ -91,32 +101,44 @@ public class DashboardFragment extends Fragment {
         mTvProcedureDate = (TextView) view.findViewById(R.id.tv_procedure_date);
 
         mCardNextScheduling.setVisibility(View.GONE);
-        PersistenceSchedule persistence = new PersistenceSchedule(getContext());
-        ArrayList<Schedule> list = persistence.getRecordsOK();
+        tvNumSchedule.setText("0");
 
-        if (list.size() > 0) {
-            mCardNextScheduling.setVisibility(View.VISIBLE);
-            mTvProcedureName.setText(list.get(0).getProduct().getDescription());
-            mTvProcedureDate.setText("Data: " + list.get(0).getDate()+  " Horário: " + list.get(0).getTime());
+        final Observer<String> nameObserver = new Observer<String>() {
+            @Override
+            public void onChanged(@Nullable final String newName) {
+                // Update the UI, in this case, a TextView.
+                tvNumSchedule.setText(newName);
 
-        } else {
-            mCardNextScheduling.setVisibility(View.GONE);
-        }
+                PersistenceSchedule persistence = new PersistenceSchedule(getContext());
+                ArrayList<Schedule> list = persistence.getRecordsOK();
 
-        SessionManager sm = new SessionManager(getActivity());
-        User user = sm.getSessionUser();
+                if (list.size() > 0) {
+                    mCardNextScheduling.setVisibility(View.VISIBLE);
+                    mTvProcedureName.setText(list.get(0).getProduct().getDescription());
+                    mTvProcedureDate.setText("Data: " + list.get(0).getDate()+  " Horário: " + list.get(0).getTime());
 
-        setAnimationCounter(user.getMessages(), TIME_ANIMATION, tvNumMessage);
+                } else {
+                    mCardNextScheduling.setVisibility(View.GONE);
+                }
 
-        int counter = 0;
-        PersistenceSchedule per = null;
+            }
+        };
+        mSchedulingLiveData.getCurrentName().observeForever(nameObserver);
+
+        AsyncTaskAppointment task1 = new AsyncTaskAppointment("Carregando agendamentos...", getContext(), true, null, mActivity, null, null);
+        task1.mLiveData = mSchedulingLiveData;
+        task1.execute(String.valueOf(mUser.getCode()));
+
+        int counterM = 0;
+        PersistenceMessage perMessage = null;
         try {
-            per = new PersistenceSchedule(getContext());
-            counter = per.count();
+            perMessage = new PersistenceMessage(getContext());
+            counterM = perMessage.count();
         } finally {
-            per.close();
-            setAnimationCounter(counter, TIME_ANIMATION, tvNumSchedule);
+            perMessage.close();
+            setAnimationCounter(counterM, TIME_ANIMATION, tvNumMessage);
         }
+
 
         mLineMessages.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -171,6 +193,8 @@ public class DashboardFragment extends Fragment {
         if (context instanceof OnFragmentInteractionListener) {
             mListener = (OnFragmentInteractionListener) context;
         } else {
+            SessionManager sm = new SessionManager(getActivity());
+            mUser = sm.getSessionUser();
 
         }
     }
