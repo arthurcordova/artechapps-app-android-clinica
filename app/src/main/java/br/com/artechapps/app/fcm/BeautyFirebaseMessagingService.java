@@ -16,6 +16,7 @@ import com.google.firebase.messaging.RemoteMessage;
 
 import br.com.artechapps.app.R;
 import br.com.artechapps.app.activity.LoginActivity;
+import br.com.artechapps.app.activity.MainMenuActivity;
 
 /**
  * Created by acstapassoli on 08/10/17.
@@ -27,7 +28,7 @@ public class BeautyFirebaseMessagingService extends FirebaseMessagingService {
 
     @Override
     public void onMessageReceived(RemoteMessage remoteMessage) {
-        Intent intent = new Intent(this, LoginActivity.class);
+        Intent intent = new Intent(this, MainMenuActivity.class);
         intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 
         PendingIntent pendingIntent = PendingIntent.getActivity(this, 0, intent, PendingIntent.FLAG_ONE_SHOT);
