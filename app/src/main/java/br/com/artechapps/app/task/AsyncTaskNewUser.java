@@ -1,6 +1,5 @@
 package br.com.artechapps.app.task;
 
-import android.content.Context;
 import android.widget.Toast;
 
 import com.google.gson.Gson;
@@ -16,9 +15,6 @@ import br.com.artechapps.app.activity.NewUserActivity;
 import br.com.artechapps.app.model.User;
 import br.com.artechapps.app.utils.EndPoints;
 
-/**
- * Created by arthurcordova on 7/12/16.
- */
 public class AsyncTaskNewUser extends AsyncTaskHttp {
 
     private JSONObject mJson;
@@ -35,7 +31,7 @@ public class AsyncTaskNewUser extends AsyncTaskHttp {
     protected String doInBackground(String... params) {
         try {
             String name = params[0];
-            String cpf = params[1].replace(".","").replace("-","");;
+            String cpf = params[1].replace(".","").replace("-","");
             String pwd = params[2];
             String email = params[3];
 

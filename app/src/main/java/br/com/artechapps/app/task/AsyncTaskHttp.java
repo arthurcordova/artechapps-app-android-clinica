@@ -4,8 +4,6 @@ import android.app.ProgressDialog;
 import android.content.Context;
 import android.os.AsyncTask;
 
-import com.google.gson.Gson;
-
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -21,9 +19,6 @@ import java.net.URL;
 
 import br.com.artechapps.app.R;
 
-/**
- * Created by arthurcordova on 7/9/16.
- */
 public class AsyncTaskHttp extends AsyncTask<String, String, String> {
 
     private static final int CONN_TIME_OUT = 10000;

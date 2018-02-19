@@ -4,23 +4,13 @@ import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
-import android.media.RingtoneManager;
-import android.net.Uri;
 import android.support.v4.app.NotificationCompat;
-import android.util.Log;
 
-import com.google.firebase.iid.FirebaseInstanceId;
-import com.google.firebase.iid.FirebaseInstanceIdService;
 import com.google.firebase.messaging.FirebaseMessagingService;
 import com.google.firebase.messaging.RemoteMessage;
 
 import br.com.artechapps.app.R;
-import br.com.artechapps.app.activity.LoginActivity;
 import br.com.artechapps.app.activity.MainMenuActivity;
-
-/**
- * Created by acstapassoli on 08/10/17.
- */
 
 public class BeautyFirebaseMessagingService extends FirebaseMessagingService {
 
